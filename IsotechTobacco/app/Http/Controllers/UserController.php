@@ -28,9 +28,11 @@ class UserController extends Controller
     public function handleLogin(Request $req)
     {
         $credentials = $req->only('email', 'password');
+        $remember = $req->has('remember_me') ? true : false;
+        // dd($credentials);
         // $credentials['password'] = bcrypt($credentials['password']);
-        if (Auth::attempt($credentials)) {
-            return "Sukses Login";
+        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']], $remember)) {
+            return view('welcome');
         } else {
             return $credentials;
         }
