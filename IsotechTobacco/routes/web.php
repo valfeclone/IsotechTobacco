@@ -19,6 +19,25 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/index', function () {
+    return view('user/index');
+});
+
+Route::get('/product-detail', function () {
+    return view('user/product-detail');
+});
+
+Route::get('/admin/lists-product', function () {
+    return view('admin/product-lists');
+});
+
+Route::get('/admin/add-product', function () {
+    return view('admin/add-product');
+});
+
+Route::get('/admin/edit-product', function () {
+    return view('admin/edit-product');
+});
 
 Route::get('/', function () {
     return view('welcome');
