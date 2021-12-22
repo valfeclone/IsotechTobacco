@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
@@ -79,7 +80,7 @@ Route::post('/reset-password', function (Request $request) {
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
-
+ 
             $user->save();
 
             event(new PasswordReset($user));
@@ -90,3 +91,28 @@ Route::post('/reset-password', function (Request $request) {
                 ? redirect()->route('login')->with('status', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
+
+Route::middleware(['auth:admin'])->group(function(){
+    //admin create product
+    Route::get('/admin/create-product', function () {
+        return view('product/createproduct');
+    });
+    Route::post('/admin/create-product', [ProductController::class, 'createProductPublish']);
+    
+    //view all product & spec product
+    Route::get('/admin/view-product', [ProductController::class, 'viewProduct'])->name('viewproduct');
+    Route::get('/admin/view-product/{id}', [ProductController::class, 'viewProductbyID'])->name('viewproductID');
+
+    //edit product
+    Route::get('/admin/edit-product/{id}', [ProductController::class, 'viewEditProduct']);
+    Route::post('/admin/edit-product/{id}', [ProductController::class, 'updateProduct']);
+    
+    //delete product
+    Route::get('/admin/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteproductID');
+});
+
+Route::middleware(['auth'])->group(function(){
+//view all product & spec product
+    Route::get('/view-product', [ProductController::class, 'usrviewProduct'])->name('usrviewproduct');
+    Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
+});

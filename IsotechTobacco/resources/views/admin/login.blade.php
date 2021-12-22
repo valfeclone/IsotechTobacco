@@ -7,7 +7,7 @@
 @section('main-content')
 <div class="card mx-auto card-login">
     <div class="card-body">
-        <h4 class="card-title mb-4">Sign in</h4>
+        <h4 class="card-title mb-4">Sign in Admin</h4>
         <form method="POST" action="/admin/login">
             @csrf
             <div class="mb-3">
