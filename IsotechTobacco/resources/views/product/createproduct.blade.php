@@ -11,13 +11,13 @@
     <label for="title">Product Title:</label><br>
     <input type="text" id="title" name="title" placeholder="Title"><br>
 
-    <label for="title">Kode Stok:</label><br>
+    <label for="SKU">Kode Stok:</label><br>
     <input type="text" id="SKU" name="SKU" placeholder="Kode Stok"><br>
 
     <label for="description">Description:</label><br>
     <input type="text" id="description" name="description" placeholder="Description"><br>
         
-    <label for="description">Stock:</label><br>
+    <label for="stock">Stock:</label><br>
     <input type="text" id="stock" name="stock" placeholder="Stock"><br>
 
     <label for="category">Category:</label><br>
@@ -52,7 +52,7 @@
     <input type="text" id="weight" name="weight" placeholder="Product Weight">kg<br>
     <br>
 
-  <input type="submit" value="submit"></input>
+  <input type="submit" value="submit">
 </form>
 
 </body>

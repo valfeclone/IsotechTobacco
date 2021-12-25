@@ -16,8 +16,8 @@ class ProductController extends Controller
      */
     public function createProductPublish(Request $req)
     {
-        $product = $req->only('title', 'description', 'category', 'regular_price', 'promo_price', 
-        'tax_rate', 'width', 'height', 'product_image');
+        $product = $req->only('title', 'description', 'category', 'SKU', 'stock', 'regular_price', 'promo_price', 
+        'tax_rate', 'width', 'height', 'weight', 'product_image');
         
         // dd($product);
 
@@ -50,8 +50,8 @@ class ProductController extends Controller
 
     public function createProductDraft(Request $req)
     {
-        $product = $req->only('title', 'description', 'category', 'regular_price', 'promo_price', 
-        'tax_rate', 'width', 'height', 'product_image');
+        $product = $req->only('title', 'description', 'category', 'SKU', 'stock', 'regular_price', 'promo_price', 
+        'tax_rate', 'width', 'height', 'weight', 'product_image');
         
         // dd($product);
 
@@ -142,13 +142,18 @@ class ProductController extends Controller
     public function usrviewProduct(Request $req)
     {
         $select = Product::where('published', 1)->get();
-        return view ('product/viewproduct')->with('items',$select);
+        // dd($select);
+        return view ('user/viewproduct')->with('items',$select);
     }
 
     public function usrviewProductbyID($id)
     {
         $select = Product::findOrFail($id);
-        return view ('product/viewProductbyID')->with('items',$select);
+        if($select){
+            $select['seen_time']+=1;
+            $select->save();
+        }
+        return view ('user/viewProductID')->with('items',$select);
     }
 }
 
