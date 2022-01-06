@@ -32,7 +32,7 @@ class UserController extends Controller
         // dd($credentials);
         // $credentials['password'] = bcrypt($credentials['password']);
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']], $remember)) {
-            return redirect('view-product');
+            return redirect('index');
         } else {
             return $credentials;
         }

@@ -34,12 +34,24 @@ Route::post('/admin/register', [AdminController::class, 'handleRegister']);
 Route::get('/admin/login', function () {
     return view('admin/login');
 });
+
+// admin features
+// Route::get('/admins/edit-product/{id}', [ProductController::class, 'testviewEditProduct']);
+
 Route::post('/admin/login', [AdminController::class, 'handleLogin']);
 
 //buat login user
 Route::get('/register', function () {
     return view('user/register');
 });
+
+Route::get('/index', [ProductController::class, 'testviewProduct'])->name('testviewProduct');
+
+Route::get('/product-detail/{id}', [ProductController::class, 'testviewProductbyID'])->name('testviewProductbyID');
+
+// Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
+
+
 Route::post('/register', [UserController::class, 'handleRegister']);
 Route::get('/login', function () {
     return view('user/login');
@@ -95,7 +107,7 @@ Route::post('/reset-password', function (Request $request) {
 Route::middleware(['auth:admin'])->group(function(){
     //admin create product
     Route::get('/admin/create-product', function () {
-        return view('product/createproduct');
+        return view('admin/create-product');
     });
     Route::post('/admin/create-product', [ProductController::class, 'createProductPublish']);
     

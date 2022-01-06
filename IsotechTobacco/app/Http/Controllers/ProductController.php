@@ -85,7 +85,7 @@ class ProductController extends Controller
     public function viewProduct(Request $req)
     {
         $select = Product::all();
-        return view ('product/viewproduct')->with('items',$select);
+        return view ('admin/product-lists')->with('items',$select);
     }
 
     public function viewProductbyID($id)
@@ -97,7 +97,7 @@ class ProductController extends Controller
     public function viewEditProduct($id)
     {
         $select = Product::findOrFail($id);
-        return view ('product/editproduct')->with('product',$select);
+        return view ('admin/edit-product')->with('product',$select);
     }
 
     public function updateProduct(Request $req)
@@ -129,7 +129,7 @@ class ProductController extends Controller
             $product->product_image_path = str_replace(' ', '', $file->getClientOriginalName());
             $product->save();
         }
-        return redirect()->route('viewproductID', ['id' => $id]);
+        return redirect()->route('viewproduct');
     }
 
     public function deleteProduct($id)
@@ -154,6 +154,25 @@ class ProductController extends Controller
             $select->save();
         }
         return view ('user/viewProductID')->with('items',$select);
+    }
+
+    // TESTING
+
+    public function testviewProduct(Request $req)
+    {
+        $select = Product::where('published', 1)->get();
+        // dd($select);
+        return view ('user/index')->with('items',$select);
+    }
+
+    public function testviewProductbyID($id)
+    {
+        $select = Product::findOrFail($id);
+        if($select){
+            $select['seen_time']+=1;
+            $select->save();
+        }
+        return view ('user/product-detail')->with('items',$select);
     }
 }
 

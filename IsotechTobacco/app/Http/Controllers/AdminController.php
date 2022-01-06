@@ -29,7 +29,7 @@ class AdminController extends Controller
         $credentials = $req->only('email', 'password');
         // $credentials['password'] = bcrypt($credentials['password']);
         if (Auth::guard('admin')->attempt($credentials)) {
-            return "Sukses Login";
+            return redirect('admin/view-product');
         } else {
             return $credentials;
         }

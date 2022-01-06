@@ -7,7 +7,7 @@
 <form method="POST" action="/admin/edit-product/{id}" enctype='multipart/form-data'>
     @csrf
 
-  <h1>GENERAL<h1>  
+    <h1>GENERAL<h1>  
     <input type="hidden" name="productID" value="{{$product->id}}">
 
     <label for="title">Product Title:</label><br>
