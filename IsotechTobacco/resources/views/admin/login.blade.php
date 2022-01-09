@@ -6,6 +6,10 @@
 
 @section('main-content')
 <div class="card mx-auto card-login">
+    <!-- EDIT MANG. INI ALERT MESSAGE KALO LOGIN ERROR -->
+    @if($errors->any()) 
+        <h4>{{$errors->first()}}</h4>
+    @endif
     <div class="card-body">
         <h4 class="card-title mb-4">Sign in Admin</h4>
         <form method="POST" action="/admin/login">
@@ -17,7 +21,7 @@
                 <input id="password" name="password" class="form-control" placeholder="Password" type="password">
             </div> <!-- form-group// -->
             <div class="mb-3">
-                <a href="#" class="float-end font-sm text-muted">Forgot password?</a>
+                <a href="/admin-forgot-password" class="float-end font-sm text-muted">Forgot password?</a>
                 <label class="form-check">
                     <input type="checkbox" class="form-check-input" checked="">
                     <span class="form-check-label">Remember</span>

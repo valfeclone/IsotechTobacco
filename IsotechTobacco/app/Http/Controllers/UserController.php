@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Product;
 
 class UserController extends Controller
 {
@@ -18,12 +19,16 @@ class UserController extends Controller
     public function handleRegister(Request $req)
     {
         $credentials = $req->only('name', 'email', 'password');
-        $newAdmin = User::create([
+        $newUser = User::create([
             'name' => $credentials['name'],
             'email' => $credentials['email'],
             'password' => bcrypt($credentials['password']),
         ]);
-        return "Success";
+        if (Auth::login($newUser)) {
+            $select = Product::all();
+            return redirect('/view-product')->with('items',$select);
+        }
+        return redirect('/view-product');
     }
     public function handleLogin(Request $req)
     {
@@ -32,9 +37,10 @@ class UserController extends Controller
         // dd($credentials);
         // $credentials['password'] = bcrypt($credentials['password']);
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']], $remember)) {
-            return view('usrviewproduct');
+            $select = Product::all();
+            return redirect('/view-product')->with('items',$select);
         } else {
-            return $credentials;
+            return back()->withErrors(['msg' => 'Wrong email or password']);
         }
     }
 

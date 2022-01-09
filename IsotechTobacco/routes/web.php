@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\GoogleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
@@ -36,6 +37,22 @@ Route::get('/admin/login', function () {
 });
 Route::post('/admin/login', [AdminController::class, 'handleLogin']);
 
+//forgot password admmin
+Route::get('/admin-forgot-password', function () {
+    return view('admin.forgot-password');
+})->middleware('guest')->name('password.request');
+Route::post('/admin-forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
+
 //buat login user
 Route::get('/register', function () {
     return view('user/register');
@@ -45,8 +62,10 @@ Route::get('/login', function () {
     return view('user/login');
 })->name('login');
 Route::post('/login', [UserController::class, 'handleLogin']);
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-//forgot password
+//forgot password user
 Route::get('/forgot-password', function () {
     return view('auth.forgot-password');
 })->middleware('guest')->name('password.request');
@@ -111,8 +130,9 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::get('/admin/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteproductID');
 });
 
-Route::middleware(['auth'])->group(function(){
 //view all product & spec product
+
+Route::middleware(['auth'])->group(function(){
     Route::get('/view-product', [ProductController::class, 'usrviewProduct'])->name('usrviewproduct');
     Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
 });

@@ -82,7 +82,7 @@ class ProductController extends Controller
         return redirect('admin/view-product');
     }
 
-    public function viewProduct(Request $req)
+    public function viewProduct()
     {
         $select = Product::all();
         return view ('product/viewproduct')->with('items',$select);

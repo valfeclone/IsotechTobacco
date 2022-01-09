@@ -6,6 +6,10 @@
 
 @section('main-content')
 <div>
+    <!-- EDIT MANG. INI ALERT MESSAGE KALO LOGIN ERROR -->
+    @if($errors->any())
+        <h4>{{$errors->first()}}</h4>
+    @endif
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
@@ -46,6 +50,14 @@
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Log in</button>
                                         </div>
+                                        <div class="divider-text-center mt-15 mb-15">
+                                            <span> or</span>
+                                        </div>
+                                        <!-- mang edit nih. tambahan login with google -->
+                                        <ul class="btn-login list_none text-center mb-15"> 
+                                            <li><a href="#" class="btn btn-facebook hover-up mb-lg-0 mb-sm-4">Login With Facebook</a></li> <br>
+                                            <li><a href="/auth/google" class="btn btn-google hover-up">Login With Google</a></li>
+                                        </ul>
                                         <p class="text-center mt-4 mb-2">Don't have account? <a href="/register">Sign up</a></p>
                                     </form>
                                 </div>

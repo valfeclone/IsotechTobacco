@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Product;
 
 class AdminController extends Controller
 {
@@ -22,16 +23,20 @@ class AdminController extends Controller
             'email' => $req['email'],
             'password' => bcrypt($req['password']),
         ]);
-        return "Success";
+        if (Auth::guard('admin')->attempt($credentials)) {
+            $select = Product::all();
+            return redirect('/admin/view-product')->with('items',$select);
+        }
     }
     public function handleLogin(Request $req)
     {
         $credentials = $req->only('email', 'password');
         // $credentials['password'] = bcrypt($credentials['password']);
         if (Auth::guard('admin')->attempt($credentials)) {
-            return "Sukses Login";
+            $select = Product::all();
+            return redirect('/admin/view-product')->with('items',$select);
         } else {
-            return $credentials;
+            return back()->withErrors(['msg' => 'Wrong email or password']);
         }
     }
 }
