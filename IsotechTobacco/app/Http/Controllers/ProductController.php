@@ -16,8 +16,8 @@ class ProductController extends Controller
      */
     public function createProductPublish(Request $req)
     {
-        $product = $req->only('title', 'description', 'category', 'regular_price', 'promo_price', 
-        'tax_rate', 'width', 'height', 'product_image');
+        $product = $req->only('title', 'description', 'category', 'SKU', 'stock', 'regular_price', 'promo_price', 
+        'tax_rate', 'width', 'height', 'weight', 'product_image');
         
         // dd($product);
 
@@ -50,8 +50,8 @@ class ProductController extends Controller
 
     public function createProductDraft(Request $req)
     {
-        $product = $req->only('title', 'description', 'category', 'regular_price', 'promo_price', 
-        'tax_rate', 'width', 'height', 'product_image');
+        $product = $req->only('title', 'description', 'category', 'SKU', 'stock', 'regular_price', 'promo_price', 
+        'tax_rate', 'width', 'height', 'weight', 'product_image');
         
         // dd($product);
 
@@ -85,7 +85,7 @@ class ProductController extends Controller
     public function viewProduct()
     {
         $select = Product::all();
-        return view ('product/viewproduct')->with('items',$select);
+        return view ('admin/product-lists')->with('items',$select);
     }
 
     public function viewProductbyID($id)
@@ -97,7 +97,7 @@ class ProductController extends Controller
     public function viewEditProduct($id)
     {
         $select = Product::findOrFail($id);
-        return view ('product/editproduct')->with('product',$select);
+        return view ('admin/edit-product')->with('product',$select);
     }
 
     public function updateProduct(Request $req)
@@ -129,7 +129,7 @@ class ProductController extends Controller
             $product->product_image_path = str_replace(' ', '', $file->getClientOriginalName());
             $product->save();
         }
-        return redirect()->route('viewproductID', ['id' => $id]);
+        return redirect()->route('viewproduct');
     }
 
     public function deleteProduct($id)
@@ -142,13 +142,37 @@ class ProductController extends Controller
     public function usrviewProduct(Request $req)
     {
         $select = Product::where('published', 1)->get();
-        return view ('product/viewproduct')->with('items',$select);
+        // dd($select);
+        return view ('user/viewproduct')->with('items',$select);
     }
 
     public function usrviewProductbyID($id)
     {
         $select = Product::findOrFail($id);
-        return view ('product/viewProductbyID')->with('items',$select);
+        if($select){
+            $select['seen_time']+=1;
+            $select->save();
+        }
+        return view ('user/viewProductID')->with('items',$select);
+    }
+
+    // TESTING
+
+    public function testviewProduct(Request $req)
+    {
+        $select = Product::where('published', 1)->get();
+        // dd($select);
+        return view ('user/index')->with('items',$select);
+    }
+
+    public function testviewProductbyID($id)
+    {
+        $select = Product::findOrFail($id);
+        if($select){
+            $select['seen_time']+=1;
+            $select->save();
+        }
+        return view ('user/product-detail')->with('items',$select);
     }
 }
 
