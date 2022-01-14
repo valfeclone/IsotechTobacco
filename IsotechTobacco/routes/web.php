@@ -143,8 +143,10 @@ Route::middleware(['auth:admin'])->group(function(){
 });
 
 //view all product & spec product
+Route::get('/search-product', [ProductController::class, 'searchProduct']);
+Route::post('/search-product', [ProductController::class, 'searchProduct']);
+Route::get('/view-product', [ProductController::class, 'usrviewProduct'])->name('usrviewproduct');
+Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/view-product', [ProductController::class, 'usrviewProduct'])->name('usrviewproduct');
-    Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
 });

@@ -174,5 +174,16 @@ class ProductController extends Controller
         }
         return view ('user/product-detail')->with('items',$select);
     }
+
+    public function searchProduct(Request $request)
+    {
+        $search = $request->title;
+        if($search == null){
+            $select = Product::all();
+            return view ('product/searchproduct')->with('items', $select);
+        }
+        $select = Product::where('title', 'like', '%'.$search.'%')->get();
+        return view ('product/searchproduct')->with('items', $select);
+    }    
 }
 

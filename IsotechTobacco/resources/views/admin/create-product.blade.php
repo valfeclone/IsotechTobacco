@@ -72,15 +72,12 @@
                             <option value="Cat A"> Cat A  </option>
                             <option value="Cat B"> Cat B  </option>
                             <option value="Cat C"> Cat C  </option>
-                            <option value="Cat D"> Cat D  </option>
-                            <option value="Cat E"> Cat E  </option>
-                            <option value="Cat F"> Cat F  </option>
                         </select>
                     </div>
                 </div>
                 <div class="mb-4">
                     <label for="tax_rate" class="form-label">Tax rate</label>
-                    <input type="text" placeholder="%" class="form-control" id="tax_rate" name="tax_rate">
+                    <input type="text" placeholder="%" class="form-control" id="tax_rate" name="tax_rate" value=0.0>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">

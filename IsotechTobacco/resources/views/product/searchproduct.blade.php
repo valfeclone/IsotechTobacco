@@ -1,0 +1,19 @@
+<form method="POST" action="/search-product" enctype='multipart/form-data'>
+    @csrf
+    <label for="title" class="form-label">Search Product Title</label>
+    <input type="text" placeholder="Type here" class="form-control" id="title" name="title">
+    <input class="btn btn-md rounded font-sm hover-up"  type="submit" value="Publish">
+</form>
+
+@foreach($items as $product)
+<tr>
+    <th>
+        <img src="/storage/products/{{ $product->product_image_path }}" alt="" style="width: 50px; height: 50px;"></img>
+    </th><br> 
+    <th>Title: {{ $product->title}}</th> <br>
+    <th>Category: {{ $product->category}}</th> <br>
+    <th>Price: {{ $product->regular_price}}</th> <br>
+    <th>Seen: {{ $product->seen_time}}</th> <br>
+    <a href="/view-product/{{$product->id}}">check item</a> <br><br>
+</tr>
+@endforeach
