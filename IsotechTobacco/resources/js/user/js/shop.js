@@ -82,6 +82,14 @@
             });
         });
 
+        // Total Value
+        // var qtyVal = parseInt($(this).find('.qty-val').text(), 10);
+        // var priceVal = parseInt($(this).find('.price-detail').text(), 10);
+        // var totalPrice = (priceVal * qtyVal);
+        // console.log(totalPrice);
+
+        // $('.total-val').text(totalPrice.toString());
+
         $('.dropdown-menu .cart_list').on('click', function (event) {
             event.stopPropagation();
         });

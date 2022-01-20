@@ -67,12 +67,14 @@
             var qtyval = parseInt($(this).find('.qty-val').text(), 10);
             $('.qty-up').on('click', function (event) {
                 event.preventDefault();
-                qtyval = qtyval + 1;
+                // qtyval = qtyval + 1;
+                qtyval++;
                 $(this).prev().text(qtyval);
             });
             $('.qty-down').on('click', function (event) {
                 event.preventDefault();
-                qtyval = qtyval - 1;
+                // qtyval = qtyval - 1;
+                qtyval--;
                 if (qtyval > 1) {
                     $(this).next().text(qtyval);
                 } else {

@@ -62,6 +62,10 @@ Route::get('/register', function () {
     return view('user/register');
 });
 
+Route::get('/shoping-cart', function () {
+    return view('user/shop-cart');
+});
+
 Route::get('/index', [ProductController::class, 'testviewProduct'])->name('testviewProduct');
 
 Route::get('/product-detail/{id}', [ProductController::class, 'testviewProductbyID'])->name('testviewProductbyID');
