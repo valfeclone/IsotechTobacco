@@ -62,27 +62,81 @@
                 $(this).parents('.attr-detail').find('.current-color').text($(this).attr('data-color'));
             });
         });
-        //Qty Up-Down
-        $('.detail-qty').each(function () {
-            var qtyval = parseInt($(this).find('.qty-val').text(), 10);
-            $('.qty-up').on('click', function (event) {
-                event.preventDefault();
-                // qtyval = qtyval + 1;
-                qtyval++;
-                $(this).prev().text(qtyval);
+        // Qty Up-Down
+        // $('.detail-qty').each(function () {
+        //     // var qtyval = parseInt($(this).find('.qty-val').text(), 10);
+            
+        //     $('.qty-up').on('click', function (event) {
+        //         event.preventDefault();
+        //         // qtyval = qtyval + 1;
+        //         var $upBtn = $(this);
+        //         $('#output-'+$upBtn.data('index')).html(function(i, qtyval) {
+        //             // console.log(qtyval);
+        //             qtyval = qtyval * 1 + 1;
+        //             console.log(qtyval);
+        //             return qtyval;
+        //         });
+        //         // $(this).prev().text(qtyval);
+        //     });
+        //     $('.qty-down').on('click', function (event) {
+        //         event.preventDefault();
+        //         // qtyval = qtyval - 1;
+        //         qtyval--;
+        //         if (qtyval > 1) {
+        //             $(this).next().text(qtyval);
+        //         } else {
+        //             qtyval = 1;
+        //             $(this).next().text(qtyval);
+        //         }
+        //     });
+        // });
+
+        $('.qty-up').on('click', function (event) {
+            event.preventDefault();
+            // qtyval = qtyval + 1;
+            var $upBtn = $(this);
+            var newQty = $('#output-'+$upBtn.data('index')).html(function(i, qtyval) {
+                // console.log(qtyval);
+                qtyval = qtyval * 1 + 1;
+                console.log(qtyval);
+                return qtyval;
             });
-            $('.qty-down').on('click', function (event) {
-                event.preventDefault();
-                // qtyval = qtyval - 1;
-                qtyval--;
+            $('#total-'+$upBtn.data('index')).html(function(i, subtotal) {
+                var price = parseInt($('#price-'+$upBtn.data('index')).html());
+                subtotal = parseInt(newQty.html()) * price;
+                return subtotal;
+            });
+            // $('#cart-total').html(function(i, carttotal) {
+
+            // })
+            // $(this).prev().text(qtyval);
+        });
+
+        $('.qty-down').on('click', function (event) {
+            event.preventDefault();
+            // qtyval = qtyval - 1;
+            var $downBtn = $(this);
+            var newQty = $('#output-'+$downBtn.data('index')).html(function(i, qtyval) {
                 if (qtyval > 1) {
-                    $(this).next().text(qtyval);
+                    qtyval = qtyval * 1 - 1;
                 } else {
                     qtyval = 1;
-                    $(this).next().text(qtyval);
                 }
+                return qtyval;
+            });
+            $('#total-'+$downBtn.data('index')).html(function(i, subtotal) {
+                var price = parseInt($('#price-'+$downBtn.data('index')).html());
+                subtotal = parseInt(newQty.html()) * price;
+                return subtotal;
             });
         });
+
+        // $('.qty-up').on('click', function() {
+        //     console.log("hehe");
+        //     var qtyval = parseInt($(this).find('.qty-val').data('click'));
+        //     qtyval++;
+        //     $(this).find('.qty-val').data('click', qtyval);
+        // })
 
         $('.dropdown-menu .cart_list').on('click', function (event) {
             event.stopPropagation();
