@@ -66,6 +66,14 @@ Route::get('/shoping-cart', function () {
     return view('user/shop-cart');
 });
 
+Route::get('/payment', function () {
+    return view('user/payment');
+});
+
+Route::get('/payment-process', function () {
+    return view('user/after-payment');
+});
+
 Route::get('/index', [ProductController::class, 'testviewProduct'])->name('testviewProduct');
 
 Route::get('/product-detail/{id}', [ProductController::class, 'testviewProductbyID'])->name('testviewProductbyID');
@@ -154,3 +162,6 @@ Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'
 
 Route::middleware(['auth'])->group(function(){
 });
+
+// cart
+// Route::get()

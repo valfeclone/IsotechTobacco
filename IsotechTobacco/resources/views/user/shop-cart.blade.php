@@ -18,8 +18,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="table-responsive">S
+                <div class="table-responsive">
                     <table class="table shopping-summery text-center clean">
+                        <form action="">
+                            <input type="hidden" name="usr_id" id="usr_id" value="1">
+                        </form>
                         <thead>
                             <tr class="main-heading">
                                 <th scope="col">Image</th>

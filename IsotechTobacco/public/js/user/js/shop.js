@@ -95,10 +95,13 @@
             event.preventDefault();
             // qtyval = qtyval + 1;
             var $upBtn = $(this);
+            var usr_id = $('#usr_id').val();
+            console.log(usr_id);
+            var cart_id = $upBtn.data('index');
             var newQty = $('#output-'+$upBtn.data('index')).html(function(i, qtyval) {
                 // console.log(qtyval);
                 qtyval = qtyval * 1 + 1;
-                console.log(qtyval);
+                // console.log(qtyval);
                 return qtyval;
             });
             $('#total-'+$upBtn.data('index')).html(function(i, subtotal) {
@@ -106,6 +109,24 @@
                 subtotal = parseInt(newQty.html()) * price;
                 return subtotal;
             });
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name=crsf-token]').attr('content')
+            //     }
+            // });
+            // $.ajax({
+            //     type: "PUT",
+            //     url: "/",
+            //     dataType: "json",
+            //     data : {
+            //         usr_id: usr_id,
+            //         qty: newQty
+            //     },
+            //     success: function(data){
+            //         console.log(data);
+            //     }
+            // });
+
             // $('#cart-total').html(function(i, carttotal) {
 
             // })
@@ -115,6 +136,9 @@
         $('.qty-down').on('click', function (event) {
             event.preventDefault();
             // qtyval = qtyval - 1;
+            var usr_id = $('#usr_id').val();
+            console.log(usr_id);
+            // var cart_id = $upBtn.data('index');
             var $downBtn = $(this);
             var newQty = $('#output-'+$downBtn.data('index')).html(function(i, qtyval) {
                 if (qtyval > 1) {
@@ -129,6 +153,23 @@
                 subtotal = parseInt(newQty.html()) * price;
                 return subtotal;
             });
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name=crsf-token]').attr('content')
+            //     }
+            // });
+            // $.ajax({
+            //     type: "PUT",
+            //     url: "/",
+            //     dataType: "json",
+            //     data : {
+            //         usr_id: usr_id,
+            //         qty: newQty
+            //     },
+            //     success: function(data){
+            //         console.log(data);
+            //     }
+            // })
         });
 
         // $('.qty-up').on('click', function() {
