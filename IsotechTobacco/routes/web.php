@@ -28,6 +28,18 @@ Route::middleware(['auth'])->group(function(){
     });
 });
 
+Route::get('/checkout', function () {
+    return view('user/checkout');
+});
+
+Route::get('/admin/order-lists', function () {
+    return view('admin/order-lists');
+});
+
+Route::get('/admin/order-details', function () {
+    return view('admin/order-details');
+});
+
 //buat login admin
 Route::get('/admin/register', function () {
     return view('admin/register');
