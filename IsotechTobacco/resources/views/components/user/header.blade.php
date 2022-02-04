@@ -71,10 +71,9 @@
                 </div>
 
                 <div class="header-action-right">
-
                     <!-- Search bar -->
                     <div class="search-style-2">
-                        <form action="#">
+                        {{-- <form action="#">
                             <select class="select-active">
                                 <option>Search in</option>
                                 <option>Women's Clothing</option>
@@ -89,23 +88,23 @@
                                 <option>Mother & Kids</option>
                             </select>
                             <input type="text" placeholder="Search for items…">
-                        </form>
+                        </form> --}}
                     </div>
 
                     <!-- Wishlist and Cart -->
                     <div class="header-action-2">
-                        <div class="header-action-icon-2">
+                        {{-- <div class="header-action-icon-2">
                             <a href="shop-wishlist.html">
                                 <img class="svgInject" alt="Evara" src="{{ asset('images/user/imgs/theme/icons/icon-heart.svg') }}">
                                 <span class="pro-count blue">4</span>
                             </a>
-                        </div>
+                        </div> --}}
                         <div class="header-action-icon-2">
                             <a class="mini-cart-icon" href="shop-cart.html">
                                 <img alt="Evara" src="{{ asset('images/user/imgs/theme/icons/icon-cart.svg') }}">
-                                <span class="pro-count blue">2</span>
+                                {{-- <span class="pro-count blue">2</span> --}}
                             </a>
-                            <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                            {{-- <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                 <ul>
                                     <li>
                                         <div class="shopping-cart-img">
@@ -141,7 +140,7 @@
                                         <a href="shop-checkout.html">Checkout</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="header-action-icon d-block d-lg-none">
                             <div class="burger-icon">

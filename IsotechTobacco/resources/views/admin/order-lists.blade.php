@@ -4,6 +4,48 @@
     Admin Gondrong | Product Lists
 @endsection
 
+@section('admin-aside')
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="index.html" class="brand-wrap">
+            <img src="{{ asset('images/admin/imgs/theme/logo.svg') }}" class="logo" alt="Evara Dashboard">
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            @include('components.admin.aside.dashboard')
+            @include('components.admin.aside.products')
+            @include('components.admin.aside-active.orders')
+            @include('components.admin.aside.sellers')
+            @include('components.admin.aside.addproduct')
+            @include('components.admin.aside.transactions')
+            @include('components.admin.aside.account')
+            @include('components.admin.aside.reviews')
+            @include('components.admin.aside.brands')
+            @include('components.admin.aside.statistics')
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
+                    <span class="text"> Starter page </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
+</aside>
+@endsection
+
 {{-- START: Title content --}}
 
 @section('content-title')

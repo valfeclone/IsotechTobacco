@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -20,22 +21,24 @@ class CartController extends Controller
         $user = Auth::user();
         $id = $user['id'];
         $prodID = $req['product_id']; 
-        $checkExist = Carts::where('user_id', '{{ $id }}')
-            ->where('product_id', '{{ $prodID }}')
-            ->get();
-
+        $checkExist = Cart::where('user_id', $id)
+            ->where('product_id', $prodID)
+            ->first();
+        // dd($prodID, $id);
         if($checkExist){
-            $checkExist['jumlahPesan'] = $checkExist['jumlahPesan']+1;
+            $checkExist->jumlahPesan = $checkExist->jumlahPesan+1;
             $checkExist->save();
         }
         else{
             $newProduct = Cart::create([
-                'product_id' => $request['product_id'],
-                'jumlahPesan' => $request['jumlahPesan'],
+                'product_id' => $req['product_id'],
+                'jumlahPesan' => $req['jumlahPesan'],
                 'user_id' => $user['id'],
             ]);
             $newProduct->save();
         }
+
+        return redirect()->back();
     }
 
     public function viewCart()
@@ -46,7 +49,7 @@ class CartController extends Controller
                         ->where('order_id', null)
                         ->get();
 
-        // return view ('/shopping-cart')->with('items',$select);
+        return view ('user/shop-cart')->with('items',$select);
     }
 
     public function updateCart(Request $req)

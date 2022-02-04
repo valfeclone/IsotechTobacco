@@ -34,6 +34,28 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($items as $product)
+                            <tr class="rowchart" id={{ $product->id }}>
+                                <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-2.jpg" alt="#"></td>
+                                <td class="product-des product-name">
+                                    <h5 class="product-name"><a href="shop-product-right.html">{{ $product->title }}</a></h5>
+                                    <p class="font-xs">
+                                    </p>
+                                </td>
+                                <td class="price" data-title="Price">$<span id="price-1" class="price-detail">{{ $product->regular_price }}</span></td>
+                                <td class="text-center" data-title="Stock">
+                                    <div class="detail-qty border radius m-auto">
+                                        <a href="#" class="qty-down" data-index="1"><i class="fi-rs-angle-small-down" ></i></a>
+                                        <span id="output-1" class="qty-val">{{ $product->jumlahPesan }}</span>
+                                        <a href="#" class="qty-up" data-index="1" data-inc="1"><i class="fi-rs-angle-small-up"></i></a>
+                                    </div>
+                                </td>
+                                <td class="text-right" data-title="Cart">
+                                    $<span id="total-1" class="total-val">{{ $product->jumlahPesan * $product->regular_price }}</span>
+                                </td>
+                                <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
+                            </tr>
+                            @endforeach
                             <tr class="rowchart" id="1">
                                 <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-2.jpg" alt="#"></td>
                                 <td class="product-des product-name">

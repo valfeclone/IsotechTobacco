@@ -22,7 +22,7 @@
 
 <body>
     <div class="screen-overlay"></div>
-    @include('components.admin.aside')
+    @yield('admin-aside')
     <main class="main-wrap">
         @include('components.admin.header-2')
         <section class="content-main">
