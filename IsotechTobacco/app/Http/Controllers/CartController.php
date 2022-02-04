@@ -18,10 +18,12 @@ class CartController extends Controller
     public function createCart(Request $req)
     {  
         $user = Auth::user();
-        $checkExist = DB::table('carts')
-                        ->where('user_id', $user['id'])
-                        ->where('product_id', $req['product_id'])
-                        ->get();
+        $id = $user['id'];
+        $prodID = $req['product_id']; 
+        $checkExist = Carts::where('user_id', '{{ $id }}')
+            ->where('product_id', '{{ $prodID }}')
+            ->get();
+
         if($checkExist){
             $checkExist['jumlahPesan'] = $checkExist['jumlahPesan']+1;
             $checkExist->save();

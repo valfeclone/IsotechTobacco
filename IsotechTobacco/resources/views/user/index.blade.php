@@ -117,7 +117,7 @@
                                 <h2><a href="/product-detail/{{$product->id}}">{{ $product->title}}</a></h2>
                                 <div class="rating-result" title="90%">
                                     <span>
-                                        <span>90%</span>
+                                        <span>Rating%</span>
                                     </span>
                                 </div>
                                 <div class="product-price">

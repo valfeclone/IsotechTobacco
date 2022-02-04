@@ -16,5 +16,12 @@
     <th>Height: {{ $items->height}}</th> <br><br>
     <th>Weight: {{ $items->weight}}</th> <br><br>
 </tr>
-<a href="#">Beli Produk</a>
-<a href="#">Add to Card</a>
+<a href="/createcart">Beli Produk</a>
+<form method="POST" action="/createcart" enctype='multipart/form-data'>
+    @csrf
+    <input type="text" class="form-control" id="product_id" name="product_id" value="{{ $items->id }}" hidden>
+    <input type="text" class="form-control" id="jumlahPesan" name="jumlahPesan" value=1 hidden>
+    <input class="btn btn-md rounded font-sm hover-up"  type="submit" value="Beli Produk">
+</form>
+
+<a href="/createcart">Add to Cart</a>

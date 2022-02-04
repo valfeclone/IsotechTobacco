@@ -123,7 +123,13 @@
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                     <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                    <form method="POST" action="/createcart" enctype='multipart/form-data'>
+                                        @csrf
+                                        <input type="text" class="form-control" id="product_id" name="product_id" value="{{ $items->id }}" hidden>
+                                        <input type="text" class="form-control" id="jumlahPesan" name="jumlahPesan" value=1 hidden>
+                                        <input class="btn btn-md rounded font-sm hover-up"  type="submit" value="Beli Produk">
+                                        <!-- <button type="submit" class="button button-add-to-cart">Add to cart</button> -->
+                                    </form>    
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     </div>

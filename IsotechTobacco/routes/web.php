@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
@@ -62,9 +63,10 @@ Route::get('/register', function () {
     return view('user/register');
 });
 
-Route::get('/shoping-cart', function () {
+Route::get('/shopping-cart', function () {
     return view('user/shop-cart');
 });
+Route::post('/createcart', [CartController::class, 'createCart']);
 
 Route::get('/payment', function () {
     return view('user/payment');
