@@ -56,6 +56,7 @@ class CartController extends Controller
         $product = DB::table('carts')
                         ->where('user_id', $user['id'])
                         ->where('product_id', $req['product_id'])
+                        ->where('order_id', null)
                         ->get();
         if($product){
             $product['jumlahPesan'] = $req['jumlahPesan'];

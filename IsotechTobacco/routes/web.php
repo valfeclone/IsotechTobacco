@@ -174,6 +174,11 @@ Route::post('/search-product', [ProductController::class, 'searchProduct']);
 Route::get('/view-product', [ProductController::class, 'usrviewProduct'])->name('usrviewproduct');
 Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
 
+Route::post('/create-cart', [CartController::class, 'createCart']);
+Route::post('/update-cart', [CartController::class, 'updateCart']);
+Route::post('/delete-cart', [CartController::class, 'deleteCart']);
+Route::get('/view-cart', [CartController::class, 'viewCart']);
+
 Route::middleware(['auth'])->group(function(){
 });
 
