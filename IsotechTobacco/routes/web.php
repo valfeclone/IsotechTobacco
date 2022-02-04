@@ -27,6 +27,10 @@ Route::middleware(['auth'])->group(function(){
     });
 });
 
+Route::get('/checkout', function () {
+    return view('user/checkout');
+});
+
 Route::get('/admin/order-lists', function () {
     return view('admin/order-lists');
 });
