@@ -4,6 +4,11 @@
     Gondrong Tobacco | Shopping Cart
 @endsection
 
+@section('extra-meta')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
+@endsection
+
 @section('main-content')
 <div class="page-header breadcrumb-wrap">
     <div class="container">
@@ -34,24 +39,29 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <form action="/update-cart" id="formCart" method="POST">
                             @foreach ($carts as $cart)
+                            <input type="hidden" id="cart_id-{{ $cart->product->id }}" value={{ $cart->id }}>
+                            <input type="hidden" id="product_id-{{ $cart->product->id }}" value={{ $cart->product->id }}>
                             <tr class="rowchart" id={{ $cart->product->id }}>
-                                <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-2.jpg" alt="#"></td>
+                                <td class="image product-thumbnail"><img src="/storage/products/{{ $cart->product->product_image_path }}" alt="#"></td>
                                 <td class="product-des product-name">
                                     <h5 class="product-name"><a href="shop-product-right.html">{{ $cart->product->title }}</a></h5>
                                     <p class="font-xs">
                                     </p>
                                 </td>
-                                <td class="price" data-title="Price">$<span id="price-1" class="price-detail">{{ $cart->product->regular_price }}</span></td>
+                                <td class="price" data-title="Price">Rp<span id="price-{{ $cart->product->id }}" class="price-detail">{{ $cart->product->regular_price }}</span></td>
                                 <td class="text-center" data-title="Stock">
                                     <div class="detail-qty border radius m-auto">
-                                        <a href="#" class="qty-down" data-index="1"><i class="fi-rs-angle-small-down" ></i></a>
-                                        <span id="output-1" class="qty-val">{{ $cart->jumlahPesan }}</span>
-                                        <a href="#" class="qty-up" data-index="1" data-inc="1"><i class="fi-rs-angle-small-up"></i></a>
+                                        {{-- {{ csrf_field() }}  --}}
+                                        <a href="#" class="qty-down" data-index={{ $cart->product->id }}><i class="fi-rs-angle-small-down" ></i></a>
+                                        <input type="hideen" id="qtyId-{{ $cart->product->id }}" value={{ $cart->jumlahPesan }}>
+                                        <span id="output-{{ $cart->product->id }}" class="qty-val">{{ $cart->jumlahPesan }}</span>
+                                        <a href="#" class="qty-up" data-index={{ $cart->product->id }} data-inc={{ $cart->product->id }}><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                 </td>
                                 <td class="text-right" data-title="Cart">
-                                    $<span id="total-1" class="total-val">{{ $cart->product->jumlahPesan * $cart->product->regular_price }}</span>
+                                    Rp<span id="total-{{ $cart->product->id }}" class="total-val">{{ $cart->jumlahPesan * $cart->product->regular_price }}</span>
                                 </td>
                                 <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                             </tr>
@@ -60,9 +70,13 @@
                     </table>
                 </div>
                 <div class="cart-action text-end">
-                    {{-- <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a> --}}
+                    <button type="submit" form="formCart" class="btn mr-10 mb-sm-15">
+                        <a><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
+                    </button>
+                    {{-- <a class="btn mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a> --}}
                     <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
                 </div>
+                </form>
                 <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                 <div class="row mb-50">
                     <div class="col-lg-12 col-md-12">
@@ -75,7 +89,16 @@
                                     <tbody>
                                         <tr>
                                             <td class="cart_total_label">Cart Subtotal</td>
-                                            <td class="cart_total_amount font-lg fw-900 text-brand">$<span class="font-lg fw-900 text-brand" id="cart-total">240</span>.00</td>
+                                            <td class="cart_total_amount font-lg fw-900 text-brand">Rp
+                                            <span class="font-lg fw-900 text-brand" id="cart-total-1">
+                                                @php
+                                                    $total = 0;
+                                                    foreach ($carts as $cart) 
+                                                        $total += $cart->jumlahPesan * $cart->product->regular_price
+                                                    
+                                                @endphp
+                                                {{ $total }}
+                                            </span></td>
                                         </tr>
                                         {{-- <tr>
                                             <td class="cart_total_label">Shipping</td>
