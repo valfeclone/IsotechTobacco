@@ -34,92 +34,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($items as $product)
-                            <tr class="rowchart" id={{ $product->id }}>
+                            @foreach ($carts as $cart)
+                            <tr class="rowchart" id={{ $cart->product->id }}>
                                 <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-2.jpg" alt="#"></td>
                                 <td class="product-des product-name">
-                                    <h5 class="product-name"><a href="shop-product-right.html">{{ $product->title }}</a></h5>
+                                    <h5 class="product-name"><a href="shop-product-right.html">{{ $cart->product->title }}</a></h5>
                                     <p class="font-xs">
                                     </p>
                                 </td>
-                                <td class="price" data-title="Price">$<span id="price-1" class="price-detail">{{ $product->regular_price }}</span></td>
+                                <td class="price" data-title="Price">$<span id="price-1" class="price-detail">{{ $cart->product->regular_price }}</span></td>
                                 <td class="text-center" data-title="Stock">
                                     <div class="detail-qty border radius m-auto">
                                         <a href="#" class="qty-down" data-index="1"><i class="fi-rs-angle-small-down" ></i></a>
-                                        <span id="output-1" class="qty-val">{{ $product->jumlahPesan }}</span>
+                                        <span id="output-1" class="qty-val">{{ $cart->jumlahPesan }}</span>
                                         <a href="#" class="qty-up" data-index="1" data-inc="1"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                 </td>
                                 <td class="text-right" data-title="Cart">
-                                    $<span id="total-1" class="total-val">{{ $product->jumlahPesan * $product->regular_price }}</span>
+                                    $<span id="total-1" class="total-val">{{ $cart->product->jumlahPesan * $cart->product->regular_price }}</span>
                                 </td>
                                 <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                             </tr>
                             @endforeach
-                            <tr class="rowchart" id="1">
-                                <td class="image product-thumbnail"><img src="assets/imgs/shop/product-1-2.jpg" alt="#"></td>
-                                <td class="product-des product-name">
-                                    <h5 class="product-name"><a href="shop-product-right.html">J.Crew Mercantile Women's Short-Sleeve</a></h5>
-                                    <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy magndapibus.
-                                    </p>
-                                </td>
-                                <td class="price" data-title="Price">$<span id="price-1" class="price-detail">65</span>.00</td>
-                                <td class="text-center" data-title="Stock">
-                                    <div class="detail-qty border radius m-auto">
-                                        <a href="#" class="qty-down" data-index="1"><i class="fi-rs-angle-small-down" ></i></a>
-                                        <span id="output-1" class="qty-val">1</span>
-                                        <a href="#" class="qty-up" data-index="1" data-inc="1"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div>
-                                </td>
-                                <td class="text-right" data-title="Cart">
-                                    $<span id="total-1" class="total-val">65</span>.00
-                                </td>
-                                <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
-                            </tr>
-                            <tr class="rowchart" id="2">
-                                <td class="image"><img src="assets/imgs/shop/product-11-2.jpg" alt="#"></td>
-                                <td class="product-des">
-                                    <h5 class="product-name"><a href="shop-product-right.html">Amazon Essentials Women's Tank</a></h5>
-                                    <p class="font-xs">Sit at ipsum amet clita no est,<br> sed amet sadipscing et gubergren</p>
-                                </td>
-                                <td class="price" data-title="Price">$<span id="price-2" class="price-detail">75</span>.00</td>
-                                <td class="text-center" data-title="Stock">
-                                    <div class="detail-qty border radius  m-auto">
-                                        <a href="#" class="qty-down" data-index="2"><i class="fi-rs-angle-small-down"></i></a>
-                                        <span id="output-2" class="qty-val">2</span>
-                                        <a href="#" data-index="2" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div>
-                                </td>
-                                <td class="text-right" data-title="Cart">
-                                    $<span id="total-2">150</span>.00
-                                </td>
-                                <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
-                            </tr>
-                            <tr class="rowchart" id="3">
-                                <td class="image"><img src="assets/imgs/shop/product-6-1.jpg" alt="#"></td>
-                                <td class="product-des">
-                                    <h5 class="product-name"><a href="shop-product-right.html">Amazon Brand - Daily Ritual Women's Jersey </a></h5>
-                                    <p class="font-xs">Erat amet et et amet diam et et.<br> Justo amet at dolore
-                                    </p>
-                                </td>
-                                <td class="price" data-title="Price">$<span id="price-3" class="price-detail">62</span>.00</td>
-                                <td class="text-center" data-title="Stock">
-                                    <div class="detail-qty border radius  m-auto">
-                                        <a href="#" class="qty-down" data-index="3"><i class="fi-rs-angle-small-down"></i></a>
-                                        <span id="output-3" class="qty-val">1</span>
-                                        <a href="#" class="qty-up" data-index="3"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div>
-                                </td>
-                                <td class="text-right" data-title="Cart">
-                                    $<span id="total-3">62</span>.00
-                                </td>
-                                <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td colspan="6" class="text-end">
-                                    <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear Cart</a>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
