@@ -30,4 +30,9 @@ class Product extends Model
         'published',
         'product_image_path',
     ];    
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
 }
