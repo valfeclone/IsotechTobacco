@@ -96,36 +96,60 @@
             // qtyval = qtyval + 1;
             var $upBtn = $(this);
             var usr_id = $('#usr_id').val();
-            console.log(usr_id);
+            var product_id = $upBtn.data('index');
+            // console.log(usr_id);
             var cart_id = $upBtn.data('index');
             var newQty = $('#output-'+$upBtn.data('index')).html(function(i, qtyval) {
-                // console.log(qtyval);
+                var getQtyVal = $('#qtyId-'+$upBtn.data('index'));
                 qtyval = qtyval * 1 + 1;
+                getQtyVal.val(qtyval);
                 // console.log(qtyval);
                 return qtyval;
             });
+            // $('#qtyId-'+$upBtn.data('index')).html(function(i, qtyvalForm) {
+            //     // console.log(qtyvalForm);
+            //     var getqtyVal = qtyvalForm.val();
+            //     console.log(getqtyVal);
+            //     qtyvalForm.val = qtyvalForm * 1 + 1;
+            //     console.log(qtyvalForm);
+            //     return qtyvalForm;
+            // });
             $('#total-'+$upBtn.data('index')).html(function(i, subtotal) {
                 var price = parseInt($('#price-'+$upBtn.data('index')).html());
                 subtotal = parseInt(newQty.html()) * price;
                 return subtotal;
             });
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name=crsf-token]').attr('content')
-            //     }
-            // });
-            // $.ajax({
-            //     type: "PUT",
-            //     url: "/",
-            //     dataType: "json",
-            //     data : {
-            //         usr_id: usr_id,
-            //         qty: newQty
-            //     },
-            //     success: function(data){
-            //         console.log(data);
-            //     }
-            // });
+            $('#cart-total-'+$upBtn.data('index')).html(function(i, totalPrice) {
+                var price = parseInt($('#price-'+$upBtn.data('index')).html());
+                totalPrice = parseInt(totalPrice) + price;
+                // console.log(totalPrice);
+                return totalPrice;
+            });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: '/update-cart',
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                data : {
+                    '_token' : "{{ csrf_token() }}",
+                    'product_id': product_id,
+                    'jumlahPesan': newQty
+                },
+                success: function(data){
+                    console.log(data);
+                },
+                error: function(data, textStatus, errorThrown){
+                    console.log(data.responseText);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });
 
             // $('#cart-total').html(function(i, carttotal) {
 
@@ -141,17 +165,25 @@
             // var cart_id = $upBtn.data('index');
             var $downBtn = $(this);
             var newQty = $('#output-'+$downBtn.data('index')).html(function(i, qtyval) {
+                var getQtyVal = $('#qtyId-'+$downBtn.data('index'));
                 if (qtyval > 1) {
                     qtyval = qtyval * 1 - 1;
                 } else {
                     qtyval = 1;
                 }
+                getQtyVal.val(qtyval);
                 return qtyval;
             });
             $('#total-'+$downBtn.data('index')).html(function(i, subtotal) {
                 var price = parseInt($('#price-'+$downBtn.data('index')).html());
                 subtotal = parseInt(newQty.html()) * price;
                 return subtotal;
+            });
+            $('#cart-total-'+$downBtn.data('index')).html(function(i, totalPrice) {
+                var price = parseInt($('#price-'+$downBtn.data('index')).html());
+                totalPrice = parseInt(totalPrice) - price;
+                // console.log(totalPrice);
+                return totalPrice;
             });
             // $.ajaxSetup({
             //     headers: {

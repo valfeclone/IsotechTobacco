@@ -54,6 +54,7 @@ class CartController extends Controller
 
     public function updateCart(Request $req)
     {
+        // dd($req);
         $id = $req['product_id'];
         $user = Auth::user();
         $product = Cart::where('user_id', $user['id'])

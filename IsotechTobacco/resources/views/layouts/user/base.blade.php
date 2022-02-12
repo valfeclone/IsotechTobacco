@@ -13,6 +13,7 @@
     <meta property="og:type" content="">
     <meta property="og:url" content="">
     <meta property="og:image" content="">
+    @yield('extra-meta')
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/user/imgs/theme/favicon.svg') }}">
     <!-- Template CSS -->
