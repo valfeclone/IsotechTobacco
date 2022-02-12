@@ -16,6 +16,12 @@
     {{-- <a href="#" class="btn btn-light rounded font-md">Export</a>
     <a href="#" class="btn btn-light rounded  font-md">Import</a> --}}
     <a href="/admin/create-product" class="btn btn-primary btn-sm rounded">Create new</a>
+    <!-- MANG BENERIN MANG -->
+    <form method="POST" action="/admin/logout">
+        @csrf
+        <input type="submit" value="Logout">
+        {{-- <a aria-label="Add To Cart" class="action-btn hover-up" href=""><i class="fi-rs-shopping-bag-add"></i></a> --}}
+    </form> 
 @endsection
 
 @section('admin-aside')

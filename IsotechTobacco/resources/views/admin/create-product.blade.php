@@ -60,7 +60,7 @@
 @endsection --}}
 @section('button-lists')
     {{-- <button class="btn btn-light rounded font-sm mr-5 text-body hover-up">Save to draft</button>
-    <button class="btn btn-md rounded font-sm hover-up">Publich</button> --}}
+    <button class="btn btn-md rounded font-sm hover-up">Publish</button> --}}
 @endsection
     </div>
 

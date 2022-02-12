@@ -26,9 +26,8 @@ class UserController extends Controller
         ]);
         if (Auth::login($newUser)) {
             $select = Product::all();
-            return redirect('/view-product')->with('items',$select);
+            return redirect('/index')->with('items',$select);
         }
-        return redirect('/view-product');
     }
     public function handleLogin(Request $req)
     {
@@ -38,10 +37,16 @@ class UserController extends Controller
         // $credentials['password'] = bcrypt($credentials['password']);
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']], $remember)) {
             $select = Product::all();
-            return redirect('/view-product')->with('items',$select);
+            return redirect('/index')->with('items',$select);
         } else {
             return back()->withErrors(['msg' => 'Wrong email or password']);
         }
     }
-
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
 }

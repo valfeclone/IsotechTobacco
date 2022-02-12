@@ -39,4 +39,11 @@ class AdminController extends Controller
             return back()->withErrors(['msg' => 'Wrong email or password']);
         }
     }
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
 }

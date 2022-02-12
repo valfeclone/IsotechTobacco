@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
@@ -90,6 +92,8 @@ Route::get('/payment-process', function () {
 
 Route::get('/index', [ProductController::class, 'testviewProduct'])->name('testviewProduct');
 
+Route::post('/logout', [UserController::class, 'logout']);
+
 Route::get('/product-detail/{id}', [ProductController::class, 'testviewProductbyID'])->name('testviewProductbyID');
 
 // Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
@@ -149,6 +153,10 @@ Route::post('/reset-password', function (Request $request) {
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
+//forget password admin
+Route::get('/admin/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm']);
+Route::post('/admin/forgot-password', [ForgotPasswordController::class, 'sendLinkRequestForm'])->name('admin.forgot-password');
+
 Route::middleware(['auth:admin'])->group(function(){
     //admin create product
     Route::get('/admin/create-product', function () {
@@ -156,7 +164,7 @@ Route::middleware(['auth:admin'])->group(function(){
     });
     Route::post('/admin/create-product', [ProductController::class, 'createProductPublish']);
     
-    //view all product & spec product
+    //ADMIN view all product & spec product
     Route::get('/admin/view-product', [ProductController::class, 'viewProduct'])->name('viewproduct');
     Route::get('/admin/view-product/{id}', [ProductController::class, 'viewProductbyID'])->name('viewproductID');
 
@@ -166,6 +174,7 @@ Route::middleware(['auth:admin'])->group(function(){
     
     //delete product
     Route::get('/admin/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteproductID');
+    Route::post('/admin/logout', [AdminController::class, 'logout']);
 });
 
 //view all product & spec product
