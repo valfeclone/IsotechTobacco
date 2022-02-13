@@ -92,11 +92,6 @@
         // });
 
         $('.qty-up').on('click', function (event) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
             event.preventDefault();
             // qtyval = qtyval + 1;
             var $upBtn = $(this);

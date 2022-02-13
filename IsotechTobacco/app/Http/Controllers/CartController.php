@@ -55,16 +55,28 @@ class CartController extends Controller
     public function updateCart(Request $req)
     {
         // dd($req);
-        $id = $req['product_id'];
         $user = Auth::user();
-        $product = Cart::where('user_id', $user['id'])
-                        ->where('product_id', $req['product_id'])
-                        ->where('order_id', null)
-                        ->get();
-        if($product){
-            $product['jumlahPesan'] = $req['jumlahPesan'];
+        // dd($req->request);
+
+        $temp = (int)(floor(sizeof($req->request)/3));
+
+        // dd($temp);
+
+        for ($i=1; $i <= $temp ; $i++) { 
+            $id = $req['product_id-'.$i];
+            $product = Cart::where('user_id', $user['id'])
+                            ->where('product_id', $req['product_id-'.$i])
+                            ->where('order_id', null)
+                            ->first();
+            // dd($req['qtyId-'.$i]);
+            if($product){
+                // dd($product['jumlahPesan']);
+                $product['jumlahPesan'] = (int)$req['qtyId-'.$i];
+            }
+            $product->save();
         }
-        $product->save();
+
+        // $product->save();
 
         return redirect()->back();
     }
