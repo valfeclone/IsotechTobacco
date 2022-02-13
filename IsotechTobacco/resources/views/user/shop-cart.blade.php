@@ -54,7 +54,7 @@
                                 <td class="text-center" data-title="Stock">
                                     <div class="detail-qty border radius m-auto">
                                         {{-- {{ csrf_field() }}  --}}
-                                        <a href="#" class="qty-down" data-index={{ $cart->product->id }}><i class="fi-rs-angle-small-down" ></i></a>
+                                        <a href="#" class="qty-down" data-index={{ $cart->product->id }} ><i class="fi-rs-angle-small-down" ></i></a>
                                         <input type="hideen" id="qtyId-{{ $cart->product->id }}" value={{ $cart->jumlahPesan }}>
                                         <span id="output-{{ $cart->product->id }}" class="qty-val">{{ $cart->jumlahPesan }}</span>
                                         <a href="#" class="qty-up" data-index={{ $cart->product->id }} data-inc={{ $cart->product->id }}><i class="fi-rs-angle-small-up"></i></a>
@@ -95,7 +95,6 @@
                                                     $total = 0;
                                                     foreach ($carts as $cart) 
                                                         $total += $cart->jumlahPesan * $cart->product->regular_price
-                                                    
                                                 @endphp
                                                 {{ $total }}
                                             </span></td>

@@ -92,11 +92,18 @@
         // });
 
         $('.qty-up').on('click', function (event) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             event.preventDefault();
             // qtyval = qtyval + 1;
             var $upBtn = $(this);
             var usr_id = $('#usr_id').val();
             var product_id = $upBtn.data('index');
+            // var csrfToken = $upBtn.data('token');
+            // console.log(csrfToken);
             // console.log(usr_id);
             var cart_id = $upBtn.data('index');
             var newQty = $('#output-'+$upBtn.data('index')).html(function(i, qtyval) {
@@ -106,6 +113,8 @@
                 // console.log(qtyval);
                 return qtyval;
             });
+
+            var updateQty = parseInt(newQty.html());
             // $('#qtyId-'+$upBtn.data('index')).html(function(i, qtyvalForm) {
             //     // console.log(qtyvalForm);
             //     var getqtyVal = qtyvalForm.val();
@@ -125,31 +134,43 @@
                 // console.log(totalPrice);
                 return totalPrice;
             });
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "POST",
-                url: '/update-cart',
-                dataType: "json",
-                processData: false,
-                contentType: false,
-                data : {
-                    '_token' : "{{ csrf_token() }}",
-                    'product_id': product_id,
-                    'jumlahPesan': newQty
-                },
-                success: function(data){
-                    console.log(data);
-                },
-                error: function(data, textStatus, errorThrown){
-                    console.log(data.responseText);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
-            });
+            // $.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            event.preventDefault();
+            // var data = {
+            //     _token: csrfToken,
+            //     product_id: product_id,
+            //     jumlahPesan: updateQty
+            // }
+            // $.ajax({
+            //     type: "POST",
+            //     // url: "{{ route('updateCart') }}",
+            //     url: '/update-cart',
+            //     // url: 'http://127.0.0.1:8000/update-cart',
+            //     dataType: "json",
+            //     // processData: false,
+            //     contentType: "application/json; charset=utf-8",
+            //     // data: data,
+            //     data : {
+            //         "_token" : csrfToken,
+            //         "product_id": product_id,
+            //         "jumlahPesan": updateQty
+            //     },
+            //     // data: function(data){
+            //     //     console.log(data);
+            //     // },
+            //     success: function(data){
+            //         console.log(data);
+            //     },
+            //     error: function(data, textStatus, errorThrown){
+            //         console.log(data.responseText);
+            //         console.log(textStatus);
+            //         console.log(errorThrown);
+            //     }
+            // });
 
             // $('#cart-total').html(function(i, carttotal) {
 
@@ -161,11 +182,12 @@
             event.preventDefault();
             // qtyval = qtyval - 1;
             var usr_id = $('#usr_id').val();
-            console.log(usr_id);
+            // console.log(usr_id);
             // var cart_id = $upBtn.data('index');
             var $downBtn = $(this);
             var newQty = $('#output-'+$downBtn.data('index')).html(function(i, qtyval) {
                 var getQtyVal = $('#qtyId-'+$downBtn.data('index'));
+                // console.log(getQtyVal.val());
                 if (qtyval > 1) {
                     qtyval = qtyval * 1 - 1;
                 } else {
@@ -180,8 +202,15 @@
                 return subtotal;
             });
             $('#cart-total-'+$downBtn.data('index')).html(function(i, totalPrice) {
-                var price = parseInt($('#price-'+$downBtn.data('index')).html());
-                totalPrice = parseInt(totalPrice) - price;
+                let counter = parseInt(newQty.html());
+                if (counter > 1) {
+                    var price = parseInt($('#price-'+$downBtn.data('index')).html());
+                    totalPrice = parseInt(totalPrice) - price;
+                    return totalPrice;
+                } else {
+                    return totalPrice;
+                }
+                
                 // console.log(totalPrice);
                 return totalPrice;
             });
