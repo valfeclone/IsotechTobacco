@@ -11,6 +11,12 @@
             <div class="container">
                 <div class="row align-items-center slider-animated-1">
                     <div class="col-lg-5 col-md-6">
+                        <!-- MANG BENERIN MANG -->
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <input type="submit" value="Logout">
+                            {{-- <a aria-label="Add To Cart" class="action-btn hover-up" href=""><i class="fi-rs-shopping-bag-add"></i></a> --}}
+                        </form> 
                         <div class="hero-slider-content-2">
                             <h4 class="animated">Trade-in offer</h4>
                             <h2 class="animated fw-900">Supper value deals</h2>

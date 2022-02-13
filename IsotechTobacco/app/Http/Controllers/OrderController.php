@@ -32,8 +32,7 @@ class OrderController extends Controller
     public function viewOrder()
     {
         $user = Auth::user();
-        $select = DB::table('orders')
-                        ->where('user_id', $user['id']) //get all for user ID. Filter through front end @dharma
+        $select = Order::where('user_id', $user['id']) //get all for user ID. Filter through front end @dharma
                         // ->where('order_id', null)
                         ->get();
         // return view ('/shopping-cart')->with('items',$select);
@@ -49,8 +48,7 @@ class OrderController extends Controller
     public function updateStatusOrder(Request $req)
     {
         $user = Auth::user();
-        $order = DB::table('orders')
-                        ->where('user_id', $user['id'])
+        $order = Order::where('user_id', $user['id'])
                         ->get();
         if($order){
             if($order['statusTransaksi']=='belum dibayar'){
@@ -75,5 +73,11 @@ class OrderController extends Controller
         // dd($req);
         $res = Order::find($id)->delete();
         // return redirect('admin/view-product');
+    }
+
+    public function getTarif(Request $req)
+    {
+        $tarif = ShippingFee::where('alamat', $req['alamat'])->get();
+        return $tarif;
     }
 }
