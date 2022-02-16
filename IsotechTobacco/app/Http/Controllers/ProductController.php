@@ -85,7 +85,7 @@ class ProductController extends Controller
     public function viewProduct()
     {
         $select = Product::all();
-        return view ('admin/product-lists')->with('items',$select);
+        return view ('adminnew/product-lists')->with('items',$select);
     }
 
     public function viewProductbyID($id)
@@ -97,7 +97,7 @@ class ProductController extends Controller
     public function viewEditProduct($id)
     {
         $select = Product::findOrFail($id);
-        return view ('admin/edit-product')->with('product',$select);
+        return view ('adminnew/edit-product')->with('product',$select);
     }
 
     public function updateProduct(Request $req)
@@ -118,6 +118,7 @@ class ProductController extends Controller
             $product['width'] = $req['width'];
             $product['height'] = $req['height'];
             $product['weight'] = $req['weight'];
+            $product['published'] = $req['published'];
         }
         $product->save();
 
@@ -162,7 +163,7 @@ class ProductController extends Controller
     {
         $select = Product::where('published', 1)->get();
         // dd($select);
-        return view ('user/index')->with('items',$select);
+        return view ('usernew/index')->with('items',$select);
     }
 
     public function testviewProductbyID($id)
@@ -178,12 +179,26 @@ class ProductController extends Controller
     public function searchProduct(Request $request)
     {
         $search = $request->title;
+        // dd($search);
         if($search == null){
             $select = Product::all();
-            return view ('product/searchproduct')->with('items', $select);
+            return view ('usernew/index')->with('items', $select);
+            // return redirect('/index')->with('items', $select);
         }
         $select = Product::where('title', 'like', '%'.$search.'%')->get();
-        return view ('product/searchproduct')->with('items', $select);
-    }    
+        // return redirect('/index')->with('items', $select);
+        return view ('usernew/index')->with('items', $select);
+    } 
+    
+    public function adminSearchProduct(Request $request)
+    {
+        $search = $request->title;
+        if($search == null){
+            $select = Product::all();
+            return view ('adminnew/product-lists')->with('items', $select);
+        }
+        $select = Product::where('title', 'like', '%'.$search.'%')->get();
+        return view ('adminnew/product-lists')->with('items', $select);
+    }
 }
 

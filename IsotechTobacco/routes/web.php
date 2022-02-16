@@ -44,11 +44,30 @@ Route::get('/admin/order-details', function () {
 
 //buat login admin
 Route::get('/admin/register', function () {
-    return view('admin/register');
+    return view('adminnew/register');
 });
+Route::get('/admin/setting', function () {
+    return view('adminnew/setting');
+});
+Route::get('/admin/banner', function () {
+    return view('adminnew/banner');
+});
+Route::get('/admin/create-product-1', function () {
+    return view('adminnew/create-product');
+});
+Route::get('/admin/transaction', function () {
+    return view('adminnew/transactions');
+});
+Route::get('/admin/shipping', function () {
+    return view('adminnew/shipping');
+});
+Route::get('/admin/order-lists-1', function () {
+    return view('adminnew/order-lists');
+});
+
 Route::post('/admin/register', [AdminController::class, 'handleRegister']);
 Route::get('/admin/login', function () {
-    return view('admin/login');
+    return view('adminnew/login');
 });
 
 // admin features
@@ -163,10 +182,16 @@ Route::middleware(['auth:admin'])->group(function(){
         return view('admin/create-product');
     });
     Route::post('/admin/create-product', [ProductController::class, 'createProductPublish']);
+
+    Route::post('/admin/create-product-draft', [ProductController::class, 'createProductDraft']);
     
     //ADMIN view all product & spec product
     Route::get('/admin/view-product', [ProductController::class, 'viewProduct'])->name('viewproduct');
     Route::get('/admin/view-product/{id}', [ProductController::class, 'viewProductbyID'])->name('viewproductID');
+
+    //ADMIN Search
+    // Route::get('/search-product', [ProductController::class, 'searchProduct']);
+    Route::post('/admin/search-product', [ProductController::class, 'adminSearchProduct']);
 
     //edit product
     Route::get('/admin/edit-product/{id}', [ProductController::class, 'viewEditProduct']);

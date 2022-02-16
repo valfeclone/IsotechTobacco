@@ -41,9 +41,12 @@
                         <tbody>
                             <form action="/update-cart" id="formCart" method="POST">
                                 @csrf
+                            @php
+                                $i = 1
+                            @endphp               
                             @foreach ($carts as $cart)
                             <input type="hidden" name="cart_id-{{ $cart->id }}" id="cart_id-{{ $cart->id }}" value={{ $cart->id }}>
-                            <input type="hidden" name="product_id-{{ $cart->product->id }}" id="product_id-{{ $cart->product->id }}" value={{ $cart->product->id }}>
+                            <input type="hidden" name="product_id-{{ $i }}" id="product_id-{{ $i }}" value={{ $cart->product->id }}>
                             <tr class="rowchart" id={{ $cart->product->id }}>
                                 <td class="image product-thumbnail"><img src="/storage/products/{{ $cart->product->product_image_path }}" alt="#"></td>
                                 <td class="product-des product-name">
@@ -56,7 +59,7 @@
                                     <div class="detail-qty border radius m-auto">
                                         {{-- {{ csrf_field() }}  --}}
                                         <a href="#" class="qty-down" data-index={{ $cart->product->id }} ><i class="fi-rs-angle-small-down" ></i></a>
-                                        <input type="hidden" name="qtyId-{{ $cart->product->id }}" id="qtyId-{{ $cart->product->id }}" value={{ $cart->jumlahPesan }}>
+                                        <input type="hidden" name="qtyId-{{ $i }}" id="qtyId-{{ $i }}" value={{ $cart->jumlahPesan }}>
                                         <span id="output-{{ $cart->product->id }}" class="qty-val">{{ $cart->jumlahPesan }}</span>
                                         <a href="#" class="qty-up" data-index={{ $cart->product->id }} data-inc={{ $cart->product->id }}><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
@@ -66,6 +69,9 @@
                                 </td>
                                 <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                             </tr>
+                            @php
+                                $i = $i + 1;
+                            @endphp 
                             @endforeach
                         </tbody>
                     </table>
