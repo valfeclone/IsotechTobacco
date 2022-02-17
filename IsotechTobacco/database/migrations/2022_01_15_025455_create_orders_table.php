@@ -16,11 +16,12 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('totalTagihan');
+            $table->boolean('statusBayar');
             $table->integer('idTransaksiOy')->nullable();
             $table->foreignId('user_id')->constrained('users')
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
-            $table->enum('statusTransaksi', ['belum dibayar, belum diproses, sudah diproses, sudah selesai']);
+            $table->enum('statusTransaksi', ['belum dibayar', 'belum diproses', 'sudah diproses', 'sudah selesai']);
             $table->timestamps();
         });
     }

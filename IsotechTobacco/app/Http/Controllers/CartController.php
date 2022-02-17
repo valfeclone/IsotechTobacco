@@ -49,7 +49,7 @@ class CartController extends Controller
         $cart = Cart::where('user_id', $user['id'])
                         ->where('order_id', null)
                         ->get();
-        return view ('user/shop-cart')->with('carts',$cart);
+        return view ('usernew/shop-cart')->with('carts',$cart);
     }
 
     public function updateCart(Request $req)
@@ -81,8 +81,10 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function deleteCart($id)
-    {
+    public function deleteCart(Request $req)
+    {   
+        $id = $req['id'];
+        // dd($id);
         $res = Cart::find($id)->delete();
         return redirect()->back();
     }

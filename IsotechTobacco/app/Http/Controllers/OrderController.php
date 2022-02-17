@@ -20,13 +20,15 @@ class OrderController extends Controller
     {  
         $user = Auth::user();
         $newOrder = Order::create([
-            'totalTagihan' => $request['totalTagihan'],
+            'totalTagihan' => $req['totalTagihan'],
             'statusBayar' => false,
             'idTransaksiOy' => null,
             'user_id' => $user['id'],
             'statusTransaksi' => 'belum dibayar'
         ]);
         $newOrder->save();
+
+        return view('usernew/checkout');
     }
 
     public function viewOrder()

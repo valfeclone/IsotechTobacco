@@ -173,7 +173,7 @@ class ProductController extends Controller
             $select['seen_time']+=1;
             $select->save();
         }
-        return view ('user/product-detail')->with('items',$select);
+        return view ('usernew/product-detail')->with('items',$select);
     }
 
     public function searchProduct(Request $request)

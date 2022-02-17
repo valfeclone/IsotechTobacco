@@ -54,18 +54,18 @@
                                     <p class="font-xs">
                                     </p>
                                 </td>
-                                <td class="price" data-title="Price">Rp<span id="price-{{ $cart->product->id }}" class="price-detail">{{ $cart->product->regular_price }}</span></td>
+                                <td class="price" data-title="Price">Rp<span id="price-{{ $i }}" class="price-detail">{{ $cart->product->regular_price }}</span></td>
                                 <td class="text-center" data-title="Stock">
                                     <div class="detail-qty border radius m-auto">
                                         {{-- {{ csrf_field() }}  --}}
-                                        <a href="#" class="qty-down" data-index={{ $cart->product->id }} ><i class="fi-rs-angle-small-down" ></i></a>
+                                        <a href="#" class="qty-down" data-index={{ $i }} ><i class="fi-rs-angle-small-down" ></i></a>
                                         <input type="hidden" name="qtyId-{{ $i }}" id="qtyId-{{ $i }}" value={{ $cart->jumlahPesan }}>
-                                        <span id="output-{{ $cart->product->id }}" class="qty-val">{{ $cart->jumlahPesan }}</span>
-                                        <a href="#" class="qty-up" data-index={{ $cart->product->id }} data-inc={{ $cart->product->id }}><i class="fi-rs-angle-small-up"></i></a>
+                                        <span id="output-{{ $i }}" class="qty-val">{{ $cart->jumlahPesan }}</span>
+                                        <a href="#" class="qty-up" data-index={{ $i }} data-inc={{ $i }}><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                 </td>
                                 <td class="text-right" data-title="Cart">
-                                    Rp<span id="total-{{ $cart->product->id }}" class="total-val">{{ $cart->jumlahPesan * $cart->product->regular_price }}</span>
+                                    Rp<span id="total-{{ $i }}" class="total-val">{{ $cart->jumlahPesan * $cart->product->regular_price }}</span>
                                 </td>
                                 <td class="action" data-title="Remove"><a href="#" class="text-muted"><i class="fi-rs-trash"></i></a></td>
                             </tr>
@@ -87,6 +87,7 @@
                 <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                 <div class="row mb-50">
                     <div class="col-lg-12 col-md-12">
+                        <form action="/" method="POST">
                         <div class="border p-md-4 p-30 border-radius cart-totals">
                             <div class="heading_s1 mb-3">
                                 <h4>Cart Totals</h4>
@@ -105,6 +106,7 @@
                                                 @endphp
                                                 {{ $total }}
                                             </span></td>
+                                            <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}">
                                         </tr>
                                         {{-- <tr>
                                             <td class="cart_total_label">Shipping</td>
@@ -117,8 +119,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="#" class="btn "> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
+                            <button class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

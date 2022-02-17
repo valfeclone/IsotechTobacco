@@ -38,6 +38,12 @@
                                 <div class="form-group">
                                     <input required="" type="password" id="password" name="password" pattern=".{8,}" placeholder=" Password minimal 8 karakter">
                                 </div>
+                                <div class="form-group">
+                                    <input type="text" required="" id="alamat" name="alamat" placeholder="Alamat">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" required="" id="kota" name="kota" placeholder="Kota">
+                                </div>
                                 {{-- <div class="form-group">
                                     <input required="" type="password" name="password" placeholder="Confirm password">
                                 </div> --}}

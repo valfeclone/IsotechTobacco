@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Http\Request;
@@ -179,7 +180,7 @@ Route::post('/admin/forgot-password', [ForgotPasswordController::class, 'sendLin
 Route::middleware(['auth:admin'])->group(function(){
     //admin create product
     Route::get('/admin/create-product', function () {
-        return view('admin/create-product');
+        return view('adminnew/create-product');
     });
     Route::post('/admin/create-product', [ProductController::class, 'createProductPublish']);
 
@@ -212,6 +213,10 @@ Route::post('/create-cart', [CartController::class, 'createCart']);
 Route::post('/update-cart', [CartController::class, 'updateCart']);
 Route::post('/delete-cart', [CartController::class, 'deleteCart']);
 Route::get('/view-cart', [CartController::class, 'viewCart']);
+
+Route::get('/checkout', [OrderController::class, 'createOrder']);
+Route::post('/create-order', [OrderController::class, 'createOrder']);
+
 
 Route::middleware(['auth'])->group(function(){
 });

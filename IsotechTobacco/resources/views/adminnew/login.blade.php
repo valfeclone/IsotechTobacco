@@ -41,7 +41,7 @@
                 </svg> Sign in using Facebook
             </a>
         </div>
-        <p class="text-center mb-4">Don't have account? <a href="admin/register">Sign up</a></p>
+        <p class="text-center mb-4">Don't have account? <a href="/admin/register">Sign up</a></p>
         @if($errors->any())
             <div class="mb-3">
                 <p class="text-center font-sm text-danger ">{{$errors->first()}}</p>

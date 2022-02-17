@@ -18,11 +18,13 @@ class UserController extends Controller
      */
     public function handleRegister(Request $req)
     {
-        $credentials = $req->only('name', 'email', 'password');
+        $credentials = $req->only('name', 'email', 'password','alamat', 'kota');
         $newUser = User::create([
             'name' => $credentials['name'],
             'email' => $credentials['email'],
             'password' => bcrypt($credentials['password']),
+            'alamat' => $credentials['alamat'],
+            'kota' => $credentials['kota'],
         ]);
         if (Auth::login($newUser)) {
             $select = Product::all();

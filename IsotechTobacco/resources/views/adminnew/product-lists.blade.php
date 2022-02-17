@@ -27,7 +27,7 @@
         <p>Lorem ipsum dolor sit amet.</p>
     </div>
     <div>
-        <a href="#" class="btn btn-primary btn-sm rounded">Tambah</a>
+        <a href="/admin/create-product" class="btn btn-primary btn-sm rounded">Tambah</a>
     </div>
 </div>
 <div class="card mb-4">
