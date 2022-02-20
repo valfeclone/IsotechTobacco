@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Banner;
 
 class ProductController extends Controller
 {
@@ -161,9 +162,12 @@ class ProductController extends Controller
 
     public function testviewProduct(Request $req)
     {
-        $select = Product::where('published', 1)->get();
-        // dd($select);
-        return view ('usernew/index')->with('items',$select);
+        $product = Product::where('published', 1)->get();
+        $banner = Banner::where('status_tampil',1)->get();
+        return view ('usernew/index')->with('items', [
+            'product' => $product,
+            'banner' => $banner
+        ]);
     }
 
     public function testviewProductbyID($id)
