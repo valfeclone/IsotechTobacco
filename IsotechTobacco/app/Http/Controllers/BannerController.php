@@ -17,7 +17,7 @@ class BannerController extends Controller
     {
         $banner = $req->only('gambar_banner', 'deskripsi');
         
-        // dd($Banner);
+        // dd($banner);
 
         $newBanner = Banner::create([
             'deskripsi' => $banner['deskripsi'],
@@ -38,7 +38,7 @@ class BannerController extends Controller
     public function viewAllBanner()
     {
         $select = Banner::all();
-        return view ('admin/banner')->with('items',$select);
+        return view ('adminnew/banner')->with('items',$select);
     }
 
     public function updateBanner(Request $req)
@@ -60,6 +60,22 @@ class BannerController extends Controller
             $newBanner->link_gambar = str_replace(' ', '', $file->getClientOriginalName());
             $newBanner->save();
         }
+        return redirect('admin/banner');
+    }
+
+    public function toggleBanner(Request $req)
+    {
+        // dd($req);
+        $id = $req['bannerID'];
+        
+        $banner = Banner::find($id);
+        // dd($banner);
+        if($banner){
+            $banner['status_tampil'] = !$banner['status_tampil'];
+        }
+
+        $banner->save();
+
         return redirect('admin/banner');
     }
 

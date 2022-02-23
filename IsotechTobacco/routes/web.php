@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\CartController;
@@ -31,17 +32,17 @@ Route::middleware(['auth'])->group(function(){
     });
 });
 
-Route::get('/checkout', function () {
-    return view('user/checkout');
-});
+// Route::get('/checkout', function () {
+//     return view('user/checkout');
+// });
 
 Route::get('/admin/order-lists', function () {
     return view('admin/order-lists');
 });
 
-Route::get('/admin/order-details', function () {
-    return view('admin/order-details');
-});
+// Route::get('/admin/order-details', function () {
+//     return view('admin/order-details');
+// });
 
 //buat login admin
 Route::get('/admin/register', function () {
@@ -50,9 +51,7 @@ Route::get('/admin/register', function () {
 Route::get('/admin/setting', function () {
     return view('adminnew/setting');
 });
-Route::get('/admin/banner', function () {
-    return view('adminnew/banner');
-});
+
 Route::get('/admin/create-product-1', function () {
     return view('adminnew/create-product');
 });
@@ -62,9 +61,7 @@ Route::get('/admin/transaction', function () {
 Route::get('/admin/shipping', function () {
     return view('adminnew/shipping');
 });
-Route::get('/admin/order-lists-1', function () {
-    return view('adminnew/order-lists');
-});
+
 
 Route::post('/admin/register', [AdminController::class, 'handleRegister']);
 Route::get('/admin/login', function () {
@@ -185,10 +182,20 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::post('/admin/create-product', [ProductController::class, 'createProductPublish']);
 
     Route::post('/admin/create-product-draft', [ProductController::class, 'createProductDraft']);
+
+    // Admin Banner
+    Route::get('/admin/banner', [BannerController::class, 'viewAllBanner']);
+    Route::post('/admin/create-banner', [BannerController::class, 'createBanner']);
+    Route::post('/admin/toggle-banner/{id}', [BannerController::class, 'toggleBanner']);
+    Route::post('/admin/delete-banner/{id}', [BannerController::class, 'deleteBanner']);
     
     //ADMIN view all product & spec product
     Route::get('/admin/view-product', [ProductController::class, 'viewProduct'])->name('viewproduct');
     Route::get('/admin/view-product/{id}', [ProductController::class, 'viewProductbyID'])->name('viewproductID');
+
+    //DAFTAR Pesanan
+    Route::get('/admin/order-lists', [OrderController::class, 'viewAllOrder']);
+    Route::post('/admin/updateOrder', [OrderController::class, 'updateStatusOrder']);
 
     //ADMIN Search
     // Route::get('/search-product', [ProductController::class, 'searchProduct']);
@@ -215,7 +222,13 @@ Route::post('/delete-cart', [CartController::class, 'deleteCart']);
 Route::get('/view-cart', [CartController::class, 'viewCart']);
 
 Route::get('/checkout', [OrderController::class, 'createOrder']);
-Route::post('/create-order', [OrderController::class, 'createOrder']);
+Route::post('/checkout', [OrderController::class, 'createOrder']);
+
+Route::get('/view-order', [OrderController::class, 'viewOrder']);
+
+Route::get('/order', function(){
+    return view('usernew/order');
+});
 
 
 Route::middleware(['auth'])->group(function(){

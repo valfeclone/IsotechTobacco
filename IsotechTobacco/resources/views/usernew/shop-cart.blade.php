@@ -362,7 +362,7 @@
                       
                     </div> --}}
                     <div class="col-lg-12 col-md-12">
-                        <form action="/create-order" method="POST">
+                        <form action="/checkout" method="POST">
                             @csrf
                             <div class="border p-md-4 p-30 border-radius cart-totals">
                             <div class="heading_s1 mb-3">

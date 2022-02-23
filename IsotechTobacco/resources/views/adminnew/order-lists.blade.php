@@ -68,272 +68,51 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($orders as $order)
                     <tr>
-                        <td>0901</td>
-                        <td><b>Marvin McKinney</b></td>
-                        <td>marvin@example.com</td>
-                        <td>$9.00</td>
-                        <td><span class="badge rounded-pill alert-warning">Pending</span></td>
-                        <td>03.12.2020</td>
+                        <td>{{ $order->id }}</td>
+                        <td><b>{{ $order->user->name }}</b></td>
+                        <td>{{ $order->user->email }}</td>
+                        <td>Rp. {{ $order->totalTagihan }}</td>
+                        <td><span class="badge rounded-pill alert-warning">{{ $order->statusTransaksi }}</span></td>
+                        <td>{{ $order->created_at }}</td>
                         <td class="text-end">
                             <a href="#" class="btn btn-md rounded font-sm">Detail</a>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                <form class="dropdown-menu" method="POST" action="/admin/updateOrder">
+                                    <input type="hidden" name="order_id" value={{ $order->id }}>
+                                    <label class="dropdown-menu" for="statusTransaksi">Status:</label>
+                                        <select class="dropdown-item" name="statusTransaksi" id="statusTransaksi">
+                                            <option class="dropdown-item" value="belum diproses">belum diproses</option>
+                                            <option class="dropdown-item" value="sudah diproses">sudah diproses</option>
+                                            <option class="dropdown-item" value="sudah selesai">sudah selesai</option>
+                                    </select>
+                                    <button class="dropdown-item text-success" type="submit">Ganti Status</button>
+                                    <form method="POST" action="/admin/delete-order/{{ $order->id }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </form>
+                                    {{-- <a class="dropdown-item" href="#">Lihat detail</a>
+                                    <a class="dropdown-item" href="#">Ubah info</a> --}}
+                                    {{-- <form method="POST" action="/admin/delete-order/{{ $order->id }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            Hapus
+                                        </button>
+                                    </form> --}}
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
+                                    {{-- <a class="dropdown-item" href="#">Lihat detail</a>
+                                    <a class="dropdown-item" href="#">Ubah info</a> --}}
+                                    
                                 </div>
                             </div> <!-- dropdown //end -->
                         </td>
                     </tr>
-                    <tr>
-                        <td>2323</td>
-                        <td><b>Leslie Alexander</b></td>
-                        <td>leslie@example.com</td>
-                        <td>$46.61</td>
-                        <td><span class="badge rounded-pill alert-warning">Pending</span></td>
-                        <td>21.02.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1233</td>
-                        <td><b>Esther Howard</b></td>
-                        <td>esther@example.com</td>
-                        <td>$12.00</td>
-                        <td><span class="badge rounded-pill alert-danger">Canceled</span></td>
-                        <td>03.07.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1233</td>
-                        <td><b>Esther Howard</b></td>
-                        <td>esther@example.com</td>
-                        <td>$12.00</td>
-                        <td><span class="badge rounded-pill alert-danger">Canceled</span></td>
-                        <td>03.07.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2323</td>
-                        <td><b>Jenny Wilson</b></td>
-                        <td>jenny@example.com</td>
-                        <td>$589.99</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>22.05.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2112</td>
-                        <td><b>Marvin McKinney</b></td>
-                        <td>marvin@example.com</td>
-                        <td>$16.58</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>23.04.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>7897</td>
-                        <td><b>Albert Flores</b></td>
-                        <td>albert@example.com</td>
-                        <td>$10.00</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>13.03.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2323</td>
-                        <td><b>Wade Warren</b></td>
-                        <td>wade@example.com</td>
-                        <td>$105.55</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>23.09.2019</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2324</td>
-                        <td><b>Jane Cooper</b></td>
-                        <td>jane@example.com</td>
-                        <td>$710.68</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>28.04.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2325</td>
-                        <td><b>Savannah Nguyen</b></td>
-                        <td>savannah@example.com</td>
-                        <td>$710.68</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>23.03.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2326</td>
-                        <td><b>Guy Hawkins</b></td>
-                        <td>guy@example.com</td>
-                        <td>$767.50</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>28.04.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2327</td>
-                        <td><b>Darrell Steward</b></td>
-                        <td>darrel@example.com</td>
-                        <td>$406.27</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>14.07.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2328</td>
-                        <td><b>Jane Cooper</b></td>
-                        <td>jane@example.com</td>
-                        <td>$601.13</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>18.03.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2329</td>
-                        <td><b>Darlene Robertson</b></td>
-                        <td>deriene@example.com</td>
-                        <td>$948.55</td>
-                        <td><span class="badge rounded-pill alert-success">Received</span></td>
-                        <td>03.07.2020</td>
-                        <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
-                            <div class="dropdown">
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lihat detail</a>
-                                    <a class="dropdown-item" href="#">Ubah info</a>
-                                    <a class="dropdown-item text-danger" href="#">Hapus</a>
-                                </div>
-                            </div> <!-- dropdown //end -->
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div> <!-- table-responsive //end -->

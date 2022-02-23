@@ -28,7 +28,23 @@ class OrderController extends Controller
         ]);
         $newOrder->save();
 
-        return view('usernew/checkout');
+        $cart = Cart::where('user_id', $user['id'])
+                        ->where('order_id', null)
+                        ->get();
+                        
+        // dd(sizeof($cart));
+        if($cart){
+            for ($i=0; $i < sizeof($cart); $i++) { 
+                $cart[$i]->order_id = $newOrder['id'];
+                $cart[$i]->save();
+            }
+        }
+
+
+        return view('usernew/checkout')->with('items',[
+            'cart' => $cart,
+            'order' => $newOrder
+        ]);
     }
 
     public function viewOrder()
@@ -37,37 +53,47 @@ class OrderController extends Controller
         $select = Order::where('user_id', $user['id']) //get all for user ID. Filter through front end @dharma
                         // ->where('order_id', null)
                         ->get();
-        // return view ('/shopping-cart')->with('items',$select);
+        
+        $cart = Cart::where('user_id', $user['id'])
+                        ->get();
+
+        // dd($select, $cart);
+        return view ('usernew/order')->with('items',[
+            'order' => $select,
+            'cart' => $cart
+        ]);
     }
 
     public function viewAllOrder()
     {
-        $user = Auth::user();
+        // $user = Auth::user();
         $select = Order::all();
-        // return view ('/shopping-cart')->with('items',$select);
+        return view ('adminnew/order-lists')->with('orders',$select);
     }
 
     public function updateStatusOrder(Request $req)
     {
         $user = Auth::user();
-        $order = Order::where('user_id', $user['id'])
-                        ->get();
+        $order = Order::where('id', $req['order_id'])
+                        ->first();
+
+        // dd($req['statusTransaksi'], $order->statusTransaksi);
         if($order){
-            if($order['statusTransaksi']=='belum dibayar'){
-                $order['statusTransaksi'] = 'belum diproses';
-                if($req['idTransaksiOy']){
-                    $order['idTransaksiOy'] = $req['idTransaksiOy'];
-                }
+            if($order->statusTransaksi =='belum dibayar'){
+                $order->statusTransaksi  = $req['statusTransaksi'];
+                // if($req['idTransaksiOy']){
+                //     $order['idTransaksiOy'] = $req['idTransaksiOy'];
+                // }
             }
-            else if($order['statusTransaksi']=='belum diproses'){
-                $order['statusTransaksi'] = 'sudah diproses';
+            else if($order->statusTransaksi =='belum diproses'){
+                $order->statusTransaksi  = $req['statusTransaksi'];
             }
-            else if($order['statusTransaksi']=='sudah diproses'){
-                $order['statusTransaksi'] = 'sudah selesai';
+            else if($order->statusTransaksi =='sudah diproses'){
+                $order->statusTransaksi  = $req['statusTransaksi'];
             }
         }
-        $product->save();
-        // return redirect()->route('viewproduct');
+        $order->save();
+        return redirect()->back();
     }
 
     public function deleteOrder($id)

@@ -679,33 +679,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                // foreach disini
-                                // start
+                                @foreach ($items['cart'] as $cart)
                                 <tr>
-                                    <td class="image product-thumbnail"><img src="assets/imgs/shop/product-2-1-grey.jpg" alt="#"></td>
+                                    <td class="image product-thumbnail"><img src="/storage/products/{{ $cart->product->product_image_path }}" alt="#"></td>
                                     <td>
-                                        <h5><a href="shop-product-full.html">Yidarton Women Summer Blue</a></h5> <span class="product-qty">x 2</span>
+                                        <h5>{{ $cart->product->title }}</h5> <span class="product-qty">x {{ $cart->jumlahPesan }}</span>
                                     </td>
-                                    <td>Rp<span>180.00</span></td>
+                                    <td>Rp<span>{{ $cart->product->regular_price }}</span></td>
                                 </tr>
-                                // end foreach
-                                <tr>
-                                    <td class="image product-thumbnail"><img src="assets/imgs/shop/product-2-1-grey.jpg" alt="#"></td>
-                                    <td>
-                                        <h5><a href="shop-product-full.html">LDB MOON Women Summe</a></h5> <span class="product-qty">x 1</span>
-                                    </td>
-                                    <td>$65.00</td>
-                                </tr>
-                                <tr>
-                                    <td class="image product-thumbnail"><img src="assets/imgs/shop/product-2-1-grey.jpg" alt="#"></td>
-                                    <td><i class="ti-check-box font-small text-muted mr-10"></i>
-                                        <h5><a href="shop-product-full.html">Women's Short Sleeve Loose</a></h5> <span class="product-qty">x 1</span>
-                                    </td>
-                                    <td>$35.00</td>
-                                </tr>
+                                @endforeach                       
                                 <tr>
                                     <th>SubTotal</th>
-                                    <td class="product-subtotal" colspan="2">Rp280.000</td>
+                                    <td class="product-subtotal" colspan="2">{{ $items['order']->totalTagihan }}</td>
                                 </tr>
                                 <tr>
                                     <th>Ongkos Kirim</th>
