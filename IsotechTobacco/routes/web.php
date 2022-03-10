@@ -228,6 +228,10 @@ Route::get('/order', function(){
     return view('usernew/order');
 });
 
+Route::get('/katalog', function () {
+    return view('usernew/katalog');
+});
+
 
 Route::middleware(['auth'])->group(function(){
 });

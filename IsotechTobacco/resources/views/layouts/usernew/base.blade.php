@@ -259,7 +259,7 @@
                                     <li><a href="/index">Home</a>
                                     </li>                                 
                                     <li>
-                                        <a  class="active" href="shop-grid-left.html">Katalog</a>
+                                        <a  href="/katalog" href="shop-grid-left.html">Katalog</a>
                                     </li>
                                 </ul>
                             </nav>
