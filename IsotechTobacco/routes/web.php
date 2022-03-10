@@ -26,11 +26,11 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware(['auth'])->group(function(){
-    Route::get('/', function () {
-        return view('welcome');
-    });
-});
+// Route::middleware(['auth'])->group(function(){
+// });
+Route::get('/', [ProductController::class, 'testviewProduct']);
+
+Route::get('/index', [ProductController::class, 'testviewProduct'])->name('testviewProduct');
 
 // Route::get('/checkout', function () {
 //     return view('user/checkout');
@@ -106,8 +106,6 @@ Route::get('/payment', function () {
 Route::get('/payment-process', function () {
     return view('user/after-payment');
 });
-
-Route::get('/index', [ProductController::class, 'testviewProduct'])->name('testviewProduct');
 
 Route::post('/logout', [UserController::class, 'logout']);
 

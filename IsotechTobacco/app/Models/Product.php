@@ -28,6 +28,7 @@ class Product extends Model
         'height',
         'weight',
         'published',
+        'filter',
         'product_image_path',
     ];    
 

@@ -26,6 +26,7 @@ class ProductController extends Controller
             'title' => $product['title'],
             'description' => $product['description'],
             'category' => $product['category'],
+            'filter' => "Terbaru",
             'SKU' => $product['SKU'],
             'stock' => $product['stock'],
             'regular_price' => $product['regular_price'],
@@ -54,12 +55,13 @@ class ProductController extends Controller
         $product = $req->only('title', 'description', 'category', 'SKU', 'stock', 'regular_price', 'promo_price', 
         'tax_rate', 'width', 'height', 'weight', 'product_image');
         
-        // dd($product);
+        // dd($product);D
 
         $newProduct = Product::create([
             'title' => $product['title'],
             'description' => $product['description'],
             'category' => $product['category'],
+            'filter' => "Terbaru",
             'SKU' => $product['SKU'],
             'stock' => $product['stock'],
             'regular_price' => $product['regular_price'],
@@ -111,6 +113,9 @@ class ProductController extends Controller
             $product['title'] = $req['title'];
             $product['description'] = $req['description'];
             $product['category'] = $req['category'];
+            if($req['filter']){
+                $product['filter'] = $req['filter'];
+            }
             $product['SKU'] = $req['SKU'];
             $product['stock'] = $req['stock'];
             $product['regular_price'] = $req['regular_price'];
@@ -163,6 +168,9 @@ class ProductController extends Controller
     public function testviewProduct(Request $req)
     {
         $product = Product::where('published', 1)->get();
+        $populer = Product::where('published', 1)->where('filter', 'Populer')->get();
+        $terbaru = Product::where('published', 1)->where('filter', 'Terbaru')->get();
+        $featured = Product::where('published', 1)->where('filter', 'Featured')->get();
         $banner = Banner::where('status_tampil',1)->get();
         return view ('usernew/index')->with('items', [
             'product' => $product,
