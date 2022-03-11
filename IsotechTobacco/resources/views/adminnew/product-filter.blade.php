@@ -1,7 +1,7 @@
 @extends('layouts.adminnew.base')
 
 @section('meta-title')
-    Admin Gondrong | Product Lists
+    Admin Gondrong | Product Filter
 @endsection
 
 @section('menu-aside')
@@ -23,11 +23,11 @@
 @section('main-section')
 <div class="content-header">
     <div>
-        <h2 class="content-title card-title">Daftar Produk</h2>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <h2 class="content-title card-title">Daftar Produk Filter</h2>
+        <p>Admin dapat melakukan pengaturan filter disini</p>
     </div>
     <div>
-        <a href="/admin/create-product" class="btn btn-primary btn-sm rounded">Tambah</a>
+        {{-- <a href="/admin/create-product" class="btn btn-primary btn-sm rounded">Tambah</a> --}}
     </div>
 </div>
 <div class="card mb-4">
@@ -68,7 +68,7 @@
                         <input class="form-check-input" type="checkbox">
                     </div>
                 </div>
-                <div class="col-lg-2 col-sm-4 col-8 flex-grow-1 col-name">
+                <div class="col-lg-4 col-sm-4 col-8 flex-grow-1 col-name">
                     <a class="itemside" href="#">
                         <div class="left">
                             <img src="/storage/products/{{ $product->product_image_path }}" class="img-sm img-thumbnail" alt="Item">
@@ -78,16 +78,9 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-2 col-sm-2 col-4 col-price"> Rp.<span>{{ $product->regular_price}}</span> </div>
+                <div class="col-lg-2 col-sm-2 col-4 col-price"> <span>{{ $product->regular_price}}</span> </div>
                 <div class="col-lg-2 col-sm-2 col-4 col-status">
-                    @if ($product->published)
-                        <span class="badge rounded-pill alert-success">Publish</span>    
-                    @else
-                        <span class="badge rounded-pill alert-danger">Draft</span> 
-                    @endif
-                </div>
-                <div class="col-lg-2 col-sm-2 col-4 col-status">
-                    <span class="badge rounded-pill alert-warning">{{ $product->filter }}</span>
+                    <span class="badge rounded-pill alert-warning">{{ $product->filter }}</span> 
                 </div>
                 {{-- <div class="col-lg-1 col-sm-2 col-4 col-date">
                     <span>02.11.2021</span>

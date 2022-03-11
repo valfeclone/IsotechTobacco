@@ -174,7 +174,10 @@ class ProductController extends Controller
         $banner = Banner::where('status_tampil',1)->get();
         return view ('usernew/index')->with('items', [
             'product' => $product,
-            'banner' => $banner
+            'banner' => $banner,
+            'populer' => $populer,
+            'terbaru' => $terbaru,
+            'featured' => $featured
         ]);
     }
 

@@ -132,7 +132,7 @@
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h4>Publich or Draft</h4>
+                                <h4>Published or Draft</h4>
                             </div>
                             <div class="card-body">
                                 <div class="row gx-2">
@@ -146,6 +146,46 @@
                                             @else{
                                                 <option value=1> Yes </option>
                                                 <option selected value=0> No  </option>
+                                            }
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div> <!-- row.// -->
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h4>Filter Produk</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row gx-2">
+                                    <div class="col-sm-6 mb-3">
+                                        <label for="filter" class="form-label">Filter</label>
+                                        <select name="filter" class="form-select">
+                                            
+                                            @if ($product->filter == 'non-filter'){
+                                                <option selected value='non-filter'> non-filter </option>
+                                                <option value='Terbaru'> Terbaru  </option>
+                                                <option value='Populer'> Populer  </option>
+                                                <option value='Featured'> Featured  </option>
+                                            } 
+                                            @elseif($product->filter = 'Terbaru'){
+                                                <option selected value='non-filter'> non-filter </option>
+                                                <option selected value='Terbaru'> Terbaru  </option>
+                                                <option value='Populer'> Populer  </option>
+                                                <option value='Featured'> Featured  </option>
+                                            }
+                                            @elseif($product->filter = 'Populer'){
+                                                <option selected value='non-filter'> non-filter </option>
+                                                <option value='Terbaru'> Terbaru  </option>
+                                                <option selected value='Populer'> Populer  </option>
+                                                <option value='Featured'> Featured  </option>
+                                            }
+                                            @elseif($product->filter = 'Featured'){
+                                                <option value='non-filter'> non-filter </option>
+                                                <option value='Terbaru'> Terbaru  </option>
+                                                <option value='Populer'> Populer  </option>
+                                                <option selected value='Featured'> Featured  </option>
                                             }
                                             @endif
                                         </select>
