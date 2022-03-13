@@ -25,7 +25,7 @@
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="index.html" class="brand-wrap">
-                <img src="{{ asset('images/admin/imgs/theme/logo.svg') }}" class="logo" alt="Dashboard Admin">
+                <img src="/storage/profils/{{ $profiles->logo_path }}" class="logo" alt="Dashboard Admin">
             </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>

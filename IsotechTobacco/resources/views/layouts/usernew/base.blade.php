@@ -180,7 +180,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="/index"><img src="{{ asset('images/user/imgs/theme/logo.svg') }}" alt="logo"></a>
+                        <a href="/index"><img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
@@ -502,25 +502,23 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index-4.html"><img src="{{asset('images/user/imgs/theme/logo.svg')}}" alt="logo"></a>
+                                <a href="index-4.html"><img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Kontak</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Alamat: </strong>Jl. Mangkubumi No 212, Yogyakarta
+                                <strong>Alamat: </strong>{{ $profiles->alamat }}
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Nomor: </strong>+62 1234 5678
+                                <strong>Nomor: </strong>{{ $profiles->kontak }}
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Jam: </strong>10:00 - 18:00, Senin - Minggu
+                                <strong>Jam: </strong>{{ $profiles->jam_buka }} - {{ $profiles->jam_tutup }}, {{ $profiles->hari_buka }}
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Ikuti Kami</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
                                 <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-facebook.svg')}}" alt=""></a>
-                                <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-twitter.svg')}}" alt=""></a>
-                                <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-instagram.svg')}}" alt=""></a>
-                                <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-pinterest.svg')}}" alt=""></a>
-                                <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-youtube.svg')}}" alt=""></a>
+                                <a href="https://twitter.com/{{ $profiles->twitter }}"><img src="{{asset('images/user/imgs/theme/icons/icon-twitter.svg')}}" alt=""></a>
+                                <a href="https://www.instagram.com/{{ $profiles->instagram }}/"><img src="{{asset('images/user/imgs/theme/icons/icon-instagram.svg')}}" alt=""></a>
                             </div>
                         </div>
                     </div>

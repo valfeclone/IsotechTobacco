@@ -40,12 +40,44 @@ class ProfilController extends Controller
     public function viewProfil(Request $req)
     {
         $select = Profil::all()->first();
-        return view ('admin/profil')->with('items',$select);
+        return view ('adminnew/setting')->with('items',$select);
     }
 
     public function updateProfil(Request $req)
     {   
         $profil = profil::all()->first();
+
+        if($profil == null){
+            $profil = $req->only('logo', 'deskripsi', 'kontak', 'alamat', 'hari_buka', 'jam_buka', 'jam_tutup', 
+            'facebook', 'twitter', 'instagram');
+
+            $newProfil = Profil::create([
+                'deskripsi' => $profil['deskripsi'],
+                'kontak' => $profil['kontak'],
+                'alamat' => $profil['alamat'],
+                'hari_buka' => $profil['hari_buka'],
+                'jam_buka' => $profil['jam_buka'],
+                'jam_tutup' => $profil['jam_tutup'],
+                'facebook' => $profil['facebook'],
+                'twitter' => $profil['twitter'],
+                'instagram' => $profil['instagram'],
+            ]);
+            $newProfil->save();
+            // dd($newProfil);
+
+            if($profil['logo']){
+                $file = $req->file('logo');
+                $path = storage_path('app/public/profils');
+                // dd($file, $path);
+                $file->move($path, str_replace(' ', '', $file->getClientOriginalName()));
+                
+                $newProfil->logo_path = str_replace(' ', '', $file->getClientOriginalName());
+                $newProfil->save();
+            }
+
+            return redirect('admin/setting');
+        };
+
         if($profil){
             $profil['deskripsi'] = $req['deskripsi'];
             $profil['kontak'] = $req['kontak'];
@@ -67,6 +99,6 @@ class ProfilController extends Controller
             $profil->logo_path = str_replace(' ', '', $file->getClientOriginalName());
             $profil->save();
         }
-        return redirect('admin/profil');
+        return redirect('admin/setting');
     }
 }

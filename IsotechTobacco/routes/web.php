@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\ProfilController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
@@ -47,9 +48,6 @@ Route::get('/admin/order-lists', function () {
 //buat login admin
 Route::get('/admin/register', function () {
     return view('adminnew/register');
-});
-Route::get('/admin/setting', function () {
-    return view('adminnew/setting');
 });
 
 Route::get('/admin/create-product-1', function () {
@@ -173,6 +171,10 @@ Route::get('/admin/forgot-password', [ForgotPasswordController::class, 'showLink
 Route::post('/admin/forgot-password', [ForgotPasswordController::class, 'sendLinkRequestForm'])->name('admin.forgot-password');
 
 Route::middleware(['auth:admin'])->group(function(){
+    // Profile
+    Route::post('/admin/update-profile', [ProfilController::class, 'updateProfil']);
+    Route::get('/admin/setting', [ProfilController::class, 'viewProfil']);
+
     //admin create product
     Route::get('/admin/create-product', function () {
         return view('adminnew/create-product');
