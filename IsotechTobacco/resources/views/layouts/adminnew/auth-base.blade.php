@@ -16,7 +16,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/admin/imgs/theme/favicon.svg') }}">
     <!-- Template CSS -->
-    <link href="{{ asset('css-new/admin/main.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css-new/admin/css/main.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
 <body>

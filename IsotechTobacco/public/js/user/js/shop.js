@@ -238,6 +238,9 @@
         $('.dropdown-menu .cart_list').on('click', function (event) {
             event.stopPropagation();
         });
+        function convertToAngka(rupiah){
+            return parseInt(rupiah.replace(/,.*|[^0-9]/g, ''), 10);
+        }
     };
     /* WOW active */
     new WOW().init();

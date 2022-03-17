@@ -61,7 +61,7 @@
                                         <a href="#" class="qty-down" data-index={{ $i }} ><i class="fi-rs-angle-small-down" ></i></a>
                                         <input type="hidden" name="qtyId-{{ $i }}" id="qtyId-{{ $i }}" value={{ $cart->jumlahPesan }}>
                                         <span id="output-{{ $i }}" class="qty-val">{{ $cart->jumlahPesan }}</span>
-                                        <a href="#" class="qty-up" data-index={{ $i }} data-inc={{ $i }}><i class="fi-rs-angle-small-up"></i></a>
+                                        <a href="#" class="qty-up" data-index={{ $i }}><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                 </td>
                                 <td class="text-right" data-title="Cart">

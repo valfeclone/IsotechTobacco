@@ -105,7 +105,7 @@
                 var getQtyVal = $('#qtyId-'+$upBtn.data('index'));
                 qtyval = qtyval * 1 + 1;
                 getQtyVal.val(qtyval);
-                // console.log(qtyval);
+                console.log(qtyval);
                 return qtyval;
             });
 
@@ -120,13 +120,16 @@
             // });
             $('#total-'+$upBtn.data('index')).html(function(i, subtotal) {
                 var price = parseInt($('#price-'+$upBtn.data('index')).html());
+                // console.log(price);
+                // price = convertToAngka(price);
+                // console.log(price);
                 subtotal = parseInt(newQty.html()) * price;
                 return subtotal;
             });
-            $('#cart-total-'+$upBtn.data('index')).html(function(i, totalPrice) {
+            $('#cart-total-1').html(function(i, totalPrice) {
                 var price = parseInt($('#price-'+$upBtn.data('index')).html());
                 totalPrice = parseInt(totalPrice) + price;
-                // console.log(totalPrice);
+                console.log(totalPrice);
                 return totalPrice;
             });
             // $.ajaxSetup({
@@ -182,7 +185,7 @@
             var $downBtn = $(this);
             var newQty = $('#output-'+$downBtn.data('index')).html(function(i, qtyval) {
                 var getQtyVal = $('#qtyId-'+$downBtn.data('index'));
-                // console.log(getQtyVal.val());
+                console.log(getQtyVal.val());
                 if (qtyval > 1) {
                     qtyval = qtyval * 1 - 1;
                 } else {
@@ -206,7 +209,7 @@
                     return totalPrice;
                 }
                 
-                // console.log(totalPrice);
+                console.log(totalPrice);
                 return totalPrice;
             });
             // $.ajaxSetup({
@@ -238,6 +241,10 @@
         $('.dropdown-menu .cart_list').on('click', function (event) {
             event.stopPropagation();
         });
+
+        // function convertToAngka(rupiah){
+        //     return parseInt(rupiah.replace(/,.*|[^0-9]/g, ''), 10);
+        // }
     };
     /* WOW active */
     new WOW().init();

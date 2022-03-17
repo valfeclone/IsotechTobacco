@@ -46,17 +46,17 @@
                     <option>Kategori C</option>
                 </select>
             </div>
-            <div class="col-md-2 col-6">
+            {{-- <div class="col-md-2 col-6">
                 <input type="date" value="02.05.2021" class="form-control">
-            </div>
-            <div class="col-md-2 col-6">
+            </div> --}}
+            {{-- <div class="col-md-2 col-6">
                 <select class="form-select">
                     <option selected>Status</option>
                     <option>Active</option>
                     <option>Disabled</option>
                     <option>Show all</option>
                 </select>
-            </div>
+            </div> --}}
         </div>
     </header> <!-- card-header end// -->
     <div class="card-body">

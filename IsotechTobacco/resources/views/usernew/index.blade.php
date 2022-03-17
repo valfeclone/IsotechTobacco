@@ -8,26 +8,13 @@
 {{-- Carousel Slider --}}
 <section class="home-slider position-relative mb-30">
     <div class="container">
-        <div class="home-slide-cover bg-grey-10 mt-30">
+        <div class="home-slide-cover mt-30">
             <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
                 @foreach ($items['banner'] as $banner)
-                <div class="single-hero-slider single-animation-wrap">
+                <div class="single-hero-slider single-animation-wrap mt-30">
                     <div class="container">
                         <div class="row align-items-center slider-animated-1">
-                            <div class="col-lg-5 col-md-6">
-                                <div class="hero-slider-content-2">
-                                    {{-- <h4 class="animated">Trade-In Offer</h4> --}}
-                                    <h3 class="animated fw-900">{{ $banner->deskripsi }}</h3>
-                                    {{-- <h2 class="animated fw-900 text-brand">On All Products</h2> --}}
-                                    {{-- <p class="animated">Save more with coupons & up to 70% off</p> --}}
-                                    {{-- <a class="animated btn btn-brush btn-brush-3" href="shop-product-full.html" tabindex="0"> Beli sekarang </a> --}}
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-md-6">
-                                <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated" src="/storage/banners/{{ $banner->link_gambar }}" alt="">
-                                </div>
-                            </div>
+                            <img class="animated img-fluid" src="/storage/banners/{{ $banner->link_gambar }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -97,7 +84,8 @@
                                             </span>
                                         </div> --}}
                                         <div class="product-price">
-                                            <span>{{ $product->regular_price}}</span>
+                                            {{-- <span>@toRupiah($product->regular_price)</span> --}}
+                                            <span>{{ $product->regular_price }}</span>
                                             {{-- <span class="old-price">$245.8</span> --}}
                                         </div>
                                         <div class="product-action-1 show">
@@ -564,7 +552,8 @@
                                             </span>
                                         </div> --}}
                                         <div class="product-price">
-                                            <span>{{ $product->regular_price}}</span>
+                                            {{-- <span>@toRupiah($product->regular_price)</span> --}}
+                                            <span>{{ $product->regular_price }}</span>
                                             {{-- <span class="old-price">$245.8</span> --}}
                                         </div>
                                         <div class="product-action-1 show">
@@ -1043,7 +1032,8 @@
                                             </span>
                                         </div> --}}
                                         <div class="product-price">
-                                            <span>{{ $product->regular_price}}</span>
+                                            {{-- <span>@toRupiah($product->regular_price)</span> --}}
+                                            <span>{{ $product->regular_price }}</span>
                                             {{-- <span class="old-price">$245.8</span> --}}
                                         </div>
                                         <div class="product-action-1 show">
