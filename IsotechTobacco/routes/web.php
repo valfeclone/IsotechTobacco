@@ -88,8 +88,12 @@ Route::post('/admin-forgot-password', function (Request $request) {
 })->middleware('guest')->name('password.email');
 
 //buat login user
+// Route::get('/register', function () {
+//     return view('user/register');
+// });
+
 Route::get('/register', function () {
-    return view('user/register');
+    return view('usernew/register');
 });
 
 Route::get('/shopping-cart', function () {
@@ -113,8 +117,11 @@ Route::get('/product-detail/{id}', [ProductController::class, 'testviewProductby
 
 
 Route::post('/register', [UserController::class, 'handleRegister']);
+// Route::get('/login', function () {
+//     return view('user/login');
+// })->name('login');
 Route::get('/login', function () {
-    return view('user/login');
+    return view('usernew/login');
 })->name('login');
 Route::post('/login', [UserController::class, 'handleLogin']);
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);

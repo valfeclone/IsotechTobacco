@@ -1,0 +1,24 @@
+.form{
+    height: 5px;
+}
+
+button.logout:hover {
+    background-color: #dc3545;
+}
+
+.logout, button.submit, button[type='submit'] {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0px;
+    border: none;
+    background-color: transparent;
+}
+
+.logout-text{
+    color: #ffffff;
+}
+
+button.submit:hover, button[type='submit']:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+}

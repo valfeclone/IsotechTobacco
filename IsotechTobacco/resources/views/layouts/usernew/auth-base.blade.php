@@ -19,7 +19,6 @@
     <!-- Template CSS -->
     @yield('extra-style')
     <link rel="stylesheet" href="{{ asset('css-new/user/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css-new/user/css/logout.css') }}">
 </head>
 
 <body>
@@ -155,7 +154,7 @@
         </div>
     </div>
     <header class="header-area header-style-1 header-height-2">
-        <div class="header-top header-top-ptb-1 d-none d-lg-block">
+        {{-- <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-3 col-lg-4">
@@ -187,13 +186,9 @@
                                             <i class="fi-rs-sign-out"></i>
                                             <p class="logout-text">Logout</p>
                                         </button>
-                                        {{-- <div class="d-flex">
-                                            <i class="fi-rs-sign-out"></i>
-                                            <input class="logout" type="submit" value="logout">
-                                        </div> --}}
+                                        
                                     </form>
-                                    {{-- <i class="fi-rs-sign-out"></i>
-                                    <a href="{{ url('/logout') }}">Logout</a> --}}
+                                    
                                 </li>
                                 @endif
                             </ul>
@@ -201,7 +196,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="header-wrap">

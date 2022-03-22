@@ -5,10 +5,12 @@ namespace App\Providers;
 // use App\View\Composers\ProfileComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use App\Models\Profil;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+// use App\Models\Profil;
 
  
-class ViewServiceProvider extends ServiceProvider
+class UserServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -30,8 +32,8 @@ class ViewServiceProvider extends ServiceProvider
         // // Using class based composers...
         // View::composer('layouts.usernew.base', ProfileComposer::class);
 
-        View::composer(['layouts.usernew.base', 'layouts.usernew.auth-base', 'layouts.adminnew.base'], function ($view) {
-            $view->with('profiles', Profil::all()->first());
+        View::composer(['layouts.usernew.base'], function ($view) {
+            $view->with('user', $user = Auth::user());
         });
 
     }
