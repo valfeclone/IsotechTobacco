@@ -1462,11 +1462,10 @@
                 <h1 class="font-heading mb-40">
                     Kami adalah supplier tobacco paling hebat
                 </h1>
-                <p>Tempus ultricies augue luctus et ut suscipit. Morbi arcu, ultrices purus dolor erat bibendum sapien metus.</p>
-                <p>Tempus ultricies augue luctus et ut suscipit. Morbi arcu, ultrices purus dolor erat bibendum sapien metus. Sit mi, pharetra, morbi arcu id. Pellentesque dapibus nibh augue senectus. </p>
+                <p>{{ $profiles->deskripsi }} </p>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('images/user/imgs/page/about-1-grey.png') }}" alt="">
+                <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong-Land.png') }}" alt="logo">
             </div>
         </div>
     </div>

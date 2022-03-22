@@ -206,7 +206,13 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="/index"><img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo"></a>
+                        <a href="/">
+                            @if ($profiles == null)
+                                <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong.png') }}" alt="logo">
+                            @else
+                                <img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo">
+                            @endif
+                        </a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">

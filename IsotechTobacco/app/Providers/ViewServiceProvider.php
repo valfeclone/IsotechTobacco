@@ -30,7 +30,7 @@ class ViewServiceProvider extends ServiceProvider
         // // Using class based composers...
         // View::composer('layouts.usernew.base', ProfileComposer::class);
 
-        View::composer(['layouts.usernew.base', 'layouts.usernew.auth-base', 'layouts.adminnew.base'], function ($view) {
+        View::composer(['layouts.usernew.base', 'layouts.usernew.auth-base', 'layouts.adminnew.base', 'usernew.index'], function ($view) {
             $view->with('profiles', Profil::all()->first());
         });
 
