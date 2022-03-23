@@ -221,10 +221,18 @@ class ProductController extends Controller
         $search = $request->category;
         if($search == null){
             $select = Product::all();
-            return view ('product/viewproduct')->with('items', $select);
+            return view ('usernew/katalog')->with('items', $select);
         }
         $select = Product::where('category', 'like', '%'.$search.'%')->get();
-        return view ('product/viewproduct')->with('items', $select);
+        return view ('usernew/katalog')->with('items', $select);
+    }
+
+    public function viewKatalog()
+    {
+        $select = Product::where('published', 1)->get();
+        // dd($select);
+        // var_dump($select);
+        return view ('usernew/katalog')->with('items', $select);
     }
 
     public function saveExcel(Request $req){

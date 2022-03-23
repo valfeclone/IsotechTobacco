@@ -49,11 +49,10 @@ Route::get('/admin/order-lists', function () {
 Route::get('/uploadExcel', function(){
     return view('product/uploadexcel');
 });
-Route::post('/uploadExcel', [ProductController::class, 'saveExcel']);
+// Route::post('/uploadExcel', [ProductController::class, 'saveExcel']);
 
 #get product by kategori. nanti diubah ya api address nya
-Route::get('/teskategori', [ProductController::class, 'searchGeneral']);
-Route::post('/teskategori', [ProductController::class, 'searchGeneral']);
+
 
 //buat login admin
 Route::get('/admin/register', function () {
@@ -225,6 +224,9 @@ Route::middleware(['auth:admin'])->group(function(){
     //delete product
     Route::get('/admin/delete-product/{id}', [ProductController::class, 'deleteProduct'])->name('deleteproductID');
     Route::post('/admin/logout', [AdminController::class, 'logout']);
+
+    //upload product excel
+    Route::post('/admin/upload-excel', [ProductController::class, 'saveExcel']);
 });
 
 //view all product & spec product
@@ -232,6 +234,10 @@ Route::get('/search-product', [ProductController::class, 'searchProduct']);
 Route::post('/search-product', [ProductController::class, 'searchProduct']);
 Route::get('/view-product', [ProductController::class, 'usrviewProduct'])->name('usrviewproduct');
 Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
+
+// katalog product
+Route::get('/katalog', [ProductController::class, 'viewKatalog']);
+Route::post('/katalog', [ProductController::class, 'searchGeneral']);
 
 Route::post('/create-cart', [CartController::class, 'createCart']);
 Route::post('/update-cart', [CartController::class, 'updateCart']);
@@ -245,10 +251,6 @@ Route::get('/view-order', [OrderController::class, 'viewOrder']);
 
 Route::get('/order', function(){
     return view('usernew/order');
-});
-
-Route::get('/katalog', function () {
-    return view('usernew/katalog');
 });
 
 

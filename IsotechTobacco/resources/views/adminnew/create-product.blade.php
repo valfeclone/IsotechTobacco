@@ -30,7 +30,7 @@
     <div class="col-lg-9">
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Info Produk</h4>
+                <h4>Tambah Produk Manual</h4>
             </div>
             <div class="card-body">
                 <form method="POST" action="/admin/create-product" enctype='multipart/form-data'>
@@ -143,6 +143,21 @@
                     </div>
                     <input class="btn btn-light rounded font-sm mr-5 text-body hover-up" type="submit" value="Save">
                         <input class="btn btn-md rounded font-sm hover-up"  type="submit" value="Publish">
+                </form>
+            </div>
+        </div> <!-- card end// -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Tambah Produk Excel</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/admin/upload-excel" enctype='multipart/form-data'>
+                @csrf
+                    <div class="mb-4">
+                        <label for="excel" class="form-label">Input Katalog Produk File Excel</label>
+                        <input type="file" class="form-control" id="excel" name="excel">
+                    </div>
+                    <input class="btn btn-light rounded font-sm mr-5 text-body hover-up" type="submit" value="Submit">
                 </form>
             </div>
         </div> <!-- card end// -->

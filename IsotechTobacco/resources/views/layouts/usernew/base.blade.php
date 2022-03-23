@@ -535,7 +535,7 @@
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             @if ($profiles != null)
                                 <div class="logo logo-width-1 wow fadeIn animated">
-                                    <a href="index-4.html"><img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo"></a>
+                                    {{-- <a href="index-4.html"><img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo"></a> --}}
                                 </div>
                                 <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Kontak</h5>
                                 <p class="wow fadeIn animated">
@@ -555,7 +555,7 @@
                                 </div>
                             @else
                                 <div class="logo logo-width-1 wow fadeIn animated">
-                                    <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong.png') }}" alt="logo">
+                                    {{-- <img class="w-50" src="{{ asset('images/user/imgs/logo/Logo-Gondrong.png') }}" alt="logo"> --}}
                                 </div>
                                 <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Kontak</h5>
                                 <p class="wow fadeIn animated">
@@ -588,6 +588,17 @@
                     <div class="col-lg-2  col-md-3">
                         <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
                         <img class="wow fadeIn animated" src="{{ asset('images/user/imgs/theme/payment-method.png') }}" alt="">
+                    </div>
+                    <div class="ms-5 col-lg-2  col-md-3">
+                        <div class="logo logo-width-1 wow fadeIn animated">
+                            <a href="/">
+                                @if ($profiles == null)
+                                    <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong.png') }}" alt="logo">
+                                @else
+                                    <img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo">
+                                @endif
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
