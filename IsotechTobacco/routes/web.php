@@ -45,6 +45,9 @@ Route::get('/admin/order-lists', function () {
 //     return view('admin/order-details');
 // });
 
+Route::get('/teskategori', [ProductController::class, 'searchGeneral']);
+Route::post('/teskategori', [ProductController::class, 'searchGeneral']);
+
 //buat login admin
 Route::get('/admin/register', function () {
     return view('adminnew/register');

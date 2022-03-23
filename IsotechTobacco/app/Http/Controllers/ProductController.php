@@ -215,5 +215,16 @@ class ProductController extends Controller
         $select = Product::where('title', 'like', '%'.$search.'%')->get();
         return view ('adminnew/product-lists')->with('items', $select);
     }
+
+    public function searchGeneral(Request $request)
+    {
+        $search = $request->category;
+        if($search == null){
+            $select = Product::all();
+            return view ('product/viewproduct')->with('items', $select);
+        }
+        $select = Product::where('category', 'like', '%'.$search.'%')->get();
+        return view ('product/viewproduct')->with('items', $select);
+    }
 }
 

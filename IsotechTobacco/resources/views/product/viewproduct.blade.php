@@ -1,3 +1,10 @@
+<form method="POST" action="/teskategori" enctype='multipart/form-data'>
+    @csrf
+    <label for="category" class="form-label">Search Product Category</label>
+    <input type="text" placeholder="Type here" class="form-control" id="category" name="category">
+    <input class="btn btn-md rounded font-sm hover-up"  type="submit" value="Search">
+</form>
+<br><br>
 @foreach($items as $product)
 <tr>
     <th>

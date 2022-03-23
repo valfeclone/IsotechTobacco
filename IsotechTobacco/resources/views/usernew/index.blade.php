@@ -1462,7 +1462,11 @@
                 <h1 class="font-heading mb-40">
                     Kami adalah supplier tobacco paling hebat
                 </h1>
-                <p>{{ $profiles->deskripsi }} </p>
+                @if($profiles != null)
+                    <p>{{ $profiles->deskripsi }} </p>
+                @else    
+                    <p></p>
+                @endif
             </div>
             <div class="col-lg-6">
                 <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong-Land.png') }}" alt="logo">
