@@ -226,5 +226,61 @@ class ProductController extends Controller
         $select = Product::where('category', 'like', '%'.$search.'%')->get();
         return view ('product/viewproduct')->with('items', $select);
     }
+
+    public function saveExcel(Request $req){
+        if($req['excel']){
+            $file = $req->file('excel');
+            $path = storage_path('app/public/file');
+            $file->move($path, str_replace(' ', '', 'test.csv'));
+        }
+        ProductController::importCsv();
+        return redirect('/admin/view-product');   
+    }
+
+    public function csvToArray($filename = '', $delimiter = ','){
+        if (!file_exists($filename) || !is_readable($filename))
+        return false;
+
+        // dd($filename);
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false)
+        {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
+            {
+                if (!$header)
+                    $header = $row;
+                else
+                    $data[] = array_combine($header, $row);
+            }
+            fclose($handle);
+        }
+        return $data;   
+    }
+
+    public function importCsv()
+    {
+        $file = public_path('storage\file\test.csv');
+        $productArr = $this->csvToArray($file);
+        // dd($productArr);
+        for ($i = 0; $i < count($productArr); $i++)
+        {
+            $newProduct = Product::create([
+                'title' => $productArr[$i]['title'],
+                'description' => $productArr[$i]['description'],
+                'category' => $productArr[$i]['category'],
+                'filter' => "Terbaru",
+                'SKU' => $productArr[$i]['SKU'],
+                'stock' => $productArr[$i]['stock'],
+                'regular_price' => $productArr[$i]['regular_price'],
+                // 'promo_price' => $productArr[$i]['promo_price'],
+                'tax_rate' => $productArr[$i]['tax_rate'],
+                'width' => $productArr[$i]['width'],
+                'height' => $productArr[$i]['height'],
+                'weight' => $productArr[$i]['weight'],
+            ]);
+            $newProduct->save();
+        } 
+    }
 }
 

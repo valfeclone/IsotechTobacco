@@ -45,6 +45,13 @@ Route::get('/admin/order-lists', function () {
 //     return view('admin/order-details');
 // });
 
+#upload excel to update product
+Route::get('/uploadExcel', function(){
+    return view('product/uploadexcel');
+});
+Route::post('/uploadExcel', [ProductController::class, 'saveExcel']);
+
+#get product by kategori. nanti diubah ya api address nya
 Route::get('/teskategori', [ProductController::class, 'searchGeneral']);
 Route::post('/teskategori', [ProductController::class, 'searchGeneral']);
 

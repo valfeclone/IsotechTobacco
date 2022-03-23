@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->enum('category', ['Cat A', 'Cat B', 'Cat C']);
             $table->enum('filter', ['non-filter', 'Populer', 'Terbaru', 'Featured'])->default('Terbaru');
             $table->string('SKU')->nullable();
-            //$table->arrayofstring('variant');
+            $table->string('varian')->nullable();
             $table->integer('seen_time')->default(0);
             $table->integer('sold')->default(0);
             $table->integer('stock')->default(0);

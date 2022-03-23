@@ -24,9 +24,15 @@
     <div class="screen-overlay"></div>
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
-            <a href="index.html" class="brand-wrap">
-                <img src="/storage/profils/{{ $profiles->logo_path }}" class="logo" alt="Dashboard Admin">
-            </a>
+            @if($profiles != null)
+                <a href="index.html" class="brand-wrap">
+                    <img src="/storage/profils/{{ $profiles->logo_path }}" class="logo" alt="Dashboard Admin">
+                </a>
+            @else
+                <div class="logo logo-width-1 wow fadeIn animated">
+                    <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong.png') }}" alt="logo">
+                </div>
+            @endif
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
             </div>

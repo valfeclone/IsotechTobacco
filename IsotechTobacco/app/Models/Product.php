@@ -21,6 +21,7 @@ class Product extends Model
         'SKU',
         'stock',
         'seen_time',
+        'varian',
         'regular_price',
         'promo_price',
         'tax_rate',
