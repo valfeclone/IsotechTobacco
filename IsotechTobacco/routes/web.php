@@ -255,6 +255,10 @@ Route::get('/order', function(){
 
 
 Route::middleware(['auth'])->group(function(){
+    Route::get('/updateprofil', function () {
+        return view('user/updateprofil');
+    });
+    Route::post('/updateprofil', [UserController::class, 'updateprofil']);
 });
 
 // cart

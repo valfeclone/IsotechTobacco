@@ -26,10 +26,9 @@ class UserController extends Controller
             'alamat' => $credentials['alamat'],
             'kota' => $credentials['kota'],
         ]);
-        if (Auth::login($newUser)) {
-            $select = Product::all();
-            return redirect('/index')->with('items',$select);
-        }
+        Auth::login($newUser);
+        $select = Product::all();
+        return redirect('/index')->with('items',$select);
     }
     public function handleLogin(Request $req)
     {
@@ -50,5 +49,22 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+    public function updateProfil(Request $req)
+    {
+        $user = Auth::user();
+        $credentials = $req->only('name', 'email', 'password','alamat', 'kota');
+        
+        // dd($user['name']);
+        if($user){
+            $user['name'] = $credentials['name'];
+            $user['email'] = $credentials['email'];
+            $user['password'] = bcrypt($credentials['password']);
+            $user['alamat'] = $credentials['alamat'];
+            $user['kota'] = $credentials['kota'];
+        }
+        $user->save();
+        $select = Product::all();
+        return redirect('/index')->with('items',$select);
     }
 }
