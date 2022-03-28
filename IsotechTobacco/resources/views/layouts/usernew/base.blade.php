@@ -178,7 +178,9 @@
                                 @else
                                 <li>
                                     <i class="fi-rs-user"></i>
-                                    <p>{{ $user->name }}</p>
+                                    <a href="/profile">
+                                        <p>{{ $user->name }}</p>
+                                    </a>
                                 </li>
                                 <li>
                                     <form method="POST" action="/logout">

@@ -255,9 +255,8 @@ Route::get('/order', function(){
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/updateprofil', function () {
-        return view('user/updateprofil');
-    });
+    Route::get('/profile', [UserController::class, 'getProfil']);
+    Route::get('/updateprofil', [UserController::class, 'getUpdateProfil']);
     Route::post('/updateprofil', [UserController::class, 'updateprofil']);
 });
 

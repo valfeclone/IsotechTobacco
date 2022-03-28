@@ -67,4 +67,16 @@ class UserController extends Controller
         $select = Product::all();
         return redirect('/index')->with('items',$select);
     }
+
+    public function getProfil()
+    {
+        $user = Auth::user();
+        return view ('usernew/profile')->with('items', $user);
+    }
+
+    public function getUpdateProfil()
+    {
+        $user = Auth::user();
+        return view ('usernew/update-profile')->with('items', $user);
+    }
 }
