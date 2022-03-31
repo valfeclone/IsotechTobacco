@@ -196,13 +196,14 @@ class ProductController extends Controller
         $search = $request->title;
         // dd($search);
         if($search == null){
-            $select = Product::all();
-            return view ('usernew/index')->with('items', $select);
+            $select = Product::where('published', 1)->get();
+            return view ('usernew/katalog')->with('items', $select);
             // return redirect('/index')->with('items', $select);
         }
-        $select = Product::where('title', 'like', '%'.$search.'%')->get();
+        $select = Product::where('published', 1)->where('title', 'like', '%'.$search.'%')->get();
         // return redirect('/index')->with('items', $select);
-        return view ('usernew/index')->with('items', $select);
+        // dd($select);
+        return view ('usernew/katalog')->with('items', $select);
     } 
     
     public function adminSearchProduct(Request $request)
@@ -220,10 +221,10 @@ class ProductController extends Controller
     {
         $search = $request->category;
         if($search == null){
-            $select = Product::all();
+            $select = Product::where('published', 1)->get();
             return view ('usernew/katalog')->with('items', $select);
         }
-        $select = Product::where('category', 'like', '%'.$search.'%')->get();
+        $select = Product::where('published', 1)->where('category', 'like', '%'.$search.'%')->get();
         return view ('usernew/katalog')->with('items', $select);
     }
 
