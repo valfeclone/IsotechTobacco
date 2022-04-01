@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Http\Controllers\PaymentController;
 
 class OrderController extends Controller
 {
@@ -19,32 +20,31 @@ class OrderController extends Controller
     public function createOrder(Request $req)
     {  
         $user = Auth::user();
-        $newOrder = Order::create([
-            'totalTagihan' => $req['totalTagihan'],
-            'statusBayar' => false,
-            'idTransaksiOy' => null,
-            'user_id' => $user['id'],
-            'statusTransaksi' => 'belum dibayar'
-        ]);
-        $newOrder->save();
+        $response = PaymentController::makePayment($senderName = $user['name'], $amount = $req['totalTagihan'], $email = $user['email'], $phoneNumber = $user['nomor_telpon']);
+        if($response['payment_link_id']){
+            $newOrder = Order::create([
+                'totalTagihan' => $req['totalTagihan'],
+                'statusBayar' => false,
+                'idTransaksiOy' => $response['payment_link_id'],
+                'user_id' => $user['id'],
+                'statusTransaksi' => 'belum dibayar'
+            ]);
+            $newOrder->save();
 
-        $cart = Cart::where('user_id', $user['id'])
-                        ->where('order_id', null)
-                        ->get();
-                        
-        // dd(sizeof($cart));
-        if($cart){
-            for ($i=0; $i < sizeof($cart); $i++) { 
-                $cart[$i]->order_id = $newOrder['id'];
-                $cart[$i]->save();
+            $cart = Cart::where('user_id', $user['id'])
+                            ->where('order_id', null)
+                            ->get();
+
+            // dd(sizeof($cart));
+            if($cart){
+                for ($i=0; $i < sizeof($cart); $i++) { 
+                    $cart[$i]->order_id = $newOrder['id'];
+                    $cart[$i]->save();
+                }
             }
+
+            return redirect($response['url']);
         }
-
-
-        return view('usernew/checkout')->with('items',[
-            'cart' => $cart,
-            'order' => $newOrder
-        ]);
     }
 
     public function viewOrder()

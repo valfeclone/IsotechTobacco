@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('totalTagihan');
             $table->boolean('statusBayar');
-            $table->integer('idTransaksiOy')->nullable();
+            $table->string('idTransaksiOy')->nullable();
             $table->foreignId('user_id')->constrained('users')
                   ->onUpdate('cascade')
                   ->onDelete('cascade');

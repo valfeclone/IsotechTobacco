@@ -44,6 +44,9 @@
                                 <div class="form-group">
                                     <input type="text" required="" id="kota" name="kota" placeholder="Kota">
                                 </div>
+                                <div class="form-group">
+                                    <input type="text" required="" id="nomor_telpon" name="nomor_telpon" placeholder="Nomor Telpon">
+                                </div>
                                 {{-- <div class="form-group">
                                     <input required="" type="password" name="password" placeholder="Confirm password">
                                 </div> --}}

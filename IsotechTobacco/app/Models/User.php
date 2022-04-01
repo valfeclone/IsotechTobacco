@@ -24,7 +24,8 @@ class User extends Authenticatable
         'password',
         'google_id',
         'alamat',
-        'kota'
+        'kota',
+        'nomor_telpon'
     ];
 
     /**

@@ -18,13 +18,14 @@ class UserController extends Controller
      */
     public function handleRegister(Request $req)
     {
-        $credentials = $req->only('name', 'email', 'password','alamat', 'kota');
+        $credentials = $req->only('name', 'email', 'password','alamat', 'kota', 'nomor_telpon');
         $newUser = User::create([
             'name' => $credentials['name'],
             'email' => $credentials['email'],
             'password' => bcrypt($credentials['password']),
             'alamat' => $credentials['alamat'],
             'kota' => $credentials['kota'],
+            'nomor_telpon' => $credentials['nomor_telpon'],
         ]);
         Auth::login($newUser);
         $select = Product::all();
@@ -53,7 +54,7 @@ class UserController extends Controller
     public function updateProfil(Request $req)
     {
         $user = Auth::user();
-        $credentials = $req->only('name', 'email', 'password','alamat', 'kota');
+        $credentials = $req->only('name', 'email', 'password','alamat', 'kota', 'nomor_telpon');
         
         // dd($user['name']);
         if($user){
@@ -62,6 +63,7 @@ class UserController extends Controller
             $user['password'] = bcrypt($credentials['password']);
             $user['alamat'] = $credentials['alamat'];
             $user['kota'] = $credentials['kota'];
+            $user['nomor_telpon'] = $credentials['nomor_telpon'];
         }
         $user->save();
         $select = Product::all();

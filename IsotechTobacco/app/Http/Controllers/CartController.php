@@ -24,6 +24,7 @@ class CartController extends Controller
         $prodID = $req['product_id']; 
         $checkExist = Cart::where('user_id', $id)
             ->where('product_id', $prodID)
+            ->where('order_id', null)
             ->first();
         // dd($prodID, $id);
         if($checkExist){

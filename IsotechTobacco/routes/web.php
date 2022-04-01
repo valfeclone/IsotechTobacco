@@ -239,10 +239,12 @@ Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'
 Route::get('/katalog', [ProductController::class, 'viewKatalog']);
 Route::post('/katalog', [ProductController::class, 'searchGeneral']);
 
-Route::post('/create-cart', [CartController::class, 'createCart']);
-Route::post('/update-cart', [CartController::class, 'updateCart']);
-Route::post('/delete-cart', [CartController::class, 'deleteCart']);
-Route::get('/view-cart', [CartController::class, 'viewCart']);
+Route::middleware(['auth'])->group(function(){
+    Route::post('/create-cart', [CartController::class, 'createCart']);
+    Route::post('/update-cart', [CartController::class, 'updateCart']);
+    Route::post('/delete-cart', [CartController::class, 'deleteCart']);
+    Route::get('/view-cart', [CartController::class, 'viewCart']);
+});
 
 Route::get('/checkout', [OrderController::class, 'createOrder']);
 Route::post('/checkout', [OrderController::class, 'createOrder']);
