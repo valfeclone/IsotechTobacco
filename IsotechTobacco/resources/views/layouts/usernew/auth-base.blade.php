@@ -277,7 +277,13 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="/index"><img src="{{ asset('images/user/imgs/theme/logo.svg') }}" alt="logo"></a>
+                        <a href="/">
+                            @if ($profiles == null)
+                                <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong.png') }}" alt="logo">
+                            @else
+                                <img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo">
+                            @endif
+                        </a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
@@ -292,21 +298,21 @@
                             </nav>
                         </div>
                     </div>
-                    <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
+                    {{-- <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p> --}}
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
+                                {{-- <a href="shop-wishlist.html">
                                     <img alt="Evara" src="{{ asset('images/user/imgs/theme/icons/icon-heart.svg') }}">
                                     <span class="pro-count white">4</span>
-                                </a>
+                                </a> --}}
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="shop-cart.html">
                                     <img alt="Evara" src="{{ asset('images/user/imgs/theme/icons/icon-cart.svg') }}">
-                                    <span class="pro-count white">2</span>
+                                    {{-- <span class="pro-count white">2</span> --}}
                                 </a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                {{-- <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
@@ -342,7 +348,7 @@
                                             <a href="shop-checkout.html">Checkout</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
@@ -361,7 +367,13 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index-4.html"><img src="{{ asset('images/user/imgs/theme/logo.svg') }}" alt="logo"></a>
+                    <a href="/">
+                        @if ($profiles == null)
+                            <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong.png') }}" alt="logo">
+                        @else
+                            <img src="/storage/profils/{{ $profiles->logo_path }}" alt="logo">
+                        @endif
+                    </a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -378,7 +390,7 @@
                     </form>
                 </div>
                 <div class="mobile-menu-wrap mobile-header-border">
-                    <div class="main-categori-wrap mobile-header-border">
+                    {{-- <div class="main-categori-wrap mobile-header-border">
                         <a class="categori-button-active-2" href="#">
                             <span class="fi-rs-apps"></span> Browse Categories
                         </a>
@@ -395,20 +407,20 @@
                                 <li><a href="shop-grid-right.html"><i class="evara-font-kite"></i>Outdoor fun</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- mobile menu start -->
                     <nav>
                         <ul class="mobile-menu">
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="index-4.html">Home</a>
-                                <ul class="dropdown">
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/">Home</a>
+                                {{-- <ul class="dropdown">
                                     <li><a href="index-4.html">Home 1</a></li>
                                     <li><a href="index-2.html">Home 2</a></li>
                                     <li><a href="index-3.html">Home 3</a></li>
                                     <li><a href="index-4.html">Home 4</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="shop-grid-right.html">shop</a>
-                                <ul class="dropdown">
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="/katalog">Katalog</a>
+                                {{-- <ul class="dropdown">
                                     <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
                                     <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
                                     <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
@@ -426,9 +438,9 @@
                                     <li><a href="shop-cart.html">Shop – Cart</a></li>
                                     <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                     <li><a href="shop-compare.html">Shop – Compare</a></li>
-                                </ul>
+                                </ul> --}}
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Mega menu</a>
+                            {{-- <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Mega menu</a>
                                 <ul class="dropdown">
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Women's Fashion</a>
                                         <ul class="dropdown">
@@ -455,8 +467,8 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog-category-fullwidth.html">Blog</a>
+                            </li> --}}
+                            {{-- <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog-category-fullwidth.html">Blog</a>
                                 <ul class="dropdown">
                                     <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
                                     <li><a href="blog-category-list.html">Blog Category List</a></li>
@@ -470,8 +482,8 @@
                                         </ul>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Pages</a>
+                            </li> --}}
+                            {{-- <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a >About Us</a></li>
                                     <li><a >Contact</a></li>
@@ -482,37 +494,54 @@
                                     <li><a href="page-terms.html">Terms of Service</a></li>
                                     <li><a href="page-404.html">404 Page</a></li>
                                 </ul>
-                            </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
+                            </li> --}}
+                            {{-- <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
                                 <ul class="dropdown">
                                     <li><a href="#">English</a></li>
                                     <li><a href="#">French</a></li>
                                     <li><a href="#">German</a></li>
                                     <li><a href="#">Spanish</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </nav>
                     <!-- mobile menu end -->
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
+                    @if ($profiles != null)
                     <div class="single-mobile-header-info mt-30">
-                        <a  > Lokasi Kami </a>
+                        <a href="#">{{ $profiles->alamat }}</a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="page-login-register.html">Masuk / Daftar </a>
+                        <a href="/login">Masuk / Daftar </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="#">(+62) - 1234 - 5678 </a>
+                        <a href="#">{{ $profiles->kontak }} </a>
                     </div>
+                    @else
+                    <div class="single-mobile-header-info mt-30">
+                        <a> Lokasi Kami </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="/login">Masuk / Daftar </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a>Belum Tersedia</a>
+                    </div>
+                    @endif
                 </div>
                 <div class="mobile-social-icon">
-                    <h5 class="mb-15 text-grey-4">Follow Us</h5>
-                    <a href="#"><img src="{{ asset('images/user/imgs/theme/icons/icon-facebook.svg') }}" alt=""></a>
-                    <a href="#"><img src="{{ asset('images/user/imgs/theme/icons/icon-twitter.svg') }}" alt=""></a>
-                    <a href="#"><img src="{{ asset('images/user/imgs/theme/icons/icon-instagram.svg') }}" alt=""></a>
-                    <a href="#"><img src="{{ asset('images/user/imgs/theme/icons/icon-pinterest.svg') }}" alt=""></a>
-                    <a href="#"><img src="{{ asset('images/user/imgs/theme/icons/icon-youtube.svg') }}" alt=""></a>
+                    <h5 class="mb-15 text-grey-4">Ikuti Kami</h5>
+                    @if ($profiles != null)
+                    <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-facebook.svg')}}" alt=""></a>
+                    <a href="https://twitter.com/{{ $profiles->twitter }}"><img src="{{asset('images/user/imgs/theme/icons/icon-twitter.svg')}}" alt=""></a>
+                    <a href="https://www.instagram.com/{{ $profiles->instagram }}/"><img src="{{asset('images/user/imgs/theme/icons/icon-instagram.svg')}}" alt=""></a>
+                    @else
+                    <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-facebook.svg')}}" alt=""></a>
+                    <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-twitter.svg')}}" alt=""></a>
+                    <a href="#"><img src="{{asset('images/user/imgs/theme/icons/icon-instagram.svg')}}" alt=""></a>
+                    @endif
+                </div>
                 </div>
             </div>
         </div>
