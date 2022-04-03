@@ -12,7 +12,7 @@ class PaymentController extends Controller
         String $senderName,
         int $amount,
         String $email,
-        String $phoneNumber,
+        String $phoneNumber
     )
     {
        try {
@@ -44,7 +44,7 @@ class PaymentController extends Controller
 
     public static function getPaymentStatus(
         string $partnerTrxId,
-        bool $sendCallback = false,
+        bool $sendCallback = false
     )
     {
        try {
@@ -60,17 +60,23 @@ class PaymentController extends Controller
        }
     }
 
-    public static function getPaymentLink(
-        int $paymentLinkIdOrPartnerTrxId,
+    public function getPaymentLink(
+        Request $req
     )
     {
-       try {
+        // dd($req);
+        $paymentLinkIdOrPartnerTrxId = $req['paymentLinkIdOrPartnerTrxId'];
+    //    try {
             return Http::withHeaders([
                 'x-oy-username' => 'gondrongtobacco19',
                 'x-api-key' => '6975a446-2f3d-4062-8654-596c600a0a4c'
               ])->get("https://api-stg.oyindonesia.com/api/payment-checkout/$paymentLinkIdOrPartnerTrxId");
-       } catch(\Exception $e) {
-           throwException($e);
-       }
+            
+            // dd($url);
+
+            // return redirect("https://api-stg.oyindonesia.com/api/payment-checkout/$url");
+    //    } catch(\Exception $e) {
+    //        throwException($e);
+    //    }
     }
 }

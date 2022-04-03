@@ -118,6 +118,7 @@
             //     console.log(qtyvalForm);
             //     return qtyvalForm;
             // });
+            $('#btn-checkout').attr('disabled', true);
             $('#total-'+$upBtn.data('index')).html(function(i, subtotal) {
                 var price = parseInt($('#price-'+$upBtn.data('index')).html());
                 subtotal = parseInt(newQty.html()) * price;

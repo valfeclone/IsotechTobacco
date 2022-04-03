@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ProfilController;
@@ -110,9 +111,9 @@ Route::get('/shopping-cart', function () {
 });
 Route::post('/createcart', [CartController::class, 'createCart']);
 
-Route::get('/payment', function () {
-    return view('user/payment');
-});
+// Route::get('/payment', function () {
+//     return view('user/payment');
+// });
 
 Route::get('/payment-process', function () {
     return view('user/after-payment');
@@ -249,7 +250,10 @@ Route::middleware(['auth'])->group(function(){
 Route::get('/checkout', [OrderController::class, 'createOrder']);
 Route::post('/checkout', [OrderController::class, 'createOrder']);
 
-Route::get('/view-order', [OrderController::class, 'viewOrder']);
+Route::get('/view-order', [OrderController::class, 'viewOrder'])->name('viewOrder');
+Route::get('/view-order/{idTransaksiOy}', [OrderController::class, 'viewDetailOrder']);
+
+Route::post('/payment', [PaymentController::class, 'getPaymentLink']);
 
 Route::get('/order', function(){
     return view('usernew/order');

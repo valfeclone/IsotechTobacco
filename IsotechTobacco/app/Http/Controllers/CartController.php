@@ -55,7 +55,7 @@ class CartController extends Controller
 
     public function updateCart(Request $req)
     {
-        dd($req);
+        // dd($req);
         $user = Auth::user();
         // dd($req->request);
 

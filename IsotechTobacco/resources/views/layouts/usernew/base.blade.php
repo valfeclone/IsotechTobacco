@@ -235,9 +235,17 @@
                             <div class="header-action-2">
                                
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="/view-cart">
+                                    <a class="mini-cart-icon me-3" href="/view-cart">
                                         <img alt="Evara" src="{{ asset('images/user/imgs/theme/icons/icon-cart.svg') }}">
-                                        {{-- <span class="pro-count blue">2</span> --}}
+                                        {{-- <i class="fi-rs-bag-shopping"></i> --}}
+                                        {{-- <p class="mt-1">cart</p> --}}
+                                        <span class="pro-count-1 blue">cart</span>
+                                    </a>
+                                    <a class="mini-cart-icon" href="/view-order">
+                                        <i class="fi-rs-receipt"></i>
+                                        <span class="pro-count-1 blue">order</span>
+
+                                        {{-- <p>order</p> --}}
                                     </a>
                                     {{-- <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>

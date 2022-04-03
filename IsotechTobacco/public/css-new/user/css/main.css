@@ -5392,6 +5392,20 @@ h6.post-title {
   line-height: 20px;
 }
 
+.header-action .header-action-icon > a span.pro-count-1 {
+  position: absolute;
+  right: -11px;
+  bottom: -8px;
+  color: #ffffff;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  font-weight: 700;
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+}
+
 .header-action-2 {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5428,6 +5442,19 @@ h6.post-title {
   height: 18px;
   width: 18px;
   border-radius: 100%;
+  font-weight: 500;
+  font-size: 11px;
+  text-align: center;
+  line-height: 18px;
+}
+
+.header-action-2 .header-action-icon-2 > a span.pro-count-1 {
+  position: absolute;
+  right: -11px;
+  top: -5px;
+  color: #ffffff;
+  height: 15px;
+  width: 30px;
   font-weight: 500;
   font-size: 11px;
   text-align: center;
@@ -5608,6 +5635,10 @@ h6.post-title {
 }
 
 .header-action-2 .header-action-icon-2 > a span.pro-count.blue {
+  background-color: #A9A9A9;
+}
+
+.header-action-2 .header-action-icon-2 > a span.pro-count-1.blue {
   background-color: #A9A9A9;
 }
 

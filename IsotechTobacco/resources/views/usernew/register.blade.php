@@ -36,6 +36,9 @@
                                     <input type="text" required="" id="email" name="email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
+                                    <input type="text" required="" id="nomor_telpon" name="nomor_telpon" placeholder="Nomor Telpon">
+                                </div>
+                                <div class="form-group">
                                     <input required="" type="password" id="password" name="password" pattern=".{8,}" placeholder=" Password minimal 8 karakter">
                                 </div>
                                 <div class="form-group">
@@ -43,9 +46,6 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" required="" id="kota" name="kota" placeholder="Kota">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" required="" id="nomor_telpon" name="nomor_telpon" placeholder="Nomor Telpon">
                                 </div>
                                 {{-- <div class="form-group">
                                     <input required="" type="password" name="password" placeholder="Confirm password">

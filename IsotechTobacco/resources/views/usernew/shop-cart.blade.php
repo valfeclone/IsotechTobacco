@@ -113,7 +113,7 @@
                     <button type="submit" form="formCart" class="btn mr-10 mb-sm-15">
                         <a><i class="fi-rs-shuffle mr-10"></i>Update Keranjang</a>
                     </button>
-                    <a class="btn " href="/index"><i class="fi-rs-shopping-bag mr-10"></i>Lanjut Belanja</a>
+                    <a class="btn " href="/"><i class="fi-rs-shopping-bag mr-10"></i>Lanjut Belanja</a>
                 </div>
                 <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                 <div class="row mb-50">
@@ -427,7 +427,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</button>
+                            <button id="btn-checkout" class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</button>
                         </div>
                         </form>
                     </div>

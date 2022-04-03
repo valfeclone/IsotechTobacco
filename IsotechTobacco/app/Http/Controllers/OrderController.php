@@ -43,7 +43,10 @@ class OrderController extends Controller
                 }
             }
 
-            return redirect($response['url']);
+            // return redirect($response['url']);
+            // return redirect()->route('viewOrder');
+            return redirect('view-order');
+
         }
     }
 
@@ -57,8 +60,34 @@ class OrderController extends Controller
         $cart = Cart::where('user_id', $user['id'])
                         ->get();
 
-        // dd($select, $cart);
+        // dd($cart[1]->product->product_image_path);
+
+        // dd($cart, $select, $cart[0]->product->title);
         return view ('usernew/order')->with('items',[
+            'order' => $select,
+            'cart' => $cart
+        ]);
+    }
+
+    public function viewDetailOrder(Request $request)
+    {
+        $user = Auth::user();
+
+        $idTransaksiOy = $request->route('idTransaksiOy');
+
+        // dd($idTransaksiOy);
+
+        $select = Order::where('idTransaksiOy', $idTransaksiOy) //get all for user ID. Filter through front end @dharma
+                        // ->where('order_id', null)
+                        ->get();
+
+        // dd($select[0]->id);
+        
+        $cart = Cart::where('user_id', $user['id'])
+                        ->where('order_id', $select[0]->id)
+                        ->get();
+        // dd($select, $cart);
+        return view ('usernew/order-detail')->with('items',[
             'order' => $select,
             'cart' => $cart
         ]);

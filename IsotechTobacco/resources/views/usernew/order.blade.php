@@ -94,12 +94,13 @@
                                         <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
                                     </ul> --}}
                                 </div>
+                            <a href="/view-order/{{ $items['order'][$i]->idTransaksiOy }}">Lihat Detail</a>
                             </div>
                             <div class="media-body order-2 order-lg-1">
-                                <p>Status:</p>
-                                <p>{{ $items['order'][$i]->statusTransaksi }}</p>
+                                <p class=""><strong>Status:</strong></p>
+                                <p class="">{{ $items['order'][$i]->statusTransaksi }}</p>
                             </div>
-                            <img src="/storage/products/carbon(2).png" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                            <img src="/storage/products/{{ $items['cart'][0]->product->product_image_path }}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                         </div> <!-- End -->
                     </li> <!-- End -->
                     @endfor

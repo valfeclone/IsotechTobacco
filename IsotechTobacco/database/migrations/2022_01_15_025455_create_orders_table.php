@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained('users')
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
-            $table->enum('statusTransaksi', ['belum dibayar', 'belum diproses', 'sudah diproses', 'sudah selesai']);
+            $table->enum('statusTransaksi', ['belum dibayar', 'sedang diproses', 'dalam perjalanan', 'sudah selesai']);
             $table->timestamps();
         });
     }
