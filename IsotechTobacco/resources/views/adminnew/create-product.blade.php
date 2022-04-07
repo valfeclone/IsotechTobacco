@@ -12,7 +12,6 @@
     @include('components.admin.asidenew.product')
     @include('components.admin.asidenew.order')
     @include('components.admin.asidenew-active.addproduct')
-    @include('components.admin.asidenew.transaction')
     @include('components.admin.asidenew.shipping')
 </ul>
 <hr>

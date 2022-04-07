@@ -108,7 +108,8 @@
                 // console.log(qtyval);
                 return qtyval;
             });
-
+            var shippingFee = $('#ongkos-kirim').html();
+            console.log(parseInt(shippingFee));
             var updateQty = parseInt(newQty.html());
             // $('#qtyId-'+$upBtn.data('index')).html(function(i, qtyvalForm) {
             //     // console.log(qtyvalForm);
@@ -126,6 +127,12 @@
                 // console.log(price);
                 subtotal = parseInt(newQty.html()) * price;
                 return subtotal;
+            });
+            $('#sub-cart-total-1').html(function(i, totalPrice) {
+                var price = parseInt($('#price-'+$upBtn.data('index')).html());
+                totalPrice = parseInt(totalPrice) + price;
+                // console.log(totalPrice);
+                return totalPrice;
             });
             $('#cart-total-1').html(function(i, totalPrice) {
                 var price = parseInt($('#price-'+$upBtn.data('index')).html());
@@ -202,7 +209,7 @@
                 subtotal = parseInt(newQty.html()) * price;
                 return subtotal;
             });
-            $('#cart-total-1').html(function(i, totalPrice) {
+            $('#sub-cart-total-1').html(function(i, totalPrice) {
                 // console.log(countProduct);
                 if(parseInt(countProduct) === 2) {
                     var price = parseInt($('#price-'+$downBtn.data('index')).html());

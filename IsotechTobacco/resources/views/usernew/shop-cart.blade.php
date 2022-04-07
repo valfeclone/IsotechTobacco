@@ -405,7 +405,8 @@
                                         <tr>
                                             <td class="cart_total_label">Subtotal Keranjang</td>
                                             <td class="cart_total_amount">
-                                                <span class="font-lg fw-900 text-brand" id="cart-total-1">
+                                                <span class="font-lg fw-900 text-brand">Rp</span>
+                                                <span class="font-lg fw-900 text-brand" id="sub-cart-total-1">
                                                     @php
                                                     $total = 0;
                                                     foreach ($carts as $cart) 
@@ -416,14 +417,31 @@
                                                 <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}">
                                             </td>
                                         </tr>
-                                        {{-- <tr>
+                                        <tr>
                                             <td class="cart_total_label">Ongkos Kirim</td>
-                                            <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Gratis Ongkir</td>
+                                            <td class="cart_total_amount">
+                                                <span class="font-lg fw-900 text-brand">Rp</span>
+                                                <span class="font-lg fw-900 text-brand" id="ongkos-kirim">
+                                                    20000
+                                                </span>
+                                                <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}">
+                                            </td>
+                                            {{-- <td class="cart_total_label">Ongkos Kirim</td>
+                                            <td class="cart_total_amount" id="ongkos-kirim">20000</td> --}}
                                         </tr>
                                         <tr>
                                             <td class="cart_total_label">Total</td>
-                                            <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">Rp240.000</span></strong></td>
-                                        </tr> --}}
+                                            <td class="cart_total_amount"><strong>
+                                                <span class="font-lg fw-900 text-brand">Rp</span>
+                                                <span class="font-xl fw-900 text-brand" id="cart-total-1">
+                                                @php
+                                                    $totalCart = 20000;
+                                                    foreach ($carts as $cart) 
+                                                        $totalCart += $cart->jumlahPesan * $cart->product->regular_price
+                                                @endphp
+                                                {{ $totalCart }}    
+                                            </span></strong></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

@@ -12,7 +12,6 @@
     @include('components.admin.asidenew.product')
     @include('components.admin.asidenew-active.order')
     @include('components.admin.asidenew.addproduct')
-    @include('components.admin.asidenew.transaction')
     @include('components.admin.asidenew.shipping')
 </ul>
 <hr>
@@ -85,7 +84,7 @@
                                     <label class="dropdown-menu" for="statusTransaksi">Status:</label>
                                         <select class="dropdown-item" name="statusTransaksi" id="statusTransaksi">
                                             <option class="dropdown-item" value="belum dibayar">belum dibayar</option>
-                                            <option class="dropdown-item" value="sedang diproses">sedang diproses diproses</option>
+                                            <option class="dropdown-item" value="sedang diproses">sedang diproses</option>
                                             <option class="dropdown-item" value="dalam perjalanan">dalam perjalanan</option>
                                             <option class="dropdown-item" value="sudah selesai">sudah selesai</option>
                                     </select>

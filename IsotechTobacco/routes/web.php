@@ -228,6 +228,19 @@ Route::middleware(['auth:admin'])->group(function(){
 
     //upload product excel
     Route::post('/admin/upload-excel', [ProductController::class, 'saveExcel']);
+
+    // shipping fee
+    // tinggal controllernya
+
+    // add new shipping fee
+    Route::get('/admin/add-shippingfee', function () {
+        return view('adminnew/add-shippingfee');
+    });
+
+    // edit shipping fee
+    Route::get('/admin/shippingfee', function () {
+        return view('adminnew/shippingfee-lists');
+    });
 });
 
 //view all product & spec product
