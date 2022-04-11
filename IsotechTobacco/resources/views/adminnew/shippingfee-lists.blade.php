@@ -65,7 +65,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($shippingfees as $shippingfee)
+                    {{-- @foreach ($shippingfees as $shippingfee)
                     <tr>
                         <td>{{ $shippingfee->id }}</td>
                         <td><b>{{ $shippingfee->tujuan }}</b></td>
@@ -79,7 +79,7 @@
                             </div> <!-- dropdown //end -->
                         </td>
                     </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
         </div> <!-- table-responsive //end -->

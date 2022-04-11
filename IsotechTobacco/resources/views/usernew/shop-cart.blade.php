@@ -392,7 +392,7 @@
                         </form>
                       
                     </div> --}}
-                    <div class="col-lg-12 col-md-12">
+                    {{-- <div class="col-lg-12 col-md-12">
                         <form action="/checkout" method="POST">
                             @csrf
                             <div class="border p-md-4 p-30 border-radius cart-totals">
@@ -426,8 +426,6 @@
                                                 </span>
                                                 <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}">
                                             </td>
-                                            {{-- <td class="cart_total_label">Ongkos Kirim</td>
-                                            <td class="cart_total_amount" id="ongkos-kirim">20000</td> --}}
                                         </tr>
                                         <tr>
                                             <td class="cart_total_label">Total</td>
@@ -448,6 +446,63 @@
                             <button id="btn-checkout" class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</button>
                         </div>
                         </form>
+                    </div> --}}
+                    <div class="col-lg-12 col-md-12">
+                        {{-- <form action="/checkout" method="POST">
+                            @csrf --}}
+                        <div class="border p-md-4 p-30 border-radius cart-totals">
+                            <div class="heading_s1 mb-3">
+                                <h4>Total Keranjang</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="cart_total_label">Subtotal Keranjang</td>
+                                            <td class="cart_total_amount">
+                                                <span class="font-lg fw-900 text-brand">Rp</span>
+                                                <span class="font-lg fw-900 text-brand" id="sub-cart-total-1">
+                                                    @php
+                                                    $total = 0;
+                                                    foreach ($carts as $cart) 
+                                                        $total += $cart->jumlahPesan * $cart->product->regular_price
+                                                @endphp
+                                                {{ $total }}
+                                                </span>
+                                                {{-- <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}"> --}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label">Ongkos Kirim</td>
+                                            <td class="cart_total_amount">
+                                                <span class="font-lg fw-900 text-brand">Rp</span>
+                                                <span class="font-lg fw-900 text-brand" id="ongkos-kirim">
+                                                    20000
+                                                </span>
+                                                {{-- <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}"> --}}
+                                            </td>
+                                            {{-- <td class="cart_total_label">Ongkos Kirim</td>
+                                            <td class="cart_total_amount" id="ongkos-kirim">20000</td> --}}
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label">Total</td>
+                                            <td class="cart_total_amount"><strong>
+                                                <span class="font-lg fw-900 text-brand">Rp</span>
+                                                <span class="font-xl fw-900 text-brand" id="cart-total-1">
+                                                @php
+                                                    $totalCart = 20000;
+                                                    foreach ($carts as $cart) 
+                                                        $totalCart += $cart->jumlahPesan * $cart->product->regular_price
+                                                @endphp
+                                                {{ $totalCart }}    
+                                            </span></strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="/checkout" id="btn-checkout" class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
+                        </div>
+                        {{-- </form> --}}
                     </div>
                 </div>
             </div>

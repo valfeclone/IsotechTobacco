@@ -109,6 +109,8 @@ Route::get('/register', function () {
 Route::get('/shopping-cart', function () {
     return view('user/shop-cart');
 });
+
+// Route::get('/checkout-shop',[OrderController::class, 'viewCheckout']);
 Route::post('/createcart', [CartController::class, 'createCart']);
 
 // Route::get('/payment', function () {
@@ -260,7 +262,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/view-cart', [CartController::class, 'viewCart']);
 });
 
-Route::get('/checkout', [OrderController::class, 'createOrder']);
+Route::get('/checkout', [OrderController::class, 'viewCheckout']);
 Route::post('/checkout', [OrderController::class, 'createOrder']);
 
 Route::get('/view-order', [OrderController::class, 'viewOrder'])->name('viewOrder');
@@ -277,6 +279,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/profile', [UserController::class, 'getProfil']);
     Route::get('/updateprofil', [UserController::class, 'getUpdateProfil']);
     Route::post('/updateprofil', [UserController::class, 'updateprofil']);
+    Route::post('/updateaddress', [UserController::class, 'updateAddress']);
 });
 
 // cart
