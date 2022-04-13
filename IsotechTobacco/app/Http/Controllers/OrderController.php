@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
@@ -75,13 +76,21 @@ class OrderController extends Controller
 
         $idTransaksiOy = $request->route('idTransaksiOy');
 
-        // dd($idTransaksiOy);
-
         $select = Order::where('idTransaksiOy', $idTransaksiOy) //get all for user ID. Filter through front end @dharma
                         // ->where('order_id', null)
                         ->get();
 
-        // dd($select[0]->id);
+        $response = PaymentController::getPaymentLink($partnerTrxId = $idTransaksiOy);
+    
+        dd($response);
+        if($select['statusBayar'] == 0){
+            if($response['status'] == 'completed'){
+                $select['statusBayar'] = 1;
+                $select['statusTransaksi'] = 'selesai';
+                $select->save();
+            }
+        }
+        dd($response);
         
         $cart = Cart::where('user_id', $user['id'])
                         ->where('order_id', $select[0]->id)

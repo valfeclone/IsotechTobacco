@@ -20,7 +20,7 @@ class PaymentController extends Controller
                 'x-oy-username' => 'gondrongtobacco19',
                 'x-api-key' => '6975a446-2f3d-4062-8654-596c600a0a4c'
               ])->post("https://api-stg.oyindonesia.com/api/payment-checkout/create-v2", [
-                'partner_trx_id' => null,
+                'partner_tx_id' => null,
                 'description' => "",
                 'notes' => "",
                 'sender_name' => $senderName,
@@ -47,20 +47,16 @@ class PaymentController extends Controller
         bool $sendCallback = false
     )
     {
-       try {
-            return Http::withHeaders([
-                'x-oy-username' => 'gondrongtobacco19',
-                'x-api-key' => '6975a446-2f3d-4062-8654-596c600a0a4c'
-              ])->get("https://api-stg.oyindonesia.com/api/payment-checkout/status", [
-                'partner_trx_id' => $partnerTrxId,
-                'send_callback' => $sendCWllback,
-            ]);
-       } catch(\Exception $e) {
-           throwException($e);
-       }
+        return Http::withHeaders([
+            'x-oy-username' => 'gondrongtobacco19',
+            'x-api-key' => '6975a446-2f3d-4062-8654-596c600a0a4c'
+          ])->get("https://api-stg.oyindonesia.com/api/payment-checkout/status", [
+            'partner_tx_id' => $partnerTrxId,
+            'send_callback' => $sendCallback,
+        ]);
     }
 
-    public function getPaymentLink(
+    public static function getPaymentLink(
         Request $req
     )
     {
