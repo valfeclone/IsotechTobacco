@@ -51,6 +51,7 @@ class UserController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
+
     public function updateProfil(Request $req)
     {
         $user = Auth::user();
@@ -68,6 +69,22 @@ class UserController extends Controller
         $user->save();
         $select = Product::all();
         return redirect('/index')->with('items',$select);
+    }
+
+    public function updateAddress(Request $req)
+    {
+        $user = Auth::user();
+        $credentials = $req->only('alamat', 'kota', 'nomor_telpon');
+        
+        // dd($user['name']);
+        if($user){
+            $user['alamat'] = $credentials['alamat'];
+            $user['kota'] = $credentials['kota'];
+            $user['nomor_telpon'] = $credentials['nomor_telpon'];
+        }
+        $user->save();
+        return redirect()->back();
+
     }
 
     public function getProfil()

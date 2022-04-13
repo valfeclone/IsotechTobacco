@@ -100,7 +100,7 @@
                                 <p class=""><strong>Status:</strong></p>
                                 <p class="">{{ $items['order'][$i]->statusTransaksi }}</p>
                             </div>
-                            <img src="/storage/products/{{ $items['cart'][0]->product->product_image_path }}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                            <img src="/storage/products/{{ $items['cart'][$i]->product->product_image_path }}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                         </div> <!-- End -->
                     </li> <!-- End -->
                     @endfor

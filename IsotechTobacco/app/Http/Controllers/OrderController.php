@@ -51,6 +51,19 @@ class OrderController extends Controller
         }
     }
 
+    public function viewCheckout()
+    {
+        $user = Auth::user();
+        $cart = Cart::where('user_id', $user['id'])
+                        ->where('order_id', null)
+                        ->get();
+        
+        return view('usernew/checkout-shop')->with('items', [
+            'user' => $user,
+            'cart' => $cart
+        ]);
+    }
+
     public function viewOrder()
     {
         $user = Auth::user();
