@@ -21,34 +21,42 @@ class OrderController extends Controller
     public function createOrder(Request $req)
     {  
         $user = Auth::user();
-        $response = PaymentController::makePayment($senderName = $user['name'], $amount = $req['totalTagihan'], $email = $user['email'], $phoneNumber = $user['nomor_telpon']);
-        if($response['payment_link_id']){
-            $newOrder = Order::create([
-                'totalTagihan' => $req['totalTagihan'],
-                'statusBayar' => false,
-                'idTransaksiOy' => $response['payment_link_id'],
-                'user_id' => $user['id'],
-                'statusTransaksi' => 'belum dibayar'
-            ]);
-            $newOrder->save();
-
-            $cart = Cart::where('user_id', $user['id'])
-                            ->where('order_id', null)
-                            ->get();
-
-            // dd(sizeof($cart));
-            if($cart){
-                for ($i=0; $i < sizeof($cart); $i++) { 
-                    $cart[$i]->order_id = $newOrder['id'];
-                    $cart[$i]->save();
-                }
+        $newOrder = Order::create([
+            'totalTagihan' => $req['totalTagihan'],
+            'statusBayar' => false,
+            'idTransaksiOy' => null,
+            'user_id' => $user['id'],
+            'statusTransaksi' => 'belum dibayar'
+        ]);
+        // $txID = ($user['id']).($newOrder['id'])."-".($newOrder['totalTagihan'])."-".$user['nomor_telpon'];
+        // $newOrder['idTransaksiOy'] = $txID;
+        $newOrder->save();
+        $cart = Cart::where('user_id', $user['id'])
+                        ->where('order_id', null)
+                        ->get();
+        // dd(sizeof($cart));
+        if($cart){
+            for ($i=0; $i < sizeof($cart); $i++) { 
+                $cart[$i]->order_id = $newOrder['id'];
+                $cart[$i]->save();
             }
-
-            // return redirect($response['url']);
-            // return redirect()->route('viewOrder');
-            return redirect('view-order');
-
         }
+        return redirect('view-order');
+    }
+
+    public function payOrder(Request $req){
+        $user = Auth::user();
+        $select = Order::where('id', $req['order_id']) //get all for user ID. Filter through front end @dharma
+        // ->where('order_id', null)
+                    ->get();
+        
+        if($select){
+            $response = PaymentController::makePayment($senderName = $user['name'], $amount = $req['totalTagihan'], $email = $user['email'], $phoneNumber = $user['nomor_telpon']);
+            $select['idTransaksiOy'] = $response['payment_link_id'];
+            $select->save();
+        }
+        
+        return redirect($response['url']);
     }
 
     public function viewCheckout()
@@ -71,6 +79,26 @@ class OrderController extends Controller
                         // ->where('order_id', null)
                         ->get();
         
+        foreach ($select as $TO) {
+            if($TO->idTransaksiOy != null){
+                $response = PaymentController::getPaymentStatus($partnerTxId = $TO->idTransaksiOy);
+                $status = ($response->json($key = 'data')['status']);
+                if($status == 'created'){
+                    $TO->statusTransaksi = 'belum dibayar';
+                    $TO->save();
+                }
+                else if($status == 'complete'){
+                    $TO->statusTransaksi = 'sedang diproses';
+                    $TO->statusBayar = true;
+                    $TO->save();
+                }
+                else if($status == 'expired'){
+                    $TO->statusTransaksi = 'pembayaran expired';
+                    $TO->save();
+                }
+            }
+        }
+
         $cart = Cart::where('user_id', $user['id'])
                         ->get();
 
@@ -87,23 +115,11 @@ class OrderController extends Controller
     {
         $user = Auth::user();
 
-        $idTransaksiOy = $request->route('idTransaksiOy');
-
-        $select = Order::where('idTransaksiOy', $idTransaksiOy) //get all for user ID. Filter through front end @dharma
+        $idOrder = $request->route('id');
+        
+        $select = Order::where('id', $idOrder)
                         // ->where('order_id', null)
                         ->get();
-
-        $response = PaymentController::getPaymentLink($partnerTrxId = $idTransaksiOy);
-    
-        dd($response);
-        if($select['statusBayar'] == 0){
-            if($response['status'] == 'completed'){
-                $select['statusBayar'] = 1;
-                $select['statusTransaksi'] = 'selesai';
-                $select->save();
-            }
-        }
-        dd($response);
         
         $cart = Cart::where('user_id', $user['id'])
                         ->where('order_id', $select[0]->id)

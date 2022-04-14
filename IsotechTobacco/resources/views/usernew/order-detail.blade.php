@@ -159,10 +159,10 @@
                             </h6>
                             <form action="/payment" method="POST">
                                 @csrf
-                                <input type="hidden" name="paymentLinkIdOrPartnerTrxId" value="{{ $items['order'][0]->idTransaksiOy }}">
+                                <input type="hidden" name="amount" value="{{ $items['order'][0]->totalTagihan }}">
+                                <input type="hidden" name="order_id" value="{{ $items['order'][0]->id }}">
                                 <button class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Pembayaran
                                 </button>
-                                {{-- <a href="https://api-stg.oyindonesia.com/api/payment-checkout/{{ $items['order'][0]->idTransaksiOy }}">Pembayaran</a> --}}
                             </form>
                             <div class="d-flex align-items-center justify-content-between mt-1">
                                 {{-- <h6 class="font-weight-bold my-2">Rp {{ $items['order'][$i]->totalTagihan }}</h6> --}}
@@ -174,7 +174,7 @@
                                     <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
                                 </ul> --}}
                             </div>
-                        {{-- <a href="/view-order/{{ $items['order'][$i]->idTransaksiOy }}">Lihat Detail</a> --}}
+                        {{-- <a href="/view-order/{{ $items['order'][$i]->id }}">Lihat Detail</a> --}}
                         </div>
                     </div> <!-- End -->
                     </li> <!-- End -->

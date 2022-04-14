@@ -94,7 +94,7 @@
                                         <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
                                     </ul> --}}
                                 </div>
-                            <a href="/view-order/{{ $items['order'][$i]->idTransaksiOy }}">Lihat Detail</a>
+                            <a href="/view-order/{{ $items['order'][$i]->id }}">Lihat Detail</a>
                             </div>
                             <div class="media-body order-2 order-lg-1">
                                 <p class=""><strong>Status:</strong></p>

@@ -266,9 +266,9 @@ Route::get('/checkout', [OrderController::class, 'viewCheckout']);
 Route::post('/checkout', [OrderController::class, 'createOrder']);
 
 Route::get('/view-order', [OrderController::class, 'viewOrder'])->name('viewOrder');
-Route::get('/view-order/{idTransaksiOy}', [OrderController::class, 'viewDetailOrder']);
+Route::get('/view-order/{id}', [OrderController::class, 'viewDetailOrder']);
 
-Route::post('/payment', [PaymentController::class, 'getPaymentLink']);
+Route::post('/payment', [PaymentController::class, 'makePayment']);
 
 Route::get('/order', function(){
     return view('usernew/order');
