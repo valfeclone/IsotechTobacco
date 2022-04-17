@@ -22,6 +22,8 @@ class CreateOrdersTable extends Migration
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
             $table->enum('statusTransaksi', ['belum dibayar', 'sedang diproses', 'dalam perjalanan', 'sudah selesai', 'pembayaran gagal']);
+            $table->string('file_resi_barang')->nullable();
+            $table->string('foto_bukti_pengiriman')->nullable();
             $table->timestamps();
         });
     }
