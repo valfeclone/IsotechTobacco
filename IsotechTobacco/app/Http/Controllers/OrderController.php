@@ -131,11 +131,20 @@ class OrderController extends Controller
         ]);
     }
 
-    public function viewAllOrder()
+    public function viewAllOrder(Request $request)
     {
+        $search = $request->status;
+
+        if($search == null){
+            $select = Order::all()->orderByDesc('created_at');
+            return view ('adminnew/order-lists')->with('orders',$select);
+        }
+
+        $select = Order::where('statusTransaksi', 'like', '%'.$search.'%')->orderByDesc('created_at')->get();
+        return view ('adminnew/order-lists')->with('orders', $select);
+
         // $user = Auth::user();
-        $select = Order::all();
-        return view ('adminnew/order-lists')->with('orders',$select);
+        
     }
 
     public function updateStatusOrder(Request $req)
@@ -174,5 +183,20 @@ class OrderController extends Controller
     {
         $tarif = ShippingFee::where('alamat', $req['alamat'])->get();
         return $tarif;
+    }
+
+    public function uploadBuktiPengiriman(Request $req){
+        if($req){
+            $order = Order::where('id', $req['order_id'])->first();
+            
+            $file = $req->file('bukti_pengiriman');
+            $path = storage_path('app/public/bukti_pengiriman');
+            $file->move($path, str_replace(' ', '', $order->idTransaksiOy));
+            
+            $order->foto_bukti_pengiriman = str_replace(' ', '', $order->idTransaksiOy);
+            $order->statusTransaksi = 'dalam perjalanan';
+            $order->save();
+        }
+        return redirect();
     }
 }

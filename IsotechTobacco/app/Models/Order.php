@@ -20,6 +20,8 @@ class Order extends Model
         'idTransaksiOy',
         'user_id',
         'statusTransaksi',
+        'file_resi_barang',
+        'foto_bukti_pengiriman'
     ];
     
     public function user()
