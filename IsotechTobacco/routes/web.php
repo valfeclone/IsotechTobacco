@@ -243,6 +243,10 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::get('/admin/shippingfee', function () {
         return view('adminnew/shippingfee-lists');
     });
+
+    Route::get('/admin/order-detail', function () {
+        return view('adminnew/order-detail');
+    });
 });
 
 //view all product & spec product

@@ -154,7 +154,7 @@
                         </div> --}}
                         <div class="media-body order-2 order-lg-1 me-3">
                             <h5 class="mt-0 font-weight-bold mb-2">Total Harga</h5>
-                            <h6 class="fs-5 font-italic text-muted mb-0 small">
+                            <h6 class="fs-5 font-italic text-muted mb-3 small">
                                 Rp {{ $items['order'][0]->totalTagihan }}
                             </h6>
                             <form action="/payment" method="POST">

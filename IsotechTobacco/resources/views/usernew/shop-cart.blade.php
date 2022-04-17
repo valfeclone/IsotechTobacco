@@ -500,7 +500,13 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="/checkout" id="btn-checkout" class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</a>
+                            
+                            <button id="btn-checkout" class="btn" type="submit"> 
+                                {{-- <a href="/checkout"> --}}
+                                    <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut
+                                
+                                {{-- </a> --}}
+                            </button>
                         </div>
                         {{-- </form> --}}
                     </div>

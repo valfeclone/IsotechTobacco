@@ -26,7 +26,7 @@
         {{-- <p>Lorem ipsum dolor sit amet.</p> --}}
     </div>
     <div>
-        <input type="text" placeholder="Cari ID pesanan" class="form-control bg-white">
+        <a href="/admin/add-shippingfee" class="btn btn-primary"><i class="material-icons md-plus"></i>Tambah Biaya Ongkir</a>
     </div>
 </div>
 <div class="card mb-4">
