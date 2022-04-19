@@ -20,12 +20,6 @@
 @endsection
 
 @section('main-section')
-<div class="content-header">
-    <div>
-        <h2 class="content-title card-title">Detail Pesanan</h2>
-        <p>Detail untuk ID Pesanan: {{ $items['order'][0]->id }}</p>
-    </div>
-</div>
 <div class="card">
     <header class="card-header">
         <div class="row align-items-center">
@@ -84,7 +78,7 @@
             </div> <!-- col// -->
         </div> <!-- row // -->
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-12">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -98,7 +92,7 @@
                         <tbody>
                             {{-- {{ dd($items['carts']) }} --}}
                             @foreach ($items['carts'] as $cart)
-                            <tr>
+                            <tr class="itemlist">
                                 <td>
                                     <a class="itemside" href="#">
                                         <div class="left">
@@ -150,34 +144,7 @@
                     </table>
                 </div> <!-- table-responsive// -->
             </div> <!-- col// -->
-            <div class="col-lg-1"></div>
-            <div class="col-lg-3">
-                <div class="box shadow-sm bg-light">
-                    <h6 class="mb-15">Upload Bukti Pengiriman</h6>
-                    {{-- <p>
-                        <img src="assets/imgs/card-brands/2.png" class="border" height="20"> Master Card **** **** 4768 <br>
-                        Business name: Grand Market LLC <br>
-                        Phone: +1 (800) 555-154-52
-                    </p> --}}
-                    <form action="/admin/upload-bukti-pengiriman" method="POST" enctype='multipart/form-data'>
-                        @csrf
-                        <div class="card-body">
-                            <div class="input-upload">
-                                <img src="{{ asset('images/admin/imgs/theme/upload.svg') }}" alt="">
-                                <input name="bukti_pengiriman" id="bukti_pengiriman" class="form-control" type="file">
-                            </div>
-                            <input class="btn btn-light rounded font-sm mr-5 text-body hover-up" type="submit" value="Submit">
-                        </div>
-                    </form>
-                </div>
-                {{-- <div class="h-25 pt-4">
-                    <div class="col-lg-12  mb-3">
-                        <label class="form-label">Nomor Resi</label>
-                        <input class="form-control" type="text" placeholder="Masukkan Nomor Resi">
-                    </div>
-                    <button class="btn btn-primary">Simpan</button>
-                </div> --}}
-            </div> <!-- col// -->
+            
         </div>
     </div> <!-- card-body end// -->
 </div> <!-- card end// -->
