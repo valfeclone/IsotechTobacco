@@ -246,7 +246,7 @@ Route::middleware(['auth:admin'])->group(function(){
         return view('adminnew/shippingfee-lists');
     });
 
-    Route::get('/admin/invoice', [OrderController::class, 'viewInvoice']);
+    Route::get('/admin/invoice/{id}', [OrderController::class, 'viewInvoice']);
 
     
 });

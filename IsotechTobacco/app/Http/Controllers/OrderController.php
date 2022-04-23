@@ -155,15 +155,16 @@ class OrderController extends Controller
         return view ('adminnew/order-detail')->with('items',[
             'order' => $select,
             'carts' => $cart,
-            'buyer' => $buyer
+            'buyer' => $buyer,
+            'orderId' => $idOrder
         ]);
     }
 
     public function viewInvoice(Request $request)
     {
 
-        // $idOrder = $request->route('id');
-        $idOrder = 1;
+        $idOrder = $request->route('id');
+        // $idOrder = 1;
         
         $select = Order::where('id', $idOrder)
                         ->get();

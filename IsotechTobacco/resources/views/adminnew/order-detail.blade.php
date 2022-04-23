@@ -170,13 +170,9 @@
                         </div>
                     </form>
                 </div>
-                {{-- <div class="h-25 pt-4">
-                    <div class="col-lg-12  mb-3">
-                        <label class="form-label">Nomor Resi</label>
-                        <input class="form-control" type="text" placeholder="Masukkan Nomor Resi">
-                    </div>
-                    <button class="btn btn-primary">Simpan</button>
-                </div> --}}
+                <div class="h-25 pt-4">
+                    <a href="/admin/invoice/{{ $items['orderId'] }}" class="btn btn-primary">Lihat Invoice</a>
+                </div>
             </div> <!-- col// -->
         </div>
     </div> <!-- card-body end// -->
