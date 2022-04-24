@@ -25,6 +25,7 @@ class OrderController extends Controller
         $newOrder = Order::create([
             'totalTagihan' => $req['totalTagihan'],
             'statusBayar' => false,
+            'catatan' => $req['catatan'],
             'idTransaksiOy' => null,
             'user_id' => $user['id'],
             'statusTransaksi' => 'belum dibayar'
