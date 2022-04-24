@@ -57,7 +57,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#ID</th>
+                        <th>No</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Email</th>
                         <th scope="col">Total</th>
@@ -67,16 +67,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $num = 1;
+                    @endphp
                     @foreach ($orders as $order)
                     <tr>
-                        <td>{{ $order->id }}</td>
+                        <td>{{ $num }}</td>
                         <td><b>{{ $order->user->name }}</b></td>
                         <td>{{ $order->user->email }}</td>
                         <td>Rp. {{ $order->totalTagihan }}</td>
                         <td><span class="badge rounded-pill alert-warning">{{ $order->statusTransaksi }}</span></td>
                         <td>{{ $order->created_at }}</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Detail</a>
+                            <a href="/admin/order-detail/{{ $order->id }}" class="btn btn-md rounded font-sm">Detail</a>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
                                 <form class="dropdown-menu" method="POST" action="/admin/updateOrder">
@@ -112,6 +115,9 @@
                             </div> <!-- dropdown //end -->
                         </td>
                     </tr>
+                    @php
+                        $num++;
+                    @endphp
                     @endforeach
                 </tbody>
             </table>

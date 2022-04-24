@@ -9,6 +9,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Database\Eloquent\Collection;
 
 class OrderController extends Controller
 {
@@ -128,6 +129,58 @@ class OrderController extends Controller
         return view ('usernew/order-detail')->with('items',[
             'order' => $select,
             'cart' => $cart
+        ]);
+    }
+
+    public function viewDetailOrderAdmin(Request $request)
+    {
+        $user = Auth::user();
+
+        $idOrder = $request->route('id');
+        
+        $select = Order::where('id', $idOrder)
+                        // ->where('order_id', null)
+                        ->get();
+
+        // dd($select[0]);
+
+        $buyer = User::where('id', $select[0]->user_id)->get();
+        // dd($buyer);
+        
+        
+        $cart = Cart::where('user_id', $buyer[0]->id)
+                        ->where('order_id', $select[0]->id)
+                        ->get();
+        // dd($cart);
+        return view ('adminnew/order-detail')->with('items',[
+            'order' => $select,
+            'carts' => $cart,
+            'buyer' => $buyer,
+            'orderId' => $idOrder
+        ]);
+    }
+
+    public function viewInvoice(Request $request)
+    {
+
+        $idOrder = $request->route('id');
+        // $idOrder = 1;
+        
+        $select = Order::where('id', $idOrder)
+                        ->get();
+
+
+        $buyer = User::where('id', $select[0]->user_id)->get();
+        
+        
+        $cart = Cart::where('user_id', $buyer[0]->id)
+                        ->where('order_id', $select[0]->id)
+                        ->get();
+        // dd($cart);
+        return view ('adminnew/invoice')->with('items',[
+            'order' => $select,
+            'carts' => $cart,
+            'buyer' => $buyer
         ]);
     }
 

@@ -261,6 +261,13 @@
             // })
         });
 
+        $('#btn-checkout').click(function(){
+
+            var url = '/checkout';
+
+            document.location.href = url;
+        });
+
         // $('.qty-up').on('click', function() {
         //     console.log("hehe");
         //     var qtyval = parseInt($(this).find('.qty-val').data('click'));

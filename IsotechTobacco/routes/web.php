@@ -215,6 +215,8 @@ Route::middleware(['auth:admin'])->group(function(){
     //DAFTAR Pesanan
     Route::get('/admin/order-lists', [OrderController::class, 'viewAllOrder']);
     Route::post('/admin/updateOrder', [OrderController::class, 'updateStatusOrder']);
+    Route::get('/admin/order-detail/{id}', [OrderController::class, 'viewDetailOrderAdmin']);
+    Route::post('/admin/upload-bukti-pengiriman', [OrderController::class, 'uploadBuktiPengiriman']);
 
     //ADMIN Search
     // Route::get('/search-product', [ProductController::class, 'searchProduct']);
@@ -243,6 +245,10 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::get('/admin/shippingfee', function () {
         return view('adminnew/shippingfee-lists');
     });
+
+    Route::get('/admin/invoice/{id}', [OrderController::class, 'viewInvoice']);
+
+    
 });
 
 //view all product & spec product

@@ -119,7 +119,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</button>
+                            <button id="btn-checkout" class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Proceed To CheckOut</button>
                         </div>
                         </form>
                     </div>
