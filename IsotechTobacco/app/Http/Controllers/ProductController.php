@@ -274,21 +274,39 @@ class ProductController extends Controller
         // dd($productArr);
         for ($i = 0; $i < count($productArr); $i++)
         {
-            $newProduct = Product::create([
-                'title' => $productArr[$i]['title'],
-                'description' => $productArr[$i]['description'],
-                'category' => $productArr[$i]['category'],
-                'filter' => "Terbaru",
-                'SKU' => $productArr[$i]['SKU'],
-                'stock' => $productArr[$i]['stock'],
-                'regular_price' => $productArr[$i]['regular_price'],
-                // 'promo_price' => $productArr[$i]['promo_price'],
-                'tax_rate' => $productArr[$i]['tax_rate'],
-                'width' => $productArr[$i]['width'],
-                'height' => $productArr[$i]['height'],
-                'weight' => $productArr[$i]['weight'],
-            ]);
-            $newProduct->save();
+            $sku = $productArr[$i]['SKU'];
+            $select = Product::where('SKU', 'like', $sku)->get();
+            if($select!=null){
+                $select['title'] = $productArr[$i]['title'];
+                $select['description'] = $productArr[$i]['description'];
+                $select['category'] = $productArr[$i]['category'];
+                $select['SKU'] = $productArr[$i]['SKU'];
+                $select['stock'] = $productArr[$i]['stock'];
+                $select['regular_price'] = $productArr[$i]['regular_price'];
+                $select['promo_price'] = $productArr[$i]['promo_price'];
+                $select['tax_rate'] = $productArr[$i]['tax_rate'];
+                $select['width'] = $productArr[$i]['width'];
+                $select['height'] = $productArr[$i]['height'];
+                $select['weight'] = $productArr[$i]['weight'];
+                $select->save();
+            }
+            else{
+                $newProduct = Product::create([
+                    'title' => $productArr[$i]['title'],
+                    'description' => $productArr[$i]['description'],
+                    'category' => $productArr[$i]['category'],
+                    'filter' => "Terbaru",
+                    'SKU' => $productArr[$i]['SKU'],
+                    'stock' => $productArr[$i]['stock'],
+                    'regular_price' => $productArr[$i]['regular_price'],
+                    // 'promo_price' => $productArr[$i]['promo_price'],
+                    'tax_rate' => $productArr[$i]['tax_rate'],
+                    'width' => $productArr[$i]['width'],
+                    'height' => $productArr[$i]['height'],
+                    'weight' => $productArr[$i]['weight'],
+                ]);
+                $newProduct->save();
+            }
         } 
     }
 }

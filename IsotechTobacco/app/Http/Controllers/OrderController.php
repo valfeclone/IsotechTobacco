@@ -136,11 +136,11 @@ class OrderController extends Controller
         $search = $request->status;
 
         if($search == null){
-            $select = Order::all()->orderByDesc('created_at');
+            $select = Order::all();
             return view ('adminnew/order-lists')->with('orders',$select);
         }
 
-        $select = Order::where('statusTransaksi', 'like', '%'.$search.'%')->orderByDesc('created_at')->get();
+        $select = Order::where('statusTransaksi', 'like', '%'.$search.'%')->get();
         return view ('adminnew/order-lists')->with('orders', $select);
 
         // $user = Auth::user();
@@ -177,12 +177,6 @@ class OrderController extends Controller
         // dd($req);
         $res = Order::find($id)->delete();
         // return redirect('admin/view-product');
-    }
-
-    public function getTarif(Request $req)
-    {
-        $tarif = ShippingFee::where('alamat', $req['alamat'])->get();
-        return $tarif;
     }
 
     public function uploadBuktiPengiriman(Request $req){
