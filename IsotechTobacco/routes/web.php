@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OngkirController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
@@ -236,15 +237,23 @@ Route::middleware(['auth:admin'])->group(function(){
     // shipping fee
     // tinggal controllernya
 
+    // get all shippingfee
+    Route::get('/admin/shippingfee', [OngkirController::class, 'getAllShippingFee']);
+
     // add new shipping fee
     Route::get('/admin/add-shippingfee', function () {
         return view('adminnew/add-shippingfee');
     });
 
     // edit shipping fee
-    Route::get('/admin/shippingfee', function () {
-        return view('adminnew/shippingfee-lists');
-    });
+    Route::get('/admin/edit-shippingfee/{id}', [OngkirController::class, 'getSpecShippingFee']);
+    Route::post('/admin/edit-shippingfee/{id}', [OngkirController::class, 'updateShippingFee']);
+
+    // delete shipping fee
+    Route::get('/admin/delete-shippingfee/{id}', [OngkirController::class, 'deleteShippingFee'])->name('deleteshippingfeeID');
+
+    // post data ongkir excel
+    Route::post('/admin/add-shippingfee-excel', [OngkirController::class, 'saveExcel']);
 
     Route::get('/admin/invoice/{id}', [OrderController::class, 'viewInvoice']);
 

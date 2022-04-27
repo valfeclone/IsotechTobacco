@@ -275,7 +275,7 @@ class ProductController extends Controller
         for ($i = 0; $i < count($productArr); $i++)
         {
             $sku = $productArr[$i]['SKU'];
-            $select = Product::where('SKU', 'like', $sku)->get();
+            $select = Product::where('SKU', 'like', $sku)->first();
             if($select!=null){
                 $select['title'] = $productArr[$i]['title'];
                 $select['description'] = $productArr[$i]['description'];
@@ -299,7 +299,7 @@ class ProductController extends Controller
                     'SKU' => $productArr[$i]['SKU'],
                     'stock' => $productArr[$i]['stock'],
                     'regular_price' => $productArr[$i]['regular_price'],
-                    // 'promo_price' => $productArr[$i]['promo_price'],
+                    'promo_price' => $productArr[$i]['promo_price'],
                     'tax_rate' => $productArr[$i]['tax_rate'],
                     'width' => $productArr[$i]['width'],
                     'height' => $productArr[$i]['height'],

@@ -65,21 +65,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($shippingfees as $shippingfee)
+                    @foreach ($items as $shippingfee)
                     <tr>
                         <td>{{ $shippingfee->id }}</td>
                         <td><b>{{ $shippingfee->tujuan }}</b></td>
                         <td>Rp. {{ $shippingfee->harga }}</td>
                         <td>{{ $shippingfee->created_at }}</td>
                         <td class="text-end">
-                            <a href="#" class="btn btn-md rounded font-sm">Ubah</a>
-                            <div class="dropdown">
+                            <a href="/admin/edit-shippingfee/{{ $shippingfee->id }}" class="btn btn-md rounded font-sm">Ubah</a>
+                            <a href="{{ route('deleteshippingfeeID', $shippingfee->id) }}" class="btn btn-sm font-sm btn-light rounded">
+                                <i class="material-icons md-delete_forever"></i> Hapus
+                            </a>
+                            {{-- <div class="dropdown">
                                 <a href="/admin/edit-shippingfee/{{ $shippingfee->id }}" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
                                 <a href="{{ route('deleteShippingFeeID', $shippingfee->id) }}" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
-                            </div> <!-- dropdown //end -->
+                            </div>  --}}
                         </td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div> <!-- table-responsive //end -->

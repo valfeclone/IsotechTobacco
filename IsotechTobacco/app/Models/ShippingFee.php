@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShippingFee extends Model
 {
+    public $table = "shippingfee";
     use HasFactory;
 
         /**

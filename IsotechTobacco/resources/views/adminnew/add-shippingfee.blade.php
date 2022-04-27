@@ -29,7 +29,7 @@
     <div class="col-lg-9">
         <div class="card mb-4">
             <div class="card-header">
-                <h4>Dari: Yogyakarta</h4>
+                <h4>Dari: Yogyakarta - Input Manual</h4>
             </div>
             <div class="card-body">
                 <form method="POST" action="/admin/create-shippingfee" enctype='multipart/form-data'>
@@ -43,6 +43,23 @@
                     <input placeholder="Rp" type="text" class="form-control" id="harga" name="harga">
                 </div>
                 <input class="btn btn-light rounded font-sm mr-5 text-body hover-up" type="submit" value="Submit">
+                </form>
+            </div>
+        </div> <!-- card end// -->
+    </div>
+    <div class="col-lg-9">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>Dari: Yogyakarta - Input CSV</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/admin/add-shippingfee-excel" enctype='multipart/form-data'>
+                @csrf
+                    <div class="mb-4">
+                        <label for="excel" class="form-label">Input Ongkir File Excel</label>
+                        <input type="file" class="form-control" id="excel" name="excel">
+                    </div>
+                    <input class="btn btn-light rounded font-sm mr-5 text-body hover-up" type="submit" value="Submit">
                 </form>
             </div>
         </div> <!-- card end// -->

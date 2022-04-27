@@ -32,19 +32,20 @@
                 <h4>Dari: Yogyakarta</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="/admin/edit-shippingfee{{ $shippingfee->id }}" enctype='multipart/form-data'>
+                <form method="POST" action="/admin/edit-shippingfee/{{ $items->id }}" enctype='multipart/form-data'>
                 @csrf
-                <input type="hidden" name="id" value="{{$shippingfee->id}}">
+                <input type="hidden" name="shipfeeID" value="{{$items->id}}">
                 <div class="mb-4">
                 <div class="mb-4">
                     <label for="product_name" class="form-label">Kota Tujuan</label>
-                    <input type="text" placeholder="Type here" class="form-control" id="tujuan" name="tujuan" value="{{ $shippingfee->tujuan }}">
+                    <input type="text" placeholder="Type here" class="form-control" id="tujuan" name="tujuan" value="{{ $items->tujuan }}">
                 </div>
                 <div class="mb-4">
                     <label class="form-label">Biaya Ongkir</label>
-                    <input placeholder="Rp" type="text" class="form-control" id="harga" name="harga" value="{{ $shippingfee->harga }}">
+                    <input placeholder="Rp" type="text" class="form-control" id="harga" name="harga" value="{{ $items->harga }}">
                 </div>
-                <input class="btn btn-light rounded font-sm mr-5 text-body hover-up" type="submit" value="Submit">
+                <a href="/admin/shippingfee" class="btn btn-md rounded font-sm">Back</a>
+                <input class="btn btn-light rounded font-sm mr-5 text-body hover-up" type="submit" value="Ubah">
                 </form>
             </div>
         </div> <!-- card end// -->

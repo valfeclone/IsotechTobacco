@@ -42,7 +42,15 @@ class OngkirController extends Controller
     public function getAllShippingFee()
     {
         $select = ShippingFee::all();
-        return view ('adminnew/product-lists')->with('items',$select); #view shipping fee
+        // dd($select);
+        return view ('adminnew/shippingfee-lists')->with('items',$select); #view shipping fee
+    }
+
+    public function getSpecShippingFee($id)
+    {
+        $select = ShippingFee::findOrFail($id);
+        // dd($select);
+        return view ('adminnew/edit-shippingfee')->with('items',$select); #view shipping fee
     }
 
     public function updateShippingFee(Request $req)
@@ -55,12 +63,15 @@ class OngkirController extends Controller
             $shipFee['harga'] = $req['harga'];
         }
         $shipFee->save();
+        return redirect()->back(); 
+
     }
 
     public function deleteShippingFee($id)
     {
-        $res = ShippingFee::find($id)->delete();
-        return redirect()->refresh(); 
+        $res = ShippingFee::find($id);
+        $res->delete();
+        return redirect('admin/shippingfee'); 
     }
 
     public function saveExcel(Request $req){
@@ -70,7 +81,7 @@ class OngkirController extends Controller
             $file->move($path, str_replace(' ', '', 'shipfee.csv'));
         }
         OngkirController::importCsv();
-        return redirect('/admin/view-product'); #redirect kemana nih?    
+        return redirect('/admin/shippingfee'); #redirect kemana nih?    
     }
 
     public function csvToArray($filename = '', $delimiter = ','){
@@ -98,10 +109,12 @@ class OngkirController extends Controller
     {
         $file = public_path('storage\file\shipfee.csv');
         $shipfeearr = $this->csvToArray($file);
+        // dd($shipfeearr);
         for ($i = 0; $i < count($shipfeearr); $i++)
         {
             $tujuan = $shipfeearr[$i]['tujuan'];
-            $spec = ShippingFee::where('tujuan', 'like', '%'.$tujuan.'%')->get();
+            $spec = ShippingFee::where('tujuan', 'like', '%'.$tujuan.'%')->first();
+            // dd($spec);
             if($spec!=null){
                 $spec['tujuan'] = $req['tujuan'];
                 $spec['harga'] = $req['harga'];
