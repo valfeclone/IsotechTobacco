@@ -107,8 +107,15 @@
                                         <td class="text-end">Rp {{ $total }}  </td>
                                     </tr>
                                     @endforeach
+                                    
                                     <tr>
                                         <td colspan="4">
+                                            <article class="">
+                                                <dl class="dlist">
+                                                    <dt class="fw-bold">Catatan:</dt>
+                                                    <dd>{{ $items['order'][0]->catatan }}</dd>
+                                                </dl>
+                                            </article>
                                             <article class="float-end">
                                                 <dl class="dlist">
                                                     <dt class="fw-bold">Subtotal:</dt>

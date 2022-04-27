@@ -36,17 +36,31 @@
                                     <input type="text" required="" id="email" name="email" value="{{ $items->email }}" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input required="" type="password" id="password" name="password" pattern=".{8,}" placeholder=" Password minimal 8 karakter">
+                                    <input type="password" id="password" name="password" pattern=".{8,}" placeholder=" Password minimal 8 karakter">
                                 </div>
                                 <div class="form-group">
-                                    <input required="" type="password" name="password" placeholder="Confirm password">
+                                    <input type="password" name="password" placeholder="Confirm password">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" required="" id="nomor_telpon" name="nomor_telpon" value="{{ $items->nomor_telpon }}" placeholder="Nomor Telfon">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" required="" id="alamat" name="alamat" value="{{ $items->alamat }}" placeholder="Alamat">
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" required="" id="kota" name="kota" value="{{ $items->kota }}" placeholder="Kota">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <div class="custom_select">
+                                            <select id="kota" name="kota" class="form-control select-active">
+                                                @foreach ($cities as $city)
+                                                <option value="{{ $city->tujuan }}" {{ $items->kota ==  $city->tujuan ? 'selected' : ''}}>{{ $city->tujuan }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
+                                {{-- <div class="form-group">
+                                    <input type="text" required="" id="kota" name="kota" value="{{ $items->kota }}" placeholder="Kota">
+                                </div> --}}
                                 <div class="form-group">
                                     <button type="" class="btn btn-fill-out btn-block hover-up" name="login">Update &amp; Profil</button>
                                 </div>

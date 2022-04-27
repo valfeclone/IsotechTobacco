@@ -38,6 +38,10 @@
                                     <div class="p-3 w-50  ">{{ $items->alamat }}</div>
                                 </div>
                                 <div class="d-flex flex-row my-2">
+                                    <div class="p-3 w-50  section-title ">Nomor Telepon </div>
+                                    <div class="p-3 w-50  ">{{ $items->nomor_telpon }}</div>
+                                </div>
+                                <div class="d-flex flex-row my-2">
                                     <div class="p-3 w-50  section-title ">Kota </div>
                                     <div class="p-3 w-50  ">{{ $items->kota }}</div>
                                 </div>

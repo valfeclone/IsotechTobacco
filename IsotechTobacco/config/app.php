@@ -178,6 +178,7 @@ return [
         App\Providers\ViewServiceProvider::class,
         App\Providers\UserServiceProvider::class,
         App\Providers\ConvertRupiahServiceProvider::class,
+        App\Providers\ShippingServiceProvider::class,
 
     ],
 

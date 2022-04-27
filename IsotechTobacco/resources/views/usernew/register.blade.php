@@ -44,9 +44,32 @@
                                 <div class="form-group">
                                     <input type="text" required="" id="alamat" name="alamat" placeholder="Alamat">
                                 </div>
+                                @if ($cities != null)
+                                <div class="form-row">
+                                    <div class="form-group col-lg-12">
+                                        <div class="custom_select">
+                                            <select id="kota" name="kota" class="form-control select-active">
+                                                <option value="">Pilih Kota..</option>
+                                                @foreach ($cities as $city)
+                                                <option value="{{ $city->tujuan }}">{{ $city->tujuan }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                @else
                                 <div class="form-group">
                                     <input type="text" required="" id="kota" name="kota" placeholder="Kota">
                                 </div>
+                                @endif
+                                
+                                {{-- <div class="form-group">
+                                    <select class="form-control select-active">
+                                        <option value="">Choose a option...</option>
+                                        @foreach ($cities as $city)
+                                        <option value="{{ $city->tujuan }}">{{ $city->tujuan }}</option>
+                                        @endforeach
+                                </div> --}}
                                 {{-- <div class="form-group">
                                     <input required="" type="password" name="password" placeholder="Confirm password">
                                 </div> --}}
