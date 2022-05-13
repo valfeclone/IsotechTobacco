@@ -479,6 +479,7 @@
                                     <tr>
                                         <th>Ongkos Kirim</th>
                                         <td colspan="2"><em>Rp 20000</em></td>
+                                        <input type="hidden" name="ongkir" id="ongkir" value=20000>
                                     </tr>
                                     <tr>
                                         <th>Total</th>

@@ -41,7 +41,7 @@ class UserController extends Controller
             $select = Product::all();
             return redirect('/index')->with('items',$select);
         } else {
-            return back()->withErrors(['msg' => 'Wrong email or password']);
+            return redirect()->back()->withErrors(['msg' => 'Wrong email or password']);
         }
     }
     public function logout(Request $request)

@@ -162,6 +162,7 @@
                     <form action="/admin/upload-bukti-pengiriman" method="POST" enctype='multipart/form-data'>
                         @csrf
                         <div class="card-body">
+                            <input type="hidden" id="order_id" name="order_id" value="{{ $items['order'][0]->id }}">
                             <div class="input-upload">
                                 <img src="{{ asset('images/admin/imgs/theme/upload.svg') }}" alt="">
                                 <input name="bukti_pengiriman" id="bukti_pengiriman" class="form-control" type="file">
@@ -172,6 +173,7 @@
                 </div>
                 <div class="h-25 pt-4">
                     <a href="/admin/invoice/{{ $items['orderId'] }}" class="btn btn-primary">Lihat Invoice</a>
+                    <a href="/admin/invoice/pdf/{{ $items['orderId'] }}" class="btn btn-primary">Lihat PDF Invoice</a>
                 </div>
             </div> <!-- col// -->
         </div>

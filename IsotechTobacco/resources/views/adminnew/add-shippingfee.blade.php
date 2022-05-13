@@ -32,7 +32,7 @@
                 <h4>Dari: Yogyakarta - Input Manual</h4>
             </div>
             <div class="card-body">
-                <form method="POST" action="/admin/create-shippingfee" enctype='multipart/form-data'>
+                <form method="POST" action="/admin/add-shippingfee" enctype='multipart/form-data'>
                 @csrf
                 <div class="mb-4">
                     <label for="product_name" class="form-label">Kota Tujuan</label>
