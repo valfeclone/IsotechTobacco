@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 // use App\Models\Product;
 use App\Models\Cart;
+use App\Models\ShippingFee;
 
 class CartController extends Controller
 {
@@ -47,10 +48,17 @@ class CartController extends Controller
     public function viewCart()
     {
         $user = Auth::user();
+        $city = ShippingFee::where('tujuan', $user['kota'])->get();
+        $ongkir = $city[0]['harga'];
         $cart = Cart::where('user_id', $user['id'])
                         ->where('order_id', null)
                         ->get();
-        return view ('usernew/shop-cart')->with('carts',$cart);
+        return view ('usernew/shop-cart')->with('items', [
+            'carts' => $cart,
+            'ongkir' => $ongkir
+        ]);
+        
+        // ('carts',$cart);
     }
 
     public function updateCart(Request $req)

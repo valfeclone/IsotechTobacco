@@ -153,17 +153,43 @@
                             <p class="">{{ $items['order'][0]->statusTransaksi }}</p>
                         </div> --}}
                         <div class="media-body order-2 order-lg-1 me-3">
+                            <div>
+                                <h5 class="mt-0 font-weight-bold mb-2">Ongkir
+                                </h5>
+                                <p class="fs-5 font-italic text-muted mb-3 small">
+                                    Rp {{ $items['ongkir']}}
+                                </p>
+                            </div>
                             <h5 class="mt-0 font-weight-bold mb-2">Total Harga</h5>
                             <h6 class="fs-5 font-italic text-muted mb-3 small">
                                 Rp {{ $items['order'][0]->totalTagihan }}
                             </h6>
-                            <form action="/payment" method="POST">
+                            
+                            @if ($items['order'][0]->statusTransaksi == 'belum dibayar')
+                            <form action="/payment" method="POST" target="_blank" rel="noopener noreferrer">
                                 @csrf
                                 <input type="hidden" name="amount" value="{{ $items['order'][0]->totalTagihan }}">
                                 <input type="hidden" name="order_id" value="{{ $items['order'][0]->id }}">
-                                <button class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Pembayaran
+                                <button class="btn bg-success" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Pembayaran
                                 </button>
                             </form>
+                            <a href="#">
+                                <button class="btn mt-3" type="submit" disabled> Selesaikan Pesanan
+                                </button>
+                            </a>
+                            @else
+                            <form action="/payment" method="POST" target="_blank" rel="noopener noreferrer">
+                                @csrf
+                                <input type="hidden" name="amount" value="{{ $items['order'][0]->totalTagihan }}">
+                                <input type="hidden" name="order_id" value="{{ $items['order'][0]->id }}">
+                                <button class="btn" type="submit" disabled> <i class="fi-rs-box-alt mr-10"></i> Sudah Dibayar
+                                </button>
+                            </form>
+                            <a href="#">
+                                <button class="btn mt-3 bg-success" type="submit" > Selesaikan Pesanan
+                                </button>
+                            </a>
+                            @endif
                             <div class="d-flex align-items-center justify-content-between mt-1">
                                 {{-- <h6 class="font-weight-bold my-2">Rp {{ $items['order'][$i]->totalTagihan }}</h6> --}}
                                 {{-- <ul class="list-inline small">
@@ -182,7 +208,7 @@
                 </ul>
                 <div class="mt-4">
                     <a href="/view-order">
-                        <button class="btn" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Back</button>
+                        <button class="btn" type="submit" > <i class="fi-rs-box-alt mr-10"></i> Back</button>
                     </a>
                 </div>
                 <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>

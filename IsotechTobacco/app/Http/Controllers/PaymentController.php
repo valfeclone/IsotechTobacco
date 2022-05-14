@@ -12,7 +12,7 @@ class PaymentController extends Controller
 {
 
     public static function makePayment(
-        Request $request,
+        Request $request
     )
     {
             $user = Auth::user();
@@ -49,6 +49,7 @@ class PaymentController extends Controller
                     'va_display_name' => null
                 ]);
                 $select['idTransaksiOy'] = $txID;
+                // $select['statusTransaksi'] = 'sedang diproses';
                 $select->save();
                 
                 $url = PaymentController::getPaymentLink($req = $txID);

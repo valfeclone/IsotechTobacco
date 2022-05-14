@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\ShippingFee;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Collection;
@@ -64,13 +65,16 @@ class OrderController extends Controller
     public function viewCheckout()
     {
         $user = Auth::user();
+        $city = ShippingFee::where('tujuan', $user['kota'])->get();
+        $ongkir = $city[0]['harga'];
         $cart = Cart::where('user_id', $user['id'])
                         ->where('order_id', null)
                         ->get();
         
         return view('usernew/checkout-shop')->with('items', [
             'user' => $user,
-            'cart' => $cart
+            'cart' => $cart,
+            'ongkir' => $ongkir
         ]);
     }
 
@@ -79,6 +83,7 @@ class OrderController extends Controller
         $user = Auth::user();
         $select = Order::where('user_id', $user['id']) //get all for user ID. Filter through front end @dharma
                         // ->where('order_id', null)
+                        ->orderBy('created_at', 'desc')
                         ->get();
         
         foreach ($select as $TO) {
@@ -117,6 +122,9 @@ class OrderController extends Controller
     {
         $user = Auth::user();
 
+        $city = ShippingFee::where('tujuan', $user['kota'])->get();
+        $ongkir = $city[0]['harga'];
+
         $idOrder = $request->route('id');
         
         $select = Order::where('id', $idOrder)
@@ -129,7 +137,8 @@ class OrderController extends Controller
         // dd($select, $cart);
         return view ('usernew/order-detail')->with('items',[
             'order' => $select,
-            'cart' => $cart
+            'cart' => $cart,
+            'ongkir' => $ongkir
         ]);
     }
 
