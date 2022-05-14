@@ -18,11 +18,12 @@ class CreateOrdersTable extends Migration
             $table->integer('totalTagihan');
             $table->boolean('statusBayar');
             $table->string('catatan')->nullable();
+            $table->integer('ongkir')->nullable();
             $table->string('idTransaksiOy')->nullable();
             $table->foreignId('user_id')->constrained('users')
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
-            $table->enum('statusTransaksi', ['belum dibayar', 'sedang diproses', 'dalam perjalanan', 'sudah selesai', 'pembayaran gagal']);
+            $table->enum('statusTransaksi', ['belum dibayar', 'sedang diproses', 'dalam pengiriman', 'sudah selesai', 'pembayaran gagal']);
             $table->string('file_resi_barang')->nullable();
             $table->string('foto_bukti_pengiriman')->nullable();
             $table->timestamps();

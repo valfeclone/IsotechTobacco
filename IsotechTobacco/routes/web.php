@@ -244,6 +244,7 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::get('/admin/add-shippingfee', function () {
         return view('adminnew/add-shippingfee');
     });
+    Route::post('/admin/add-shippingfee', [OngkirController::class, 'createShippingFee']);
 
     // edit shipping fee
     Route::get('/admin/edit-shippingfee/{id}', [OngkirController::class, 'getSpecShippingFee']);
@@ -256,8 +257,7 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::post('/admin/add-shippingfee-excel', [OngkirController::class, 'saveExcel']);
 
     Route::get('/admin/invoice/{id}', [OrderController::class, 'viewInvoice']);
-
-    
+    Route::get('/admin/invoice/pdf/{id}', [OrderController::class, 'viewPDFInvoice']);    
 });
 
 //view all product & spec product
@@ -275,13 +275,14 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/update-cart', [CartController::class, 'updateCart']);
     Route::post('/delete-cart', [CartController::class, 'deleteCart']);
     Route::get('/view-cart', [CartController::class, 'viewCart']);
+    
+    Route::get('/checkout', [OrderController::class, 'viewCheckout']);
+    Route::post('/checkout', [OrderController::class, 'createOrder']);
+    
+    Route::get('/view-order', [OrderController::class, 'viewOrder'])->name('viewOrder');
+    Route::get('/view-order/{id}', [OrderController::class, 'viewDetailOrder']);
 });
 
-Route::get('/checkout', [OrderController::class, 'viewCheckout']);
-Route::post('/checkout', [OrderController::class, 'createOrder']);
-
-Route::get('/view-order', [OrderController::class, 'viewOrder'])->name('viewOrder');
-Route::get('/view-order/{id}', [OrderController::class, 'viewDetailOrder']);
 
 Route::post('/payment', [PaymentController::class, 'makePayment']);
 

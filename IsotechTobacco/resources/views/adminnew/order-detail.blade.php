@@ -121,18 +121,18 @@
                                         <dl class="dlist">
                                             <dt>Subtotal:</dt>
                                             @php
-                                                $subtotal = $items['order'][0]->totalTagihan - 20000;
+                                                $subtotal = $items['order'][0]->totalTagihan - $items['order'][0]->ongkir;
                                             @endphp
-                                            <dd>Rp {{ $items['order'][0]->totalTagihan }}</dd>
+                                            <dd>Rp {{ $subtotal }}</dd>
                                         </dl>
                                         <dl class="dlist">
                                             <dt>Ongkos Kirim:</dt>
-                                            <dd>Rp 20000</dd>
+                                            <dd>Rp {{ $items['order'][0]->ongkir }}</dd>
                                         </dl>
                                         <dl class="dlist">
                                             <dt>Total:</dt>
                                             @php
-                                                $total = $items['order'][0]->totalTagihan + 20000;
+                                                $total = $items['order'][0]->totalTagihan ;
                                             @endphp
                                             <dd> <b class="h5">Rp {{ $total }}</b> </dd>
                                         </dl>
@@ -162,6 +162,7 @@
                     <form action="/admin/upload-bukti-pengiriman" method="POST" enctype='multipart/form-data'>
                         @csrf
                         <div class="card-body">
+                            <input type="hidden" id="order_id" name="order_id" value="{{ $items['order'][0]->id }}">
                             <div class="input-upload">
                                 <img src="{{ asset('images/admin/imgs/theme/upload.svg') }}" alt="">
                                 <input name="bukti_pengiriman" id="bukti_pengiriman" class="form-control" type="file">
@@ -171,7 +172,8 @@
                     </form>
                 </div>
                 <div class="h-25 pt-4">
-                    <a href="/admin/invoice/{{ $items['orderId'] }}" class="btn btn-primary">Lihat Invoice</a>
+                    <a href="/admin/invoice/{{ $items['orderId'] }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Lihat Invoice</a>
+                    <a href="/admin/invoice/pdf/{{ $items['orderId'] }}" class="btn btn-primary">Lihat PDF Invoice</a>
                 </div>
             </div> <!-- col// -->
         </div>

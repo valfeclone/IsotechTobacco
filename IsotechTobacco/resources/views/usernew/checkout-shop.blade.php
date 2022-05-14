@@ -172,6 +172,7 @@
                                     <tr>
                                         <th>Ongkos Kirim</th>
                                         <td colspan="2"><em>Rp {{ $items['ongkir'] }}</em></td>
+                                        <input type="hidden" name="ongkir" id="ongkir" value="{{ $items['ongkir'] }}">
                                     </tr>
                                     <tr>
                                         <th>Total</th>

@@ -18,6 +18,7 @@ class Order extends Model
         'totalTagihan',
         'statusBayar',
         'catatan',
+        'ongkir',
         'idTransaksiOy',
         'user_id',
         'statusTransaksi',

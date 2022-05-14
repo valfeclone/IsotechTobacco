@@ -102,7 +102,7 @@
                             </div>
                             {{-- <div class="media-body order-2 order-lg-1">
                                 <p class=""><strong>Status:</strong></p>
-                                <p class="">{{ $items['order'][0]->statusTransaksi }}</p>
+                                <p class="">{{ $items['order']->statusTransaksi }}</p>
                             </div> --}}
                             <div class="media-body order-2 order-lg-1 me-3">
                                 <h5 class="mt-0 font-weight-bold mb-2">Total Harga</h5>
@@ -150,7 +150,7 @@
                         </div>
                         {{-- <div class="media-body order-2 order-lg-1">
                             <p class=""><strong>Status:</strong></p>
-                            <p class="">{{ $items['order'][0]->statusTransaksi }}</p>
+                            <p class="">{{ $items['order']->statusTransaksi }}</p>
                         </div> --}}
                         <div class="media-body order-2 order-lg-1 me-3">
                             <div>
@@ -162,14 +162,14 @@
                             </div>
                             <h5 class="mt-0 font-weight-bold mb-2">Total Harga</h5>
                             <h6 class="fs-5 font-italic text-muted mb-3 small">
-                                Rp {{ $items['order'][0]->totalTagihan }}
+                                Rp {{ $items['order']->totalTagihan }}
                             </h6>
                             
-                            @if ($items['order'][0]->statusTransaksi == 'belum dibayar')
+                            @if ($items['order']->statusTransaksi == 'belum dibayar')
                             <form action="/payment" method="POST" target="_blank" rel="noopener noreferrer">
                                 @csrf
-                                <input type="hidden" name="amount" value="{{ $items['order'][0]->totalTagihan }}">
-                                <input type="hidden" name="order_id" value="{{ $items['order'][0]->id }}">
+                                <input type="hidden" name="amount" value="{{ $items['order']->totalTagihan }}">
+                                <input type="hidden" name="order_id" value="{{ $items['order']->id }}">
                                 <button class="btn bg-success" type="submit"> <i class="fi-rs-box-alt mr-10"></i> Pembayaran
                                 </button>
                             </form>
@@ -180,8 +180,8 @@
                             @else
                             <form action="/payment" method="POST" target="_blank" rel="noopener noreferrer">
                                 @csrf
-                                <input type="hidden" name="amount" value="{{ $items['order'][0]->totalTagihan }}">
-                                <input type="hidden" name="order_id" value="{{ $items['order'][0]->id }}">
+                                <input type="hidden" name="amount" value="{{ $items['order']->totalTagihan }}">
+                                <input type="hidden" name="order_id" value="{{ $items['order']->id }}">
                                 <button class="btn" type="submit" disabled> <i class="fi-rs-box-alt mr-10"></i> Sudah Dibayar
                                 </button>
                             </form>

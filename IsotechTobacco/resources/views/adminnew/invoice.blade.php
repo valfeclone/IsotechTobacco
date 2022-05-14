@@ -120,18 +120,18 @@
                                                 <dl class="dlist">
                                                     <dt class="fw-bold">Subtotal:</dt>
                                                     @php
-                                                        $subtotal = $items['order'][0]->totalTagihan - 20000;
+                                                        $subtotal = $items['order'][0]->totalTagihan - $items['order'][0]->ongkir;
                                                     @endphp
-                                                    <dd>Rp {{ $items['order'][0]->totalTagihan }}</dd>
+                                                    <dd>Rp {{ $subtotal }}</dd>
                                                 </dl>
                                                 <dl class="dlist fw-bold">
                                                     <dt>Ongkos Kirim:</dt>
-                                                    <dd>Rp 20000</dd>
+                                                    <dd>Rp {{ $items['order'][0]->ongkir }}</dd>
                                                 </dl>
                                                 <dl class="dlist fw-bold">
                                                     <dt>Total:</dt>
                                                     @php
-                                                        $total = $items['order'][0]->totalTagihan + 20000;
+                                                        $total = $items['order'][0]->totalTagihan;
                                                     @endphp
                                                     <dd> <b class="h5">Rp {{ $total }}</b> </dd>
                                                 </dl>
