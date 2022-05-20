@@ -11,8 +11,7 @@ use App\Models\ShippingFee;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Collection;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Spatie\Browsershot\Browsershot;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -242,10 +241,10 @@ class OrderController extends Controller
                         'carts' => $carts,
                         'buyer' => $buyer);
 
-        $pdf = Browsershot::url('adminnew/invoice'.$idOrder, compact('items'))->save($order[0]->idTransaksiOy.".png");
-        dd($pdf);
-        $path = storage_path('app/public/img_invoice');
+        $pdf = PDF::loadView('adminnew/invoice'.$idOrder, compact('items'))->save($order[0]->idTransaksiOy.".pdf");
+        $path = storage_path('app/public/pdf_invoice');
         $file->move($path, str_replace(' ', '', $order->idTransaksiOy));
+        return $pdf->download($order[0]->idTransaksiOy.".pdf");
     }
 
     public function viewAllOrder(Request $request)
