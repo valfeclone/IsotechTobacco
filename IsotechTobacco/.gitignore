@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/storage
+/config/snappy.php
 /storage/*.key
 /vendor
 .env
