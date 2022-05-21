@@ -35,7 +35,7 @@ return [
     
     'pdf' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_PDF_BINARY', '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'),
+        'binary'  => env('WKHTML_PDF_BINARY', '"D:\wkhtml\wkhtmltopdf\bin\wkhtmltopdf.exe"'),
         'timeout' => false,
         'options' => [],
         'env'     => [],
@@ -43,10 +43,27 @@ return [
     
     'image' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_IMG_BINARY', '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"'),
+        'binary'  => env('WKHTML_IMG_BINARY', '"D:\wkhtml\wkhtmltopdf\bin\wkhtmltoimage.exe"'),
         'timeout' => false,
         'options' => [],
         'env'     => [],
     ],
 
 ];
+
+// return array(
+//     'pdf' => array(
+//         'enabled' => true,
+//         'binary' => '"D:\wkhtml\wkhtmltopdf\bin\wkhtmltopdf.exe"',
+//         'options' => array(),
+//         'timeout' => false,
+
+//     ),
+//     'image' => array(
+//         'enabled' => true,
+//         'binary' => '"D:\wkhtml\wkhtmltopdf\bin\wkhtmltoimage.exe"',
+//         'options' => array(),
+//         'timeout' => false,
+
+//     ),
+// );
