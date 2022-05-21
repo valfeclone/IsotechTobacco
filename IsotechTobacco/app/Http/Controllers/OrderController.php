@@ -239,11 +239,11 @@ class OrderController extends Controller
         $items = array('order' => $order,
                         'carts' => $carts,
                         'buyer' => $buyer);
+                        
 
-        // $pdf = PDF::loadView('adminnew/invoice'.$idOrder, compact('items'))->save($order[0]->idTransaksiOy.".pdf");
         $pdf = PDF::loadView('adminnew/invoice', compact('items'))->save($order[0]->idTransaksiOy.".pdf");
         $path = storage_path('app/public/pdf_invoice');
-        $pdf->move($path, str_replace(' ', '', $order->idTransaksiOy));
+        $pdf->move($path, str_replace(' ', '', $order[0]->idTransaksiOy));
         return $pdf->download($order[0]->idTransaksiOy.".pdf");
     }
 
