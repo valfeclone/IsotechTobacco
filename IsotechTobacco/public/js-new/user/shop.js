@@ -121,23 +121,32 @@
             // });
             $('#btn-checkout').attr('disabled', true);
             $('#total-'+$upBtn.data('index')).html(function(i, subtotal) {
-                var price = parseInt($('#price-'+$upBtn.data('index')).html());
-                // console.log(price);
+                var price = ($('#price-'+$upBtn.data('index')).html());
+                price = to_number(price);
                 // price = convertToAngka(price);
                 // console.log(price);
-                subtotal = parseInt(newQty.html()) * price;
+                subtotal = (newQty.html()) * price;
+                subtotal = to_rupiah(subtotal);
+
                 return subtotal;
             });
             $('#sub-cart-total-1').html(function(i, totalPrice) {
-                var price = parseInt($('#price-'+$upBtn.data('index')).html());
+                totalPrice = to_number(totalPrice);
+                console.log(totalPrice);
+                var price = ($('#price-'+$upBtn.data('index')).html());
+                price = to_number(price);
+                console.log(price);
                 totalPrice = parseInt(totalPrice) + price;
-                // console.log(totalPrice);
+                console.log(totalPrice);
+                totalPrice = to_rupiah(totalPrice);
                 return totalPrice;
             });
             $('#cart-total-1').html(function(i, totalPrice) {
-                var price = parseInt($('#price-'+$upBtn.data('index')).html());
-                totalPrice = parseInt(totalPrice) + price;
-                // console.log(totalPrice);
+                totalPrice = to_number(totalPrice);
+                var price = ($('#price-'+$upBtn.data('index')).html());
+                price = to_number(price);
+                totalPrice = to_rupiah(parseInt(totalPrice) + price);
+                
                 return totalPrice;
             });
             // $.ajaxSetup({
@@ -205,43 +214,66 @@
             });
             $('#btn-checkout').attr('disabled', true);
             $('#total-'+$downBtn.data('index')).html(function(i, subtotal) {
-                var price = parseInt($('#price-'+$downBtn.data('index')).html());
-                subtotal = parseInt(newQty.html()) * price;
+                var price = ($('#price-'+$downBtn.data('index')).html());
+                price = to_number(price);
+
+                subtotal = (newQty.html()) * price;
+                subtotal = to_rupiah(subtotal);
+
                 return subtotal;
             });
             $('#sub-cart-total-1').html(function(i, totalPrice) {
+                totalPrice = to_number(totalPrice);
                 // console.log(countProduct);
                 if(parseInt(countProduct) === 2) {
-                    var price = parseInt($('#price-'+$downBtn.data('index')).html());
+                    var price = ($('#price-'+$downBtn.data('index')).html());
+                    price = to_number(price);
                     totalPrice = parseInt(totalPrice) - price;
+                    totalPrice = to_rupiah(totalPrice);
+
                     return totalPrice;
                 }
                 let counter = parseInt(newQty.html());
                 // console.log(counter);
                 if (counter > 1) {
-                    var price = parseInt($('#price-'+$downBtn.data('index')).html());
+                    var price = ($('#price-'+$downBtn.data('index')).html());
+                    price = to_number(price);
                     totalPrice = parseInt(totalPrice) - price;
+                    totalPrice = to_rupiah(totalPrice);
                     return totalPrice;
                 } else {
+                    totalPrice = to_rupiah(totalPrice);
                     return totalPrice;
                 }
                 
                 // console.log(totalPrice);
                 return totalPrice;
             });
-            // $('#cart-total-'+$downBtn.data('index')).html(function(i, totalPrice) {
-            //     let counter = parseInt(newQty.html());
-            //     if (counter > 1) {
-            //         var price = parseInt($('#price-'+$downBtn.data('index')).html());
-            //         totalPrice = parseInt(totalPrice) - price;
-            //         return totalPrice;
-            //     } else {
-            //         return totalPrice;
-            //     }
-                
-            //     console.log(totalPrice);
-            //     return totalPrice;
-            // });
+            $('#cart-total-1').html(function(i, totalPrice) {
+                totalPrice = to_number(totalPrice);
+                if(parseInt(countProduct) === 2) {
+                    var price = ($('#price-'+$downBtn.data('index')).html());
+                    price = to_number(price);
+
+                    totalPrice = parseInt(totalPrice) - price;
+                    totalPrice = to_rupiah(totalPrice);
+
+                    return totalPrice;
+                }
+                let counter = parseInt(newQty.html());
+                if (counter > 1) {
+                    var price = ($('#price-'+$downBtn.data('index')).html());
+                    price = to_number(price);
+
+                    totalPrice = parseInt(totalPrice) - price;
+                    totalPrice = to_rupiah(totalPrice);
+                    return totalPrice;
+
+                } else {
+                    totalPrice = to_rupiah(totalPrice);
+                    return totalPrice;
+                }
+            });
             // $.ajaxSetup({
             //     headers: {
             //         'X-CSRF-TOKEN': $('meta[name=crsf-token]').attr('content')
@@ -283,6 +315,14 @@
         //     return parseInt(rupiah.replace(/,.*|[^0-9]/g, ''), 10);
         // }
     };
+
+    var to_number = function(price){
+        return parseInt(price.split('.').join(""));
+    }
+
+    var to_rupiah = function(price){
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
     /* WOW active */
     new WOW().init();
 

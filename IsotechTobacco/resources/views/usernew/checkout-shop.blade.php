@@ -134,7 +134,7 @@
                                                 <input type="hidden" name="qtyId-{{ $i }}" id="qtyId-{{ $i }}" value={{ $item->jumlahPesan }}>
                                                 <h5><a href="shop-product-full.html">{{ $item->product->title }}</a></h5> <span class="product-qty">x {{ $item->jumlahPesan }}</span>
                                             </td>
-                                            <td>Rp {{ $item->product->regular_price }}</td>
+                                            <td>Rp {{ to_rupiah_norp($item->product->regular_price) }}</td>
                                         </tr>
                                         @php
                                             $i = $i + 1;
@@ -165,13 +165,13 @@
                                             foreach ($items['cart'] as $cart) 
                                                 $total += $cart->jumlahPesan * $cart->product->regular_price
                                         @endphp
-                                        {{ $total }}
+                                        {{ to_rupiah_norp($total) }}
                                         <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}">
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Ongkos Kirim</th>
-                                        <td colspan="2"><em>Rp {{ $items['ongkir'] }}</em></td>
+                                        <td colspan="2"><em>Rp {{ to_rupiah_norp($items['ongkir']) }}</em></td>
                                         <input type="hidden" name="ongkir" id="ongkir" value="{{ $items['ongkir'] }}">
                                     </tr>
                                     <tr>
@@ -182,7 +182,7 @@
                                             foreach ($items['cart'] as $cart) 
                                                 $totalCart += $cart->jumlahPesan * $cart->product->regular_price
                                         @endphp
-                                        {{ $totalCart }}  
+                                        {{ to_rupiah_norp($totalCart) }}  
                                         </span></td>
                                     </tr>
                                 </tbody>

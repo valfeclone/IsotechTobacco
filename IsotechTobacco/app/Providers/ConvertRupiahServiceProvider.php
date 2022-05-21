@@ -28,7 +28,7 @@ class ConvertRupiahServiceProvider extends ServiceProvider
     { 
         
         Blade::directive('toRupiah', function ($expression) {
-            return "<?php echo number_format($expression, 0,',','.'); ?>";
+            return "<?php echo 'RP' . number_format($expression, 2,',','.'); ?>";
         });
 
     }

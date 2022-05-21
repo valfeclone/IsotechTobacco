@@ -49,7 +49,7 @@
                                             {{-- <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy magndapibus.
                                             </p> --}}
                                         </td>
-                                        <td class="price" data-title="Price">Rp<span id="price-{{ $i }}">{{ $cart->product->regular_price }}</span></td>
+                                        <td class="price" data-title="Price">Rp <span id="price-{{ $i }}">{{ to_rupiah_norp($cart->product->regular_price) }}</span></td>
                                         <td class="text-center" data-title="Stock">
                                             <div class="detail-qty border radius  m-auto">
                                                 <a href="#" class="qty-down" data-index={{ $i }}><i class="fi-rs-angle-small-down"></i></a>
@@ -59,7 +59,7 @@
                                             </div>
                                         </td>
                                         <td class="text-right" data-title="Cart">
-                                            Rp<span id="total-{{ $i }}" class="total-val">{{ $cart->jumlahPesan * $cart->product->regular_price }} </span>
+                                            Rp<span id="total-{{ $i }}" class="total-val">{{ to_rupiah_norp($cart->jumlahPesan * $cart->product->regular_price) }} </span>
                                         </td>
                                         {{-- <td class="action" data-title="Remove">
                                             <form action="/delete-cart" method="POST">
@@ -131,13 +131,27 @@
                                             <td class="cart_total_label">Subtotal Keranjang</td>
                                             <td class="cart_total_amount">
                                                 <span class="font-lg fw-900 text-brand">Rp</span>
+                                                {{-- <span id="sub-cart-total-1">
+                                                    @php
+                                                    $total = 0;
+                                                    foreach ($items['carts'] as $cart) 
+                                                        $total += $cart->jumlahPesan * $cart->product->regular_price
+                                                    @endphp
+                                                    {{ $total }}
+                                                </span>
+                                                <span class="font-lg fw-900 text-brand">
+                                                @php
+                                                    $price_format = to_rupiah_norp($total)
+                                                @endphp
+                                                {{ $price_format }}
+                                                </span> --}}
                                                 <span class="font-lg fw-900 text-brand" id="sub-cart-total-1">
                                                     @php
                                                     $total = 0;
                                                     foreach ($items['carts'] as $cart) 
                                                         $total += $cart->jumlahPesan * $cart->product->regular_price
                                                 @endphp
-                                                {{ $total }}
+                                                {{ to_rupiah_norp($total) }}
                                                 </span>
                                                 {{-- <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}"> --}}
                                             </td>
@@ -145,9 +159,9 @@
                                         <tr>
                                             <td class="cart_total_label">Ongkos Kirim</td>
                                             <td class="cart_total_amount">
-                                                <span class="font-lg fw-900 text-brand">Rp</span>
+                                                <span class="font-lg fw-900 text-brand">Rp </span>
                                                 <span class="font-lg fw-900 text-brand" id="ongkos-kirim">
-                                                    {{ $items['ongkir'] }}
+                                                    {{ to_rupiah_norp($items['ongkir']) }}
                                                 </span>
                                                 {{-- <input type="hidden" name="totalTagihan" id="totalTagihan" value="{{ $total }}"> --}}
                                             </td>
@@ -158,13 +172,19 @@
                                             <td class="cart_total_label">Total</td>
                                             <td class="cart_total_amount"><strong>
                                                 <span class="font-lg fw-900 text-brand">Rp</span>
+                                                {{-- <span>
+                                                    {{ to_rupiah(100000) }}
+                                                </span>
+                                                <span>
+                                                    {{ to_number("100.000") }}
+                                                </span> --}}
                                                 <span class="font-xl fw-900 text-brand" id="cart-total-1">
                                                 @php
                                                     $totalCart = $items['ongkir'];
                                                     foreach ($items['carts'] as $cart) 
                                                         $totalCart += $cart->jumlahPesan * $cart->product->regular_price
                                                 @endphp
-                                                {{ $totalCart }}    
+                                                {{ to_rupiah_norp($totalCart) }}    
                                             </span></strong></td>
                                         </tr>
                                     </tbody>

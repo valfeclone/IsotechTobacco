@@ -10871,7 +10871,7 @@ textarea.form-control-lg {
                     <div class="col-md-4">
                         <article class="icontext align-items-start">
                             {{-- <img src="{{ asset('images/user/imgs/logo/Logo-Gondrong.png') }}" width="100" height="100" class="img-xs" alt="Item"> --}}
-                            {{-- <img src="/IsotechTobacco/public/images/user/imgs/logo/Logo-Gondrong.png')" width="100" height="100" class="img-xs" alt="Item"> --}}
+                            {{-- <img src="/images/user/imgs/logo/Logo-Gondrong.png" width="100" height="100" class="img-xs" alt="Item"> --}}
                             <div class="text">
                                 <h4 class="mb-1">Gondrong Tobacco</h4>
                             </div>
@@ -10936,17 +10936,17 @@ textarea.form-control-lg {
                                     @foreach ($items['carts'] as $cart)
                                     <tr>
                                         <td>
-                                            {{-- <div class="left">
-                                                <img src="/storage/products/{{ $cart->product->product_image_path }}" width="40" height="40" class="img-xs" alt="Item">
-                                            </div> --}}
+                                            <div class="left">
+                                                {{-- <img src="/storage/products/{{ $cart->product->product_image_path }}" width="40" height="40" class="img-xs" alt="Item"> --}}
+                                            </div>
                                             <div class="info"> {{ $cart->product->title }}</div>
                                         </td>
-                                        <td>Rp {{ $cart->product->regular_price }} </td>
+                                        <td>Rp {{ to_rupiah_norp($cart->product->regular_price) }} </td>
                                         <td> {{ $cart->jumlahPesan }} </td>
                                         @php
                                             $total = $cart->product->regular_price * $cart->jumlahPesan;
                                         @endphp
-                                        <td class="text-end">Rp {{ $total }}  </td>
+                                        <td class="text-end">Rp {{ to_rupiah_norp($total) }}  </td>
                                     </tr>
                                     @endforeach
                                     
@@ -10964,18 +10964,18 @@ textarea.form-control-lg {
                                                     @php
                                                         $subtotal = $items['order'][0]->totalTagihan - $items['order'][0]->ongkir;
                                                     @endphp
-                                                    <dd>Rp {{ $subtotal }}</dd>
+                                                    <dd>Rp {{ to_rupiah_norp($subtotal) }}</dd>
                                                 </dl>
                                                 <dl class="dlist fw-bold">
                                                     <dt>Ongkos Kirim:</dt>
-                                                    <dd>Rp {{ $items['order'][0]->ongkir }}</dd>
+                                                    <dd>Rp {{ to_rupiah_norp($items['order'][0]->ongkir) }}</dd>
                                                 </dl>
                                                 <dl class="dlist fw-bold">
                                                     <dt>Total:</dt>
                                                     @php
                                                         $total = $items['order'][0]->totalTagihan;
                                                     @endphp
-                                                    <dd> <b class="h5">Rp {{ $total }}</b> </dd>
+                                                    <dd> <b class="h5">Rp {{ to_rupiah_norp($total) }}</b> </dd>
                                                 </dl>
                                                 <dl class="dlist">
                                                     <dt class="text-muted">Status:</dt>

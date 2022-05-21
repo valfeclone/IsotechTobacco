@@ -77,7 +77,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-2 col-sm-2 col-4 col-price"> Rp.<span>{{ $product->regular_price}}</span> </div>
+                <div class="col-lg-2 col-sm-2 col-4 col-price"> Rp <span>{{ to_rupiah_norp($product->regular_price)}}</span> </div>
                 <div class="col-lg-2 col-sm-2 col-4 col-status">
                     @if ($product->published)
                         <span class="badge rounded-pill alert-success">Publish</span>    

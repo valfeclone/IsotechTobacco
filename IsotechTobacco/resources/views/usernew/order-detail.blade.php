@@ -85,7 +85,7 @@
                                 
                                 <div class="media-body order-2 order-lg-1 me-3">
                                     <h5 class="mt-0 font-weight-bold mb-2">{{ $items['cart'][$i]->product->title }}</h5>
-                                    <p class="font-italic text-muted mb-0 small">{{ $items['cart'][$i]->jumlahPesan }} x  Rp{{ $items['cart'][$i]->product->regular_price }}</p>
+                                    <p class="font-italic text-muted mb-0 small">{{ $items['cart'][$i]->jumlahPesan }} x {{ to_rupiah($items['cart'][$i]->product->regular_price) }}</p>
                                     <div class="d-flex align-items-center justify-content-between mt-1">
                                         {{-- <h6 class="font-weight-bold my-2">Rp {{ $items['order'][$i]->totalTagihan }}</h6> --}}
                                         {{-- <ul class="list-inline small">
@@ -108,9 +108,9 @@
                                 <h5 class="mt-0 font-weight-bold mb-2">Total Harga</h5>
                                 <p class="fs-5 font-italic text-muted mb-0 small">
                                     @php
-                                        $total = $items['cart'][$i]->jumlahPesan * $items['cart'][$i]->product->regular_price
+                                        $total = to_rupiah($items['cart'][$i]->jumlahPesan * $items['cart'][$i]->product->regular_price)
                                     @endphp
-                                    Rp{{ $total }}
+                                    {{ $total }}
                                 </p>
                                 <div class="d-flex align-items-center justify-content-between mt-1">
                                     {{-- <h6 class="font-weight-bold my-2">Rp {{ $items['order'][$i]->totalTagihan }}</h6> --}}
@@ -157,12 +157,18 @@
                                 <h5 class="mt-0 font-weight-bold mb-2">Ongkir
                                 </h5>
                                 <p class="fs-5 font-italic text-muted mb-3 small">
-                                    Rp {{ $items['ongkir']}}
+                                    @php
+                                        $ongkir = to_rupiah($items['ongkir'])
+                                    @endphp
+                                    {{ $ongkir }}
                                 </p>
                             </div>
                             <h5 class="mt-0 font-weight-bold mb-2">Total Harga</h5>
                             <h6 class="fs-5 font-italic text-muted mb-3 small">
-                                Rp {{ $items['order']->totalTagihan }}
+                                @php
+                                    $price = to_rupiah($items['order']->totalTagihan)
+                                @endphp
+                                {{ $price }}
                             </h6>
                             
                             @if ($items['order']->statusTransaksi == 'belum dibayar')
