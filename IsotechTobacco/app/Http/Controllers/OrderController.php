@@ -227,12 +227,11 @@ class OrderController extends Controller
 
     public function viewPDFInvoice(Request $req)
     {
-        set_time_limit(300);
         $idOrder = $req->route('id');
         $order = Order::where('id', $idOrder)->get();
 
         $buyer = User::where('id', $order[0]->user_id)->get();
-        
+
         $carts = Cart::where('user_id', $buyer[0]->id)
             ->where('order_id', $order[0]->id)
             ->get();
@@ -242,9 +241,10 @@ class OrderController extends Controller
                         'buyer' => $buyer);
                         
 
-        $pdf = PDF::loadView('adminnew/invoice', compact('items'))->save($order[0]->idTransaksiOy.".pdf");
-        $path = storage_path('app/public/pdf_invoice');
-        $pdf->move($path, str_replace(' ', '', $order[0]->idTransaksiOy));
+        $path = storage_path('app/public/pdf_invoice/');
+        $pdf = PDF::loadView('adminnew/invoice', compact('items'));
+        $pdf->save($path.$order[0]->idTransaksiOy.".pdf");
+        // $pdf->save($path, str_replace(' ', '', $order[0]->idTransaksiOy));
         return $pdf->download($order[0]->idTransaksiOy.".pdf");
     }
 
