@@ -108,8 +108,10 @@ class OrderController extends Controller
                 }
                 else if($status == 'complete'){
                     if($TO->foto_bukti_pengiriman){
-                        $TO->statusTransaksi = 'dalam pengiriman';
-                        $TO->save();  
+                        if($TO->statusTransaksi !== 'sudah selesai'){
+                            $TO->statusTransaksi = 'dalam pengiriman';
+                            $TO->save();  
+                        }
                     }
                     else{
                         $TO->statusTransaksi = 'sedang diproses';
@@ -156,14 +158,22 @@ class OrderController extends Controller
                 $select->statusTransaksi = 'belum dibayar';
                 $select->save();
             }
-            else if($status == 'complete'){
-                $select->statusTransaksi = 'sedang diproses';
-                $select->statusBayar = true;
+            else if($status == 'expired'){
+                $select->statusTransaksi = 'pembayaran gagal';
                 $select->save();
             }
-            else if($status == 'expired'){
-                $select->statusTransaksi = 'pembayaran expired';
-                $select->save();
+            else if($status == 'complete'){
+                if($select->foto_bukti_pengiriman){
+                    if($select->statusTransaksi !== 'sudah selesai'){
+                        $select->statusTransaksi = 'dalam pengiriman';
+                        $select->save();  
+                    }
+                }
+                else{
+                    $select->statusTransaksi = 'sedang diproses';
+                    $select->statusBayar = true;
+                    $select->save();
+                }
             }
         }
 
@@ -174,6 +184,55 @@ class OrderController extends Controller
             'cart' => $cart,
             'ongkir' => $ongkir
         ]);
+    }
+
+    public function viewAllOrder(Request $request)
+    {
+        $search = $request->status;
+
+        if($search == null){
+            $select = Order::latest()->get();
+        }
+
+        $select = Order::where('statusTransaksi', 'like', '%'.$search.'%')->get();
+
+        foreach ($select as $TO) {
+            if($TO->idTransaksiOy != null){
+                $response = PaymentController::getPaymentStatus($partnerTxId = $TO->idTransaksiOy);
+                $status = ($response->json($key = 'data')['status']);
+                if($status == 'created'){
+                    $TO->statusTransaksi = 'belum dibayar';
+                    $TO->save();
+                }
+                else if($status == 'expired'){
+                    $TO->statusTransaksi = 'pembayaran gagal';
+                    $TO->save();
+                }
+                else if($status == 'complete'){
+                    if($TO->foto_bukti_pengiriman){
+                        if($TO->statusTransaksi !== 'sudah selesai'){
+                            $TO->statusTransaksi = 'dalam pengiriman';
+                            $TO->save();  
+                        }
+                    }
+                    else{
+                        $TO->statusTransaksi = 'sedang diproses';
+                        $TO->statusBayar = true;
+                        $TO->save();
+                    }
+                }
+            }
+        }
+        return view ('adminnew/order-lists')->with('orders', $select);
+    }
+
+    public function selesaikanOrder(Request $req){
+        $user = Auth::user();
+        $order = Order::where('id', $req['order_id'])
+                        ->first();
+        $order->statusTransaksi = 'sudah selesai';
+        $order->save();
+        return redirect()->back();        
     }
 
     public function viewDetailOrderAdmin(Request $request)
@@ -202,6 +261,55 @@ class OrderController extends Controller
             'buyer' => $buyer,
             'orderId' => $idOrder
         ]);
+    }
+
+    public function updateStatusOrder(Request $req)
+    {
+        $user = Auth::user();
+        $order = Order::where('id', $req['order_id'])
+                        ->first();
+
+        // dd($req['statusTransaksi'], $order->statusTransaksi);
+        if($order){
+            if($order->statusTransaksi =='belum dibayar'){
+                $order->statusTransaksi  = $req['statusTransaksi'];
+                // if($req['idTransaksiOy']){
+                //     $order['idTransaksiOy'] = $req['idTransaksiOy'];
+                // }
+            }
+            else if($order->statusTransaksi =='belum diproses'){
+                $order->statusTransaksi  = $req['statusTransaksi'];
+            }
+            else if($order->statusTransaksi =='sudah diproses'){
+                $order->statusTransaksi  = $req['statusTransaksi'];
+            }
+            else if($order->statusTransaksi =='sudah selesai'){
+                $order->statusTransaksi  = $req['statusTransaksi'];
+            }
+        }
+        $order->save();
+        return redirect()->back();
+    }
+
+    public function deleteOrder($id)
+    {
+        // dd($req);
+        $res = Order::find($id)->delete();
+        // return redirect('admin/view-product');
+    }
+
+    public function uploadBuktiPengiriman(Request $req){
+        if($req){
+            $order = Order::where('id', $req['order_id'])->first();
+            $file = $req->file('bukti_pengiriman');
+            $path = storage_path('app/public/bukti_pengiriman');
+            $file->move($path, str_replace(' ', '', $order->idTransaksiOy));
+
+            $order->foto_bukti_pengiriman = str_replace(' ', '', $order->idTransaksiOy);
+            $order->statusTransaksi = 'dalam pengiriman';
+            $order->save();
+        }
+        return redirect()->back();
     }
 
     public function viewInvoice(Request $request)
@@ -248,88 +356,4 @@ class OrderController extends Controller
         return $pdf->download($order[0]->idTransaksiOy.".pdf");
     }
 
-    public function viewAllOrder(Request $request)
-    {
-        $search = $request->status;
-
-        if($search == null){
-            $select = Order::latest()->get();
-        }
-
-        $select = Order::where('statusTransaksi', 'like', '%'.$search.'%')->get();
-
-        foreach ($select as $TO) {
-            if($TO->idTransaksiOy != null){
-                $response = PaymentController::getPaymentStatus($partnerTxId = $TO->idTransaksiOy);
-                $status = ($response->json($key = 'data')['status']);
-                if($status == 'created'){
-                    $TO->statusTransaksi = 'belum dibayar';
-                    $TO->save();
-                }
-                else if($status == 'expired'){
-                    $TO->statusTransaksi = 'pembayaran gagal';
-                    $TO->save();
-                }
-                else if($status == 'complete'){
-                    if($TO->foto_bukti_pengiriman){
-                        $TO->statusTransaksi = 'dalam pengiriman';
-                        $TO->save();  
-                    }
-                    else{
-                        $TO->statusTransaksi = 'sedang diproses';
-                        $TO->statusBayar = true;
-                        $TO->save();
-                    }
-                }
-            }
-        }
-
-        return view ('adminnew/order-lists')->with('orders', $select);
-    }
-
-    public function updateStatusOrder(Request $req)
-    {
-        $user = Auth::user();
-        $order = Order::where('id', $req['order_id'])
-                        ->first();
-
-        // dd($req['statusTransaksi'], $order->statusTransaksi);
-        if($order){
-            if($order->statusTransaksi =='belum dibayar'){
-                $order->statusTransaksi  = $req['statusTransaksi'];
-                // if($req['idTransaksiOy']){
-                //     $order['idTransaksiOy'] = $req['idTransaksiOy'];
-                // }
-            }
-            else if($order->statusTransaksi =='belum diproses'){
-                $order->statusTransaksi  = $req['statusTransaksi'];
-            }
-            else if($order->statusTransaksi =='sudah diproses'){
-                $order->statusTransaksi  = $req['statusTransaksi'];
-            }
-        }
-        $order->save();
-        return redirect()->back();
-    }
-
-    public function deleteOrder($id)
-    {
-        // dd($req);
-        $res = Order::find($id)->delete();
-        // return redirect('admin/view-product');
-    }
-
-    public function uploadBuktiPengiriman(Request $req){
-        if($req){
-            $order = Order::where('id', $req['order_id'])->first();
-            $file = $req->file('bukti_pengiriman');
-            $path = storage_path('app/public/bukti_pengiriman');
-            $file->move($path, str_replace(' ', '', $order->idTransaksiOy));
-
-            $order->foto_bukti_pengiriman = str_replace(' ', '', $order->idTransaksiOy);
-            $order->statusTransaksi = 'dalam pengiriman';
-            $order->save();
-        }
-        return redirect()->back();
-    }
 }

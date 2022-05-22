@@ -185,10 +185,13 @@
                                 <button class="btn" type="submit" disabled> <i class="fi-rs-box-alt mr-10"></i> Sudah Dibayar
                                 </button>
                             </form>
-                            <a href="#">
+                            <form action="/selesaikan-order" method="POST">
+                                @csrf
+                                <input type="hidden" name="amount" value="{{ $items['order']->totalTagihan }}">
+                                <input type="hidden" name="order_id" value="{{ $items['order']->id }}">
                                 <button class="btn mt-3 bg-success" type="submit" > Selesaikan Pesanan
                                 </button>
-                            </a>
+                            </form>
                             @endif
                             <div class="d-flex align-items-center justify-content-between mt-1">
                                 {{-- <h6 class="font-weight-bold my-2">Rp {{ $items['order'][$i]->totalTagihan }}</h6> --}}

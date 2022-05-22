@@ -125,9 +125,7 @@ Route::get('/payment-process', function () {
 Route::post('/logout', [UserController::class, 'logout']);
 
 Route::get('/product-detail/{id}', [ProductController::class, 'testviewProductbyID'])->name('testviewProductbyID');
-
-// Route::get('/view-product/{id}', [ProductController::class, 'usrviewProductbyID'])->name('usrviewproductID');
-
+Route::post('/selesaikan-order', [OrderController::class, 'selesaikanOrder']);
 
 Route::post('/register', [UserController::class, 'handleRegister']);
 // Route::get('/login', function () {
