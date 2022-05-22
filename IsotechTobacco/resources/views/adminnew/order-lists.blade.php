@@ -75,7 +75,7 @@
                         <td>{{ $num }}</td>
                         <td><b>{{ $order->user->name }}</b></td>
                         <td>{{ $order->user->email }}</td>
-                        <td>Rp. {{ $order->totalTagihan }}</td>
+                        <td>Rp {{ to_rupiah_norp($order->totalTagihan) }}</td>
                         <td><span class="badge rounded-pill alert-warning">{{ $order->statusTransaksi }}</span></td>
                         <td>{{ $order->created_at }}</td>
                         <td class="text-end">

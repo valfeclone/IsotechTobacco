@@ -107,12 +107,12 @@
                                         <div class="info"> {{ $cart->product->title }}</div>
                                     </a>
                                 </td>
-                                <td>Rp {{ $cart->product->regular_price }} </td>
+                                <td>Rp {{ to_rupiah_norp($cart->product->regular_price) }} </td>
                                 <td> {{ $cart->jumlahPesan }} </td>
                                 @php
                                     $total = $cart->product->regular_price * $cart->jumlahPesan;
                                 @endphp
-                                <td class="text-end">Rp {{ $total }}  </td>
+                                <td class="text-end">Rp {{ to_rupiah_norp($total) }}  </td>
                             </tr>
                             @endforeach
                             <tr>
@@ -123,18 +123,18 @@
                                             @php
                                                 $subtotal = $items['order'][0]->totalTagihan - $items['order'][0]->ongkir;
                                             @endphp
-                                            <dd>Rp {{ $subtotal }}</dd>
+                                            <dd>Rp {{ to_rupiah_norp($subtotal) }}</dd>
                                         </dl>
                                         <dl class="dlist">
                                             <dt>Ongkos Kirim:</dt>
-                                            <dd>Rp {{ $items['order'][0]->ongkir }}</dd>
+                                            <dd>Rp {{ to_rupiah_norp($items['order'][0]->ongkir) }}</dd>
                                         </dl>
                                         <dl class="dlist">
                                             <dt>Total:</dt>
                                             @php
                                                 $total = $items['order'][0]->totalTagihan ;
                                             @endphp
-                                            <dd> <b class="h5">Rp {{ $total }}</b> </dd>
+                                            <dd> <b class="h5">Rp {{ to_rupiah_norp($total) }}</b> </dd>
                                         </dl>
                                         <dl class="dlist">
                                             <dt class="text-muted">Status:</dt>

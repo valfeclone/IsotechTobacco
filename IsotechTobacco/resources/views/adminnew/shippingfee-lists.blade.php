@@ -69,7 +69,7 @@
                     <tr>
                         <td>{{ $shippingfee->id }}</td>
                         <td><b>{{ $shippingfee->tujuan }}</b></td>
-                        <td>Rp. {{ $shippingfee->harga }}</td>
+                        <td>Rp {{ to_rupiah_norp($shippingfee->harga) }}</td>
                         <td>{{ $shippingfee->created_at }}</td>
                         <td class="text-end">
                             <a href="/admin/edit-shippingfee/{{ $shippingfee->id }}" class="btn btn-md rounded font-sm">Ubah</a>

@@ -85,7 +85,10 @@
                                 <h5 class="mt-0 font-weight-bold mb-2">{{ $items['cart'][$i]->product->title }}</h5>
                                 <p class="font-italic text-muted mb-0 small">{{ $items['cart'][$i]->jumlahPesan }} Unit </p>
                                 <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">Rp {{ $items['order'][$i]->totalTagihan }}</h6>
+                                    @php
+                                        $price = to_rupiah($items['order'][$i]->totalTagihan)
+                                    @endphp
+                                    <h6 class="font-weight-bold my-2">{{ $price }}</h6>
                                     {{-- <ul class="list-inline small">
                                         <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
                                         <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>

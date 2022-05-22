@@ -32,19 +32,6 @@
             <div class="heading-tab-left wow fadeIn animated">
                 <h3 class="section-title mb-20"><span>Produk</span> Terbaru</h3>
             </div>
-            {{-- <div class="heading-tab-right wow fadeIn animated">
-                <ul class="nav nav-tabs right no-border" id="myTab-1" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="nav-tab-one-1" data-bs-toggle="tab" data-bs-target="#tab-one-1" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Featured</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-two-1" data-bs-toggle="tab" data-bs-target="#tab-two-1" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Popular</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-three-1" data-bs-toggle="tab" data-bs-target="#tab-three-1" type="button" role="tab" aria-controls="tab-three" aria-selected="false">New added</button>
-                    </li>
-                </ul>
-            </div> --}}
         </div>
         <div class="row">
            
@@ -85,7 +72,10 @@
                                         </div> --}}
                                         <div class="product-price">
                                             {{-- <span>@toRupiah($product->regular_price)</span> --}}
-                                            <span>{{ $product->regular_price }}</span>
+                                            @php
+                                                $price_1 = to_rupiah($product->regular_price)
+                                            @endphp
+                                            <span>{{ $price_1 }}</span>
                                             {{-- <span class="old-price">$245.8</span> --}}
                                         </div>
                                         <div class="product-action-1 show">
@@ -553,7 +543,10 @@
                                         </div> --}}
                                         <div class="product-price">
                                             {{-- <span>@toRupiah($product->regular_price)</span> --}}
-                                            <span>{{ $product->regular_price }}</span>
+                                            @php
+                                                $price_2 = to_rupiah($product->regular_price)
+                                            @endphp
+                                            <span>{{ $price_2 }}</span>
                                             {{-- <span class="old-price">$245.8</span> --}}
                                         </div>
                                         <div class="product-action-1 show">
@@ -1033,7 +1026,10 @@
                                         </div> --}}
                                         <div class="product-price">
                                             {{-- <span>@toRupiah($product->regular_price)</span> --}}
-                                            <span>{{ $product->regular_price }}</span>
+                                            @php
+                                                $price_3 = to_rupiah($product->regular_price)
+                                            @endphp
+                                            <span>{{ $price_3 }}</span>
                                             {{-- <span class="old-price">$245.8</span> --}}
                                         </div>
                                         <div class="product-action-1 show">
