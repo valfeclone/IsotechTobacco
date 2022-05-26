@@ -186,6 +186,19 @@ class OrderController extends Controller
         ]);
     }
 
+    public function viewBuktiUpload(Request $request)
+    {
+        $user = Auth::user();
+
+        $idOrder = $request->route('id');
+        
+        $select = Order::where('id', $idOrder)
+                        // ->where('order_id', null)
+                        ->first();
+        
+        return view('adminnew/shipping-upload')->with('order', $select);
+    }
+
     public function viewAllOrder(Request $request)
     {
         $search = $request->status;

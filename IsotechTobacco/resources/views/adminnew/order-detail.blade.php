@@ -4,6 +4,10 @@
     Admin Gondrong | Order Detail
 @endsection
 
+@section('extra-style')
+<link href="{{ asset('css-new/admin/css/order.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('menu-aside')
 <ul class="menu-aside">
     @include('components.admin.asidenew.dashboard')
@@ -150,6 +154,7 @@
                     </table>
                 </div> <!-- table-responsive// -->
             </div> <!-- col// -->
+            
             <div class="col-lg-1"></div>
             <div class="col-lg-3">
                 <div class="box shadow-sm bg-light">
@@ -159,6 +164,7 @@
                         Business name: Grand Market LLC <br>
                         Phone: +1 (800) 555-154-52
                     </p> --}}
+                    
                     <form action="/admin/upload-bukti-pengiriman" method="POST" enctype='multipart/form-data'>
                         @csrf
                         <div class="card-body">
@@ -171,10 +177,53 @@
                         </div>
                     </form>
                 </div>
+                
                 <div class="h-25 pt-4">
-                    <a href="/admin/invoice/{{ $items['orderId'] }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Lihat Invoice</a>
-                    <a href="/admin/invoice/pdf/{{ $items['orderId'] }}" class="btn btn-primary">Lihat PDF Invoice</a>
+                    <div class="pt-2">
+                        <a href="/admin/invoice/{{ $items['orderId'] }}" class="btn btn-primary w-50 " target="_blank" rel="noopener noreferrer">Web Invoice</a>
+                    </div>
+                    <div class="pt-2">
+                        <a href="/admin/invoice/pdf/{{ $items['orderId'] }}" class="btn btn-primary w-50"> PDF Invoice</a>
+                    </div>
+                    <div class="pt-2 w-50">
+                        <form action="/selesaikan-order" method="POST">
+                            @csrf
+                            <div>
+                                <input type="hidden" id="order_id" name="order_id" value="{{ $items['order'][0]->id }}">
+                                <input class="btn btn-primary" type="submit" value="Selesaikan Order">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="pt-2">
+                        <a href="/admin/bukti-pengiriman/{{ $items['orderId'] }}" class="btn btn-primary w-50">Bukti Pengiriman</a>
+                    </div>
+                    {{-- <div class="pt-2"> --}}
+                        {{-- <button type="button" class="pt-2 btn btn-primary" id="btnPopup">
+                            Lihat Bukti Pengiriman
+                        </button> --}}
+                        {{-- <div class="" id="modalUpper">
+                            <div class="d-none" id="myModal">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                      <button type="button" class="btn-close btnClose"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      ...
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary btnClose">Close</button>
+                                      <button type="button" class="btn btn-primary">Understood</button>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div> --}}
+                    {{-- </div> --}}
+
                 </div>
+                
             </div> <!-- col// -->
         </div>
     </div> <!-- card-body end// -->

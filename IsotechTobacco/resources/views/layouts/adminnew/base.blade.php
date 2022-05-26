@@ -20,7 +20,7 @@
     <link href="{{ asset('css-new/admin/css/main.css') }}" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+<body id="body-id">
     <div class="screen-overlay"></div>
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
@@ -41,7 +41,7 @@
             @yield('menu-aside')
         </nav>
     </aside>
-    <main class="main-wrap">
+    <main class="main-wrap" id="main-id">
         <header class="main-header navbar">
             <div class="col-search">
                 <form class="searchform" method="POST" action="/admin/search-product">

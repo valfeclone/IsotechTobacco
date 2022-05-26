@@ -216,6 +216,7 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::post('/admin/updateOrder', [OrderController::class, 'updateStatusOrder']);
     Route::get('/admin/order-detail/{id}', [OrderController::class, 'viewDetailOrderAdmin']);
     Route::post('/admin/upload-bukti-pengiriman', [OrderController::class, 'uploadBuktiPengiriman']);
+    Route::get('/admin/bukti-pengiriman/{id}', [OrderController::class, 'viewBuktiUpload']);
 
     //ADMIN Search
     // Route::get('/search-product', [ProductController::class, 'searchProduct']);
