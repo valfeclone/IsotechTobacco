@@ -42,7 +42,7 @@ class PaymentController extends Controller
                     'step' => 'input-amount',
                     'include_admin_fee' => false,
                     'list_disabled_payment_methods' => null,
-                    'list_enabled_banks' => "002,008,009,013,022",
+                    'list_enabled_banks' => "002,008,009,013,014,022",
                     'list_enabled_ewallet' => "shopeepay_ewallet,dana_ewallet,linkaja_ewallet,ovo_ewallet",
                     'expiration' => null,
                     'due_date' => null,
