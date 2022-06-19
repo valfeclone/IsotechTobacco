@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use App\Models\User;
 // use App\Models\Product;
 use App\Models\Cart;
 use App\Models\ShippingFee;
+use App\Http\Controllers\OngkirController;
 
 class CartController extends Controller
 {
@@ -49,7 +51,11 @@ class CartController extends Controller
     {
         $user = Auth::user();
         $city = ShippingFee::where('tujuan', $user['kota'])->get();
-        $ongkir = $city[0]['harga'];
+        // $ongkir = $city[0]['harga'];
+        $response = OngkirController::getShippingFee($city[0]['tujuan']);
+        $ongkir = ($response->json($key = 'content'));
+        $ongkir = (json_decode($ongkir));
+        $ongkir = ($ongkir[0]->cost);
         $cart = Cart::where('user_id', $user['id'])
                         ->where('order_id', null)
                         ->get();

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use App\Models\ShippingFee;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\OngkirController;
 
 class OngkirController extends Controller
 {
@@ -26,17 +28,57 @@ class OngkirController extends Controller
         return redirect()->back();
     }
 
-    public function getShippingFee(Request $req)
-    {
-        if($req){
-            $tarif = ShippingFee::where('tujuan', $req['tujuan'])->get();
-        }
+    public static function getShippingFee($req)
+    {    
         $user = Auth::user();
-        if($user){
-            $tarif2 = ShippingFee::where('tujuan', $user['kota'])->get();
+        if($req){
+            $key = env('TARIFKEY');
+            $data = array
+            (
+                            'weight'=>"1"
+                            ,'sendSiteCode'=>'JAKARTA'
+                            ,'destAreaCode'=>$req
+                            ,'cusName'=>'GONDRONGTOBACCO'
+                            ,'productType'=>'EZ'
+            );
+            $jason=json_encode($data);
+            $mmm = base64_encode(md5($jason.$key));
+
+            return Http::asForm([
+                'Content-Type' => 'application/x-www-form-urlencoded',
+              ])->post("http://test-jk.jet.co.id/jandt_track/inquiry.action", [
+                    'data' => $jason,
+                    'sign' => $mmm,
+            ]);
         }
 
-        return $tarif; #ini harusnya di view mana ya tarifnya?
+        else{
+            if($user){
+                $key = env('TARIFKEY');
+                $data = array
+                (
+                                'weight'=>"1"
+                                ,'sendSiteCode'=>'JAKARTA'
+                                ,'destAreaCode'=>$user['kota']
+                                ,'cusName'=>$user['name']
+                                ,'productType'=>'EZ'
+                );
+                $jason=json_encode($data);
+                $mmm = base64_encode(md5($jason.$key));
+                $data1 = array
+                (
+                                 'data'=>$jason
+                                ,'sign'=>$mmm
+                );
+    
+                return Http::withHeaders([
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                  ])->post("http://test-jk.jet.co.id/jandt_track/inquiry.action", [
+                    'data' => $jason,
+                    'sign' => $mmm,
+                ]);
+            }
+        }
     }
 
     public function getAllShippingFee()
