@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\ShippingFee;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Collection;
 use PDF;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -369,4 +371,71 @@ class OrderController extends Controller
         return $pdf->download($order[0]->idTransaksiOy.".pdf");
     }
 
+
+    public function makeDelivery(Request $req){
+        #akses ini dari admin ya. variable nya diakses di samping list order.
+        $orderID = $req['order_id'];
+        $order = Order::where('id', $orderID)->first();
+        $user = User::where('id', $order['user_id'])->first();
+        $carts = Cart::where('user_id', $user->id)
+            ->where('order_id', $order->id)
+            ->get();
+        
+        $qty = 0;
+        $weight = 0;
+        for($i = 0; $i < sizeof($carts); $i++){
+            $qty = $qty + $carts[$i]['jumlahPesan'];
+
+            $product = Product::where('id', $carts[$i]['product_id'])->first();
+            $weight = $weight + $product['weight'];
+        }
+
+        $startTime = date('Y-m-d H:i:s');
+        $endTime = date('Y-m-d H:i:s', strtotime('+1 day'));
+        $timestamp = $order['created_at'];
+        $orderDate = Carbon::parse($timestamp)->format('Y-m-d H:i:s');
+
+        $key = env('ORDERKEY');
+        $data = array(
+           'username'=>env('ORDERUSERNAME'),
+           'api_key'=>env('ORDERAPIKEY'),
+           'orderid'=>substr($order['idTransaksiOy'], 0, 20),#max nya 20 soalnya
+           'shipper_name'=>'Gondrong Tobacco',
+           'shipper_contact'=>'gondrongtobacco@gmail.com',
+           'shipper_phone'=> '+628123456789',
+           'shipper_addr'=>'JL. Pengirim no.88, RT/RW:001/010, Pluit',
+           'origin_code'=>'JKT',
+           'receiver_name'=> $user['name'],
+           'receiver_phone'=> $user['nomor_telpon'],
+           'receiver_addr'=> substr($user['alamat'], 0, 200),    
+           'receiver_zip'=>'40123',#kode pos blom ada
+           'destination_code'=>'JKT',
+           'receiver_area'=>'JKT001',
+           'qty'=>strval($qty),
+           'weight'=>strval($weight),
+           'goodsdesc'=>'Test Order',#shud be order notes
+           'servicetype'=>'1',
+           'insurance'=>'', #nullable tapi harus gini
+           'orderdate'=>strval($orderDate),
+           'item_name'=>'topi',#ini harusnya yang mana? kalo kosong boleh?
+           'cod'=>'',
+           'sendstarttime'=>strval($startTime),#Start pickup range time? Time nyatime server
+           'sendendtime'=>strval($endTime),#Start pickup range time
+           'expresstype'=>'1',#reguler
+           'goodsvalue'=>strval($order['totalTagihan'])
+        );
+        
+        $data_json = json_encode(array('detail'=>array($data))); #masih kesalahan signature
+        $md5 = md5($data_json.$key);
+        $data_sign = base64_encode(md5($data_json.$key));
+
+        dd($data_sign);
+
+        return Http::withHeaders([
+            'Content-Type' => 'application/x-www-form-urlencoded',
+          ])->post("https://test-jk.jet.co.id/jts-idn-ecommerce-api/api/order/create", [
+            'data_param' => $data_json,
+            'data_sign' => $data_sign,
+        ]);
+    }
 }

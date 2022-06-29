@@ -126,6 +126,7 @@ Route::post('/logout', [UserController::class, 'logout']);
 
 Route::get('/product-detail/{id}', [ProductController::class, 'testviewProductbyID'])->name('testviewProductbyID');
 Route::post('/selesaikan-order', [OrderController::class, 'selesaikanOrder']);
+Route::post('/buat-delivery', [OrderController::class, 'makeDelivery']);
 
 Route::post('/register', [UserController::class, 'handleRegister']);
 // Route::get('/login', function () {
