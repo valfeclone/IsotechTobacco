@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('google_id')->unique()->nullable();
             $table->string('password');
             $table->string('alamat')->nullable();
+            $table->string('kodepos')->nullable();
             $table->string('kota')->nullable();
             $table->string('nomor_telpon')->nullable();
             $table->rememberToken();

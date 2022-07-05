@@ -44,6 +44,9 @@
                                 <div class="form-group">
                                     <input type="text" required="" id="alamat" name="alamat" placeholder="Alamat">
                                 </div>
+                                <div class="form-group">
+                                    <input type="text" required="" id="kodepos" name="kodepos" placeholder="Kode Pos">
+                                </div>
                                 @if ($cities != null)
                                 <div class="form-row">
                                     <div class="form-group col-lg-12">

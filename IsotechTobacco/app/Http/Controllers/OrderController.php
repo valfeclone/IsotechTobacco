@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Collection;
 use PDF;
 use Carbon\Carbon;
+use App\Http\Controllers\OngkirController;
 
 class OrderController extends Controller
 {
@@ -69,8 +70,11 @@ class OrderController extends Controller
     public function viewCheckout(Request $req)
     {
         $user = Auth::user();
-        $city = ShippingFee::where('tujuan', $user['kota'])->get();
-        $ongkir = $city[0]['harga'];
+        // $city = ShippingFee::where('tujuan', $user['kota'])->get();
+        $response = OngkirController::getShippingFee($user['kota']);
+        $ongkir = ($response->json($key = 'content'));
+        $ongkir = (json_decode($ongkir));
+        $ongkir = ($ongkir[0]->cost);
         $cart = Cart::where('user_id', $user['id'])
                         ->where('order_id', null)
                         ->get();
@@ -127,9 +131,6 @@ class OrderController extends Controller
         $cart = Cart::where('user_id', $user['id'])
                         ->get();
 
-        // dd($cart[1]->product->product_image_path);
-
-        // dd($cart, $select, $cart[0]->product->title);
         return view ('usernew/order')->with('items',[
             'order' => $select,
             'cart' => $cart
@@ -362,7 +363,6 @@ class OrderController extends Controller
         $items = array('order' => $order,
                         'carts' => $carts,
                         'buyer' => $buyer);
-                        
 
         $path = storage_path('app/public/pdf_invoice/');
         $pdf = PDF::loadView('adminnew/invoice', compact('items'));
@@ -382,11 +382,12 @@ class OrderController extends Controller
             ->get();
         
         $qty = 0;
+        $namaproduk = "";
         $weight = 0;
         for($i = 0; $i < sizeof($carts); $i++){
             $qty = $qty + $carts[$i]['jumlahPesan'];
-
             $product = Product::where('id', $carts[$i]['product_id'])->first();
+            $namaproduk = $namaproduk.$product['title'].", ";
             $weight = $weight + $product['weight'];
         }
 
@@ -395,10 +396,10 @@ class OrderController extends Controller
         $timestamp = $order['created_at'];
         $orderDate = Carbon::parse($timestamp)->format('Y-m-d H:i:s');
 
-        $key = env('ORDERKEY');
+        $key = 'AKe62df84bJ3d8e4b1hea2R45j11klsb';
         $data = array(
-           'username'=>env('ORDERUSERNAME'),
-           'api_key'=>env('ORDERAPIKEY'),
+           'username'=>'GONDRONGTOBACCO',
+           'api_key'=>'QXRQI4',
            'orderid'=>substr($order['idTransaksiOy'], 0, 20),#max nya 20 soalnya
            'shipper_name'=>'Gondrong Tobacco',
            'shipper_contact'=>'gondrongtobacco@gmail.com',
@@ -413,12 +414,12 @@ class OrderController extends Controller
            'receiver_area'=>'JKT001',
            'qty'=>strval($qty),
            'weight'=>strval($weight),
-           'goodsdesc'=>'Test Order',#shud be order notes
+           'goodsdesc'=>strval($order['catatan']),#shud be order notes
            'servicetype'=>'1',
-           'insurance'=>'', #nullable tapi harus gini
+        //    'insurance'=>'', #nullable tapi harus gini
            'orderdate'=>strval($orderDate),
            'item_name'=>'topi',#ini harusnya yang mana? kalo kosong boleh?
-           'cod'=>'',
+        //    'cod'=>'',
            'sendstarttime'=>strval($startTime),#Start pickup range time? Time nyatime server
            'sendendtime'=>strval($endTime),#Start pickup range time
            'expresstype'=>'1',#reguler
@@ -426,16 +427,42 @@ class OrderController extends Controller
         );
         
         $data_json = json_encode(array('detail'=>array($data))); #masih kesalahan signature
-        $md5 = md5($data_json.$key);
         $data_sign = base64_encode(md5($data_json.$key));
 
-        dd($data_sign);
-
-        return Http::withHeaders([
+        $resp =  Http::asForm([
             'Content-Type' => 'application/x-www-form-urlencoded',
           ])->post("https://test-jk.jet.co.id/jts-idn-ecommerce-api/api/order/create", [
             'data_param' => $data_json,
             'data_sign' => $data_sign,
         ]);
+
+        $response = ($resp->json($key = 'detail'));
+
+        if ($response[0]['reason'] == "Orderid tidak boleh sama"){
+            return redirect()->back();
+        }
+        else{
+            $order['awb_pengiriman'] = $response[0]['awb_no'];
+            $order->save();
+            return redirect()->back();
+        }
+    }
+
+    public function checkDelivery(Request $req){
+        $order = Order::find($req['order_id']);
+        $awb = $order['awb_pengiriman'];
+
+        $data = array(
+           'awb'=>$awb,
+           'eccompanyid'=>env("ECCOMPANYID")
+        );
+
+        $resp =  Http::withBasicAuth(env("ECCOMPANYID"), env("TRACKKEY"))->post("http://test-jk.jet.co.id/jandt-order-ifd-web/track/trackAction!tracking.action", $data);
+
+        $responsedetail = ($resp->json($key = 'detail'));
+        $responsehistory = ($resp->json($key = 'history'));
+        dd($responsehistory);
+        
+        return redirect()->back();
     }
 }

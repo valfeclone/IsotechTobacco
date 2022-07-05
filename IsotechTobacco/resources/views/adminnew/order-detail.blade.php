@@ -195,6 +195,15 @@
                         </form>
                     </div>
                     <div class="pt-2 w-50">
+                        <form action="/cek-delivery" method="POST">
+                            @csrf
+                            <div>
+                                <input type="hidden" id="order_id" name="order_id" value="{{ $items['order'][0]->id }}">
+                                <input class="btn btn-primary" type="submit" value="Cek Delivery">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="pt-2 w-50">
                         <form action="/selesaikan-order" method="POST">
                             @csrf
                             <div>

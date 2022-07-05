@@ -24,6 +24,7 @@ class Order extends Model
         'statusTransaksi',
         'file_resi_barang',
         'foto_bukti_pengiriman',
+        'awb_pengiriman',
     ];
     
     public function user()
