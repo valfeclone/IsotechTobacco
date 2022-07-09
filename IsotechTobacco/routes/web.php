@@ -282,6 +282,7 @@ Route::middleware(['auth'])->group(function(){
     
     Route::get('/view-order', [OrderController::class, 'viewOrder'])->name('viewOrder');
     Route::get('/view-order/{id}', [OrderController::class, 'viewDetailOrder']);
+    Route::get('/view-order/{id}/status', [OrderController::class, 'checkStatusDelivery']);
 });
 
 

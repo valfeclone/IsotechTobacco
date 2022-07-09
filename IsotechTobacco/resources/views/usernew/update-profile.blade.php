@@ -47,11 +47,15 @@
                                 <div class="form-group">
                                     <input type="text" required="" id="alamat" name="alamat" value="{{ $items->alamat }}" placeholder="Alamat">
                                 </div>
+                                <div class="form-group">
+                                    <input type="text" required="" id="kodepos" name="kodepos" value="{{ $items->kodepos }}" placeholder="Alamat">
+                                </div>
                                 <div class="form-row">
                                     <div class="form-group">
                                         <div class="custom_select">
                                             <select id="kota" name="kota" class="form-control select-active">
                                                 @foreach ($cities as $city)
+                                                {{ dd($items) }}
                                                 <option value="{{ $city->tujuan }}" {{ $items->kota ==  $city->tujuan ? 'selected' : ''}}>{{ $city->tujuan }}</option>
                                                 @endforeach
                                             </select>

@@ -24,6 +24,95 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+     public function createOrderJet(Request $req)
+     {
+        $user = Auth::user();
+
+        $key = env('ORDERKEY');
+        // $data = array
+        // (
+        // 'username'=> env('ORDERUSERNAME'),
+        // 'api_key'=> env('ORDERAPIKEY'),
+        // 'orderid'=>'ORDERID-GONDRONGTEST-ZR931',
+        // 'shipper_name'=>'Gondrong Tobacco',
+        // 'shipper_contact'=>'Mas Salman',
+        // 'shipper_phone'=> '+628123456789',
+        // 'shipper_addr'=>'JL. Pengirim no.88, RT/RW:001/010, Pluit',
+        // 'origin_code'=>'JKT',
+        // 'receiver_name'=>$user['name'],
+        // 'receiver_phone'=>$user['nomor_telpon'],
+        // 'receiver_addr'=>$user['alamat'],     
+        // 'receiver_zip'=>'40123',
+        // 'destination_code'=>'JKT',
+        // 'receiver_area'=>'JKT001',
+        // 'qty'=>'1',
+        // 'weight'=>'1',
+        // 'goodsdesc'=>'TESTING!!',
+        // 'servicetype'=>'1',
+        // 'insurance'=>'122',
+        // 'orderdate'=>'2021-08-01 22:02:00',
+        // 'item_name'=>'topi',
+        // 'cod'=>'120000',
+        // 'sendstarttime'=>'2021-08-01 08:00:00',
+        // 'sendendtime'=>'2021-08-01 22:00:00',
+        // 'expresstype'=>'1',
+        // 'goodsvalue'=>'1000',
+        // );
+        $data = array
+        (
+        'username'=> 'GONDRONGTOBACCO',
+        'api_key'=> 'QXRQI4',
+        'orderid'=>'ORDERID-GONDRONGTEST-ZR931',
+        'shipper_name'=>'Gondrong Tobacco',
+        'shipper_contact'=>'Mas Salman',
+        'shipper_phone'=> '+628123456789',
+        'shipper_addr'=>'JL. Pengirim no.88, RT/RW:001/010, Pluit',
+        'origin_code'=>'JKT',
+        'receiver_name'=>'Fadhlan',
+        'receiver_phone'=>'08111222333',
+        'receiver_addr'=>'Jalan Maluku',     
+        'receiver_zip'=>'40123',
+        'destination_code'=>'JKT',
+        'receiver_area'=>'JKT001',
+        'qty'=>'1',
+        'weight'=>'1',
+        'goodsdesc'=>'TESTING!!',
+        'servicetype'=>'1',
+        'insurance'=>'122',
+        'orderdate'=>'2021-08-01 22:02:00',
+        'item_name'=>'topi',
+        'cod'=>'120000',
+        'sendstarttime'=>'2021-08-01 08:00:00',
+        'sendendtime'=>'2021-08-01 22:00:00',
+        'expresstype'=>'1',
+        'goodsvalue'=>'1000',
+        );
+
+        $data_json = json_encode(array('detail'=>array($data)));
+        $data_sign = base64_encode(md5($data_json.$key));
+
+        $data_request = array
+        (
+        'data_param'=>$data_json,
+        'data_sign'=> $data_sign
+        );
+        // echo($data_json);
+        dd($data_json, $data_sign);
+
+        // dd($data_json);
+        // dd($data_sign);
+
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/x-www-form-urlencoded',
+          ])->post('https://test-jk.jet.co.id/jts-idn-ecommerce-api/api/order/create', [
+            'data_param'=> $data_json,
+            'data_sign'=> $data_sign,
+        ]);
+
+        dd($response);
+     }
+
     public function createOrder(Request $req)
     {  
         $user = Auth::user();
@@ -140,9 +229,10 @@ class OrderController extends Controller
     public function viewDetailOrder(Request $request)
     {
         $user = Auth::user();
-
-        $city = ShippingFee::where('tujuan', $user['kota'])->get();
-        $ongkir = $city[0]['harga'];
+        $response = OngkirController::getShippingFee($user['kota']);
+        $ongkir = ($response->json($key = 'content'));
+        $ongkir = (json_decode($ongkir));
+        $ongkir = ($ongkir[0]->cost);
 
         $idOrder = $request->route('id');
         
@@ -437,8 +527,11 @@ class OrderController extends Controller
         ]);
 
         $response = ($resp->json($key = 'detail'));
+        dd($response);
 
         if ($response[0]['reason'] == "Orderid tidak boleh sama"){
+            $order['awb_pengiriman'] = $response[0]['awb_no'];
+            $order->save();
             return redirect()->back();
         }
         else{
@@ -464,5 +557,33 @@ class OrderController extends Controller
         dd($responsehistory);
         
         return redirect()->back();
+    }
+
+    public function checkStatusDelivery(){
+        // return view ('usernew/status-pengiriman')->with('orders', $select);
+        $statusArray = array(
+            array(  
+                "date_time" => "2022-07-05 20:00:58",
+                "status_code" => 101,
+                "status" => "Manifes"
+            ),
+            array(  
+                "date_time" => "2022-08-05 20:00:58",
+                "status_code" => 100,
+                "status" => "Paket akan dikirimkan ke xxxxxxx"
+            ),
+            array(  
+                "date_time" => "2022-09-05 20:00:58",
+                "status_code" => 100,
+                "status" => "Paket telah sampai di xxxxxxxx"
+            ),
+            array(  
+                "date_time" => "2022-10-05 20:00:58",
+                "status_code" => 100,
+                "status" => "Paket akan dikirim ke alamat penerima"
+            )
+        );
+
+        return view ('usernew/status-pengiriman')->with('tracks', $statusArray);;
     }
 }

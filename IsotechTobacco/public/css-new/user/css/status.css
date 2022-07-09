@@ -1,0 +1,16 @@
+.rounded-border{
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.vertical {
+    border-left: 1px solid #B8B8B8;
+    height: 35px;
+    position:relative;
+    left: 49.95%;
+}
+
+.bg-grey-circle{
+    background-color: #B8B8B8;
+}

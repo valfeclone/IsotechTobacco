@@ -102,6 +102,9 @@
                             <div class="media-body order-2 order-lg-1">
                                 <p class=""><strong>Status:</strong></p>
                                 <p class="">{{ $items['order'][$i]->statusTransaksi }}</p>
+                                <a href="/view-order/{{ $items['order'][$i]->id }}/status">
+                                    Lihat Status
+                                </a>
                             </div>
                             <img src="/storage/products/{{ $items['cart'][$i]->product->product_image_path }}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
                         </div> <!-- End -->

@@ -45,6 +45,10 @@
                                     <div class="p-3 w-50  section-title ">Kota </div>
                                     <div class="p-3 w-50  ">{{ $items->kota }}</div>
                                 </div>
+                                <div class="d-flex flex-row my-2">
+                                    <div class="p-3 w-50  section-title ">Kodepos </div>
+                                    <div class="p-3 w-50  ">{{ $items->kodepos }}</div>
+                                </div>
                                 {{-- <div class="d-flex flex-row my-2">
                                     <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Submit &amp; Register</button>
                                 </div> --}}

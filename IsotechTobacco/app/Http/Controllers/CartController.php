@@ -50,12 +50,11 @@ class CartController extends Controller
     public function viewCart()
     {
         $user = Auth::user();
-        $city = ShippingFee::where('tujuan', $user['kota'])->get();
-        // $ongkir = $city[0]['harga'];
-        $response = OngkirController::getShippingFee($city[0]['tujuan']);
+        $response = OngkirController::getShippingFee($user['kota']);
         $ongkir = ($response->json($key = 'content'));
         $ongkir = (json_decode($ongkir));
         $ongkir = ($ongkir[0]->cost);
+
         $cart = Cart::where('user_id', $user['id'])
                         ->where('order_id', null)
                         ->get();
@@ -64,7 +63,6 @@ class CartController extends Controller
             'ongkir' => $ongkir
         ]);
         
-        // ('carts',$cart);
     }
 
     public function updateCart(Request $req)
