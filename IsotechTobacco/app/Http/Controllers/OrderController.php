@@ -486,10 +486,10 @@ class OrderController extends Controller
         $timestamp = $order['created_at'];
         $orderDate = Carbon::parse($timestamp)->format('Y-m-d H:i:s');
 
-        $key = 'AKe62df84bJ3d8e4b1hea2R45j11klsb';
+        $key = env('ORDERKEY');
         $data = array(
-           'username'=>'GONDRONGTOBACCO',
-           'api_key'=>'QXRQI4',
+           'username'=>env('ORDERUSERNAME'),
+           'api_key'=>env('ORDERAPIKEY'),
            'orderid'=>substr($order['idTransaksiOy'], 0, 20),#max nya 20 soalnya
            'shipper_name'=>'Gondrong Tobacco',
            'shipper_contact'=>'gondrongtobacco@gmail.com',

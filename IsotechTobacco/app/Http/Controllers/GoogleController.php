@@ -40,7 +40,7 @@ class GoogleController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'google_id'=> $user->id,
-                'password' => encrypt('google_dummy312')
+                'password' => bcrypt('google_dummy312')
             ]);
             Auth::login($newUser);
             return redirect()->intended('index');

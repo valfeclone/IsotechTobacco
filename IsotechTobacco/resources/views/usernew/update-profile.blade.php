@@ -22,7 +22,7 @@
                     <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
                         <div class="padding_eight_all bg-white">
                             <div class="heading_s1">
-                                <h3 class="mb-30">Edit Profile</h3>
+                                <h3 class="mb-30">Edit Profile 1</h3>
                             </div>
                             <p class="mb-50 font-sm">
                                 Edit profile melalui form dibawah ini.
@@ -55,16 +55,15 @@
                                         <div class="custom_select">
                                             <select id="kota" name="kota" class="form-control select-active">
                                                 @foreach ($cities as $city)
-                                                {{ dd($items) }}
                                                 <option value="{{ $city->tujuan }}" {{ $items->kota ==  $city->tujuan ? 'selected' : ''}}>{{ $city->tujuan }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="form-group">
+                                <!-- <div class="form-group">
                                     <input type="text" required="" id="kota" name="kota" value="{{ $items->kota }}" placeholder="Kota">
-                                </div> --}}
+                                </div> -->
                                 <div class="form-group">
                                     <button type="" class="btn btn-fill-out btn-block hover-up" name="login">Update &amp; Profil</button>
                                 </div>
