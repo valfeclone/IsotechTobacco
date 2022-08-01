@@ -52,7 +52,7 @@
                                         </div>
                                         <!-- mang edit nih. tambahan login with google -->
                                         <ul class="btn-login list_none text-center mb-15"> 
-                                            <li><a href="#" class="btn btn-facebook hover-up mb-lg-0 mb-sm-4">Login With Facebook</a></li> <br>
+                                            <!-- <li><a href="#" class="btn btn-facebook hover-up mb-lg-0 mb-sm-4">Login With Facebook</a></li> <br> -->
                                             <li class="mt-2"><a href="/auth/google" class="btn btn-google hover-up">Login With Google</a></li>
                                         </ul>
                                         <p class="text-center mt-4 mb-2">Don't have account? <a href="/register">Sign up</a></p>
