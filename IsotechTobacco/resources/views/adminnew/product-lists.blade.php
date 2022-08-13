@@ -23,7 +23,7 @@
 <div class="content-header">
     <div>
         <h2 class="content-title card-title">Daftar Produk</h2>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Daftar produk yang ditambahkan oleh admin</p>
     </div>
     <div>
         <a href="/admin/create-product" class="btn btn-primary btn-sm rounded">Tambah</a>
