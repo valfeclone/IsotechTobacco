@@ -586,4 +586,28 @@ class OrderController extends Controller
 
         return view ('usernew/status-pengiriman')->with('tracks', $statusArray);;
     }
+
+    public function cetakLogTransaksi(){
+        $endDate =  date('Y-m-d H:i:s');
+        $startDate =  date(('Y-m-d H:i:s'), strtotime('-1 month'));
+        $order = Order::whereBetween('created_at', [$startDate, $endDate])->get();
+
+        // dd($order);
+        $final = [];
+        foreach ($order as $or){
+            $cart = Cart::where('order_id', $or->id)->get();
+            $array = [];
+            array_push($array, $or);
+            foreach ($cart as $c){
+                $produk = Product::where('id', $c->product_id)->first();
+                // $c->product_id = $produk->title;
+                array_push($array, $c);
+                array_push($array, $produk);
+            }
+            array_push($final, $array);
+        }
+
+        dd($final);
+        return view('admin/logtransaksi')->with('items', $final);
+    }
 }

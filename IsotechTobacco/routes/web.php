@@ -205,6 +205,7 @@ Route::middleware(['auth:admin'])->group(function(){
 
     // Admin Banner
     Route::get('/admin/banner', [BannerController::class, 'viewAllBanner']);
+    Route::redirect('/admin', '/admin/view-product');
     Route::post('/admin/create-banner', [BannerController::class, 'createBanner']);
     Route::post('/admin/toggle-banner/{id}', [BannerController::class, 'toggleBanner']);
     Route::post('/admin/delete-banner/{id}', [BannerController::class, 'deleteBanner']);
@@ -259,6 +260,8 @@ Route::middleware(['auth:admin'])->group(function(){
 
     Route::get('/admin/invoice/{id}', [OrderController::class, 'viewInvoice']);
     Route::get('/admin/invoice/pdf/{id}', [OrderController::class, 'viewPDFInvoice']);    
+    
+    Route::get('/admin/logtransaksi', [OrderController::class, 'cetakLogTransaksi']);    
 });
 
 //view all product & spec product

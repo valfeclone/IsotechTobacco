@@ -50,6 +50,9 @@ class CartController extends Controller
     public function viewCart()
     {
         $user = Auth::user();
+        if($user['kota'] == null){
+            return redirect('updateprofil');
+        }
         $response = OngkirController::getShippingFee($user['kota']);
         $ongkir = ($response->json($key = 'content'));
         $ongkir = (json_decode($ongkir));

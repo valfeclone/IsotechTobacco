@@ -48,7 +48,7 @@
                                     <input type="text" required="" id="alamat" name="alamat" value="{{ $items->alamat }}" placeholder="Alamat">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" required="" id="kodepos" name="kodepos" value="{{ $items->kodepos }}" placeholder="Alamat">
+                                    <input type="text" required="" id="kodepos" name="kodepos" value="{{ $items->kodepos }}" placeholder="Kode Pos">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group">
