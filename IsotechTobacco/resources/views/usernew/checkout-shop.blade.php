@@ -80,17 +80,17 @@
                     <form method="post" action="/updateaddress">
                         @csrf
                         <div class="form-group">
-                            <input type="text" name="alamat" required="" placeholder="Alamat" value="{{ $items['user']->alamat }}">
+                            <input class="input-address" type="text" name="alamat" required="" placeholder="Alamat" value="{{ $items['user']->alamat }}">
                         </div>
                         
                         {{-- <div class="form-group">
-                            <input required="" type="text" name="state" placeholder="State / County *">
-                        </div> --}}
-                        {{-- <div class="form-group">
-                            <input required="" type="text" name="zipcode" placeholder="Postcode / ZIP *">
+                            <input class="input-address" required="" type="text" name="state" placeholder="State / County *">
                         </div> --}}
                         <div class="form-group">
-                            <input required="" type="text" name="nomor_telpon" placeholder="Phone *" value="{{ $items['user']->nomor_telpon }}">
+                            <input class="input-address" required="" type="text" name="kodepos" placeholder="Kode Pos" value="{{ $items['user']->kodepos }}">
+                        </div>
+                        <div class="form-group">
+                            <input class="input-address" required="" type="text" name="nomor_telpon" placeholder="Phone" value="{{ $items['user']->nomor_telpon }}">
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -192,7 +192,7 @@
                         <div class="form-group">
                             <input type="text" id="catatan" name="catatan" placeholder="Catatan untuk tobacco">
                         </div>
-                        <button type="submit" class="btn btn-fill-out btn-block mt-30">Lanjut Pembayaran</button>
+                        <button id="submit-checkout" type="submit" class="btn btn-fill-out btn-block mt-30">Lanjut Pembayaran</button>
                         </form>
                         {{-- <div class="payment_method">
                             <div class="mb-25">

@@ -193,7 +193,7 @@
             // $(this).prev().text(qtyval);
         });
 
-        $('.qty-down').on('click', function (event) {
+        $('.qty-down').on('click', function (event) {   
             event.preventDefault();
             // qtyval = qtyval - 1;
             var usr_id = $('#usr_id').val();
@@ -309,6 +309,10 @@
 
         $('.dropdown-menu .cart_list').on('click', function (event) {
             event.stopPropagation();
+        });
+
+        $('.input-address').focus(function() {
+            $('#submit-checkout').attr('disabled', true);
         });
 
         // function convertToAngka(rupiah){
