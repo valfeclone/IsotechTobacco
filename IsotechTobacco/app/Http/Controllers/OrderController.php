@@ -460,13 +460,20 @@ class OrderController extends Controller
         // $pdf->save($path, str_replace(' ', '', $order[0]->idTransaksiOy));
         return $pdf->download($order[0]->idTransaksiOy.".pdf");
     }
-
+        
+    public function getKodeJNT($kelurahan, $kecamatan, $kota){
+        $res = Kodewilayah::where('KELURAHAN_DESA', $kelurahan)
+            ->where('KECAMATAN', $kecamatan)
+            ->where('KAB_KOTA', $kota);
+        return ($res);
+    }
 
     public function makeDelivery(Request $req){
         #akses ini dari admin ya. variable nya diakses di samping list order.
         $orderID = $req['order_id'];
         $order = Order::where('id', $orderID)->first();
         $user = User::where('id', $order['user_id'])->first();
+        $kodeJNT = getKodeJNT($user['kelurahan'], $user['kecamatan'], $user['kota']);
         $carts = Cart::where('user_id', $user->id)
             ->where('order_id', $order->id)
             ->get();
@@ -499,9 +506,9 @@ class OrderController extends Controller
            'receiver_name'=> $user['name'],
            'receiver_phone'=> $user['nomor_telpon'],
            'receiver_addr'=> substr($user['alamat'], 0, 200),    
-           'receiver_zip'=>'40123',#kode pos blom ada
-           'destination_code'=>'JKT',
-           'receiver_area'=>'JKT001',
+           'receiver_zip'=> $user['kodepos'],
+           'destination_code'=>$kodeJNT['KODE KOTA JNT'],
+           'receiver_area'=>$kodeJNT['KODE'],
            'qty'=>strval($qty),
            'weight'=>strval($weight),
            'goodsdesc'=>strval($order['catatan']),#shud be order notes
@@ -607,7 +614,7 @@ class OrderController extends Controller
             array_push($final, $array);
         }
 
-        dd($final);
+        // dd($final);
         return view('admin/logtransaksi')->with('items', $final);
     }
 }

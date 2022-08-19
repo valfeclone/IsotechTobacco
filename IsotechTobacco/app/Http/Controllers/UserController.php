@@ -56,7 +56,7 @@ class UserController extends Controller
     public function updateProfil(Request $req)
     {
         $user = Auth::user();
-        $credentials = $req->only('name', 'email', 'password','alamat', 'kota', 'nomor_telpon', 'kodepos');
+        $credentials = $req->only('name', 'email', 'password','alamat', 'kota', 'nomor_telpon', 'kodepos', 'provinsi', 'kecamatan', 'kelurahan');
         
         // dd($user['name']);
         if($user){
@@ -64,6 +64,9 @@ class UserController extends Controller
             $user['email'] = $credentials['email'];
             $user['password'] = bcrypt($credentials['password']);
             $user['alamat'] = $credentials['alamat'];
+            $user['provisi'] = $credentials['provinsi'];
+            $user['kecamatan'] = $credentials['kecamatan'];
+            $user['kelurahan'] = $credentials['kelurahan'];
             $user['kota'] = $credentials['kota'];
             $user['nomor_telpon'] = $credentials['nomor_telpon'];
             $user['kodepos'] = $credentials['kodepos'];

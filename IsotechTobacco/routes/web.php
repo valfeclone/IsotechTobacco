@@ -295,6 +295,7 @@ Route::get('/order', function(){
     return view('usernew/order');
 });
 
+Route::get('/getProvinsi', [OngkirController::class, 'getKelurahan']);
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/profile', [UserController::class, 'getProfil']);

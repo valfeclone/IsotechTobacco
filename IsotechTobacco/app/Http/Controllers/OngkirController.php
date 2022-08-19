@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\ShippingFee;
 use App\Models\User;
+use App\Models\Kodewilayah;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\OngkirController;
 
@@ -83,7 +84,7 @@ class OngkirController extends Controller
 
     public function getAllShippingFee()
     {
-        $select = ShippingFee::all();
+        $select = ShippingFee::where();
         // dd($select);
         return view ('adminnew/shippingfee-lists')->with('items',$select); #view shipping fee
     }
@@ -114,6 +115,30 @@ class OngkirController extends Controller
         $res = ShippingFee::find($id);
         $res->delete();
         return redirect('admin/shippingfee'); 
+    }
+
+    public function getProvinsi()
+    {
+        $res = Kodewilayah::select('PROVINSI')->distinct()->get();
+        return json_encode($res);
+    }
+
+    public function getKota($provinsi)
+    {
+        $res = Kodewilayah::select('KAB_KOTA')->where('PROVINSI', $provinsi)->distinct()->get();
+        return json_encode($res);
+    }
+
+    public function getKecamatan($kota)
+    {
+        $res = Kodewilayah::select('KECAMATAN')->where('KAB_KOTA', $kota)->distince()->get();
+        return json_encode($res);
+    }
+
+    public function getKelurahan($kecamatan)
+    {
+        $res = Kodewilayah::select('KELURAHAN_DESA', 'KODE_POS')->where('KECAMATAN', $kecamatan)->distinct()->get();
+        return json_encode($res);
     }
 
     public function saveExcel(Request $req){
