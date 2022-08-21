@@ -123,21 +123,24 @@ class OngkirController extends Controller
         return json_encode($res);
     }
 
-    public function getKota($provinsi)
+    public function getKota(Request $req)
     {
-        $res = Kodewilayah::select('KAB_KOTA')->where('PROVINSI', $provinsi)->distinct()->get();
+        $req = json_decode($req);
+        $res = Kodewilayah::select('KAB_KOTA')->where('PROVINSI', $req->provinsi)->distinct()->get();
         return json_encode($res);
     }
 
-    public function getKecamatan($kota)
+    public function getKecamatan(Request $req)
     {
-        $res = Kodewilayah::select('KECAMATAN')->where('KAB_KOTA', $kota)->distince()->get();
+        $req = json_decode($req);
+        $res = Kodewilayah::select('KECAMATAN')->where('KAB_KOTA', $req->kota)->distinct()->get();
         return json_encode($res);
     }
 
-    public function getKelurahan($kecamatan)
+    public function getKelurahan(Request $req)
     {
-        $res = Kodewilayah::select('KELURAHAN_DESA', 'KODE_POS')->where('KECAMATAN', $kecamatan)->distinct()->get();
+        $req = json_decode($req);
+        $res = Kodewilayah::select('KELURAHAN_DESA', 'KODE_POS')->where('KECAMATAN', $req->kecamatan)->distinct()->get();
         return json_encode($res);
     }
 
