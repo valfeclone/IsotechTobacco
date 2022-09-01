@@ -18,13 +18,16 @@ class UserController extends Controller
      */
     public function handleRegister(Request $req)
     {
-        $credentials = $req->only('name', 'email', 'password','alamat', 'kota', 'nomor_telpon', 'kodepos');
+        $credentials = $req->only('name', 'email', 'password','alamat', 'kota', 'nomor_telpon', 'kodepos', 'provinsi', 'kecamatan', 'kelurahan_desa');
         $newUser = User::create([
             'name' => $credentials['name'],
             'email' => $credentials['email'],
             'password' => bcrypt($credentials['password']),
             'alamat' => $credentials['alamat'],
+            'provinsi' => $credentials['provinsi'],
             'kota' => $credentials['kota'],
+            'kecamatan' => $credentials['kecamatan'],
+            'kelurahan' => $credentials['kelurahan_desa'],
             'nomor_telpon' => $credentials['nomor_telpon'],
             'kodepos' => $credentials['kodepos'],
         ]);
@@ -56,7 +59,7 @@ class UserController extends Controller
     public function updateProfil(Request $req)
     {
         $user = Auth::user();
-        $credentials = $req->only('name', 'email', 'password','alamat', 'kota', 'nomor_telpon', 'kodepos', 'provinsi', 'kecamatan', 'kelurahan');
+        $credentials = $req->only('name', 'email', 'password','alamat', 'kota', 'nomor_telpon', 'kodepos', 'provinsi', 'kecamatan', 'kelurahan_desa');
         
         // dd($user['name']);
         if($user){
@@ -64,9 +67,9 @@ class UserController extends Controller
             $user['email'] = $credentials['email'];
             $user['password'] = bcrypt($credentials['password']);
             $user['alamat'] = $credentials['alamat'];
-            $user['provisi'] = $credentials['provinsi'];
+            $user['provinsi'] = $credentials['provinsi'];
             $user['kecamatan'] = $credentials['kecamatan'];
-            $user['kelurahan'] = $credentials['kelurahan'];
+            $user['kelurahan'] = $credentials['kelurahan_desa'];
             $user['kota'] = $credentials['kota'];
             $user['nomor_telpon'] = $credentials['nomor_telpon'];
             $user['kodepos'] = $credentials['kodepos'];
@@ -102,6 +105,15 @@ class UserController extends Controller
     public function getUpdateProfil()
     {
         $user = Auth::user();
+        // dd($user->id);
         return view ('usernew/update-profile')->with('items', $user);
+    }
+    public function getUserProfile()
+    {
+        $user = Auth::user();
+        return json_encode($user);
+        dd($user->id);
+
+        // return view ('usernew/update-profile')->with('items', $user);
     }
 }

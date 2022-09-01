@@ -1,5 +1,9 @@
 @extends('layouts.usernew.auth-base')
 
+@section('extra-meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('meta-title')
     Gondrong Tobacco | Login
 @endsection
@@ -44,10 +48,52 @@
                                 <div class="form-group">
                                     <input type="text" required="" id="alamat" name="alamat" placeholder="Alamat">
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" required="" id="kodepos" name="kodepos" placeholder="Kode Pos">
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="provinsi" name="provinsi" class="form-select fs-6 fw-normal">
+                                                <option value="">Pilih Provinsi..</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                @if ($cities != null)
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="kota" name="kota" class="form-select fs-6 fw-normal" disabled>
+                                                <option value="">Pilih Kota..</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="kecamatan" name="kecamatan" class="form-select fs-6 fw-normal"  disabled>
+                                                <option value="">Pilih Kecamatan..</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="kelurahan_desa" name="kelurahan_desa" class="form-select fs-6 fw-normal" disabled>
+                                                <option value="">Pilih Kelurahan / Desa..</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="kodepos" name="kodepos" class="form-select fs-6 fw-normal" disabled>
+                                                <option value="">Pilih Kodepos..</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- @if ($cities != null)
                                 <div class="form-row">
                                     <div class="form-group col-lg-12">
                                         <div class="custom_select">
@@ -64,7 +110,7 @@
                                 <div class="form-group">
                                     <input type="text" required="" id="kota" name="kota" placeholder="Kota">
                                 </div>
-                                @endif
+                                @endif --}}
                                 
                                 {{-- <div class="form-group">
                                     <select class="form-control select-active">
@@ -104,4 +150,8 @@
         </div>
     </section>
 </div>
+@endsection
+
+@section('extra-script')
+    <script src="{{ asset('js-new/user/home.js') }}"></script>
 @endsection

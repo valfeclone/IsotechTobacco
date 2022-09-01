@@ -296,13 +296,14 @@ Route::get('/order', function(){
 });
 
 Route::get('/getProvinsi', [OngkirController::class, 'getProvinsi']);
-Route::get('/getKota', [OngkirController::class, 'getKota']);
-Route::get('/getKecamatan', [OngkirController::class, 'getKecamatan']);
-Route::get('/getKelurahan', [OngkirController::class, 'getKelurahan']);
+Route::get('/getKota/{provinsi}', [OngkirController::class, 'getKota']);
+Route::get('/getKecamatan/{kota}', [OngkirController::class, 'getKecamatan']);
+Route::get('/getKelurahan/{kecamatan}', [OngkirController::class, 'getKelurahan']);
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/profile', [UserController::class, 'getProfil']);
     Route::get('/updateprofil', [UserController::class, 'getUpdateProfil']);
+    Route::get('/user-profile', [UserController::class, 'getUserProfile']);
     Route::post('/updateprofil', [UserController::class, 'updateprofil']);
     Route::post('/updateaddress', [UserController::class, 'updateAddress']);
 });

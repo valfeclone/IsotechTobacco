@@ -125,22 +125,25 @@ class OngkirController extends Controller
 
     public function getKota(Request $req)
     {
-        $req = json_decode($req);
-        $res = Kodewilayah::select('KAB_KOTA')->where('PROVINSI', $req->provinsi)->distinct()->get();
+        // $req = json_decode($req);
+        $provinsi = $req->route('provinsi');
+        $res = Kodewilayah::select('KAB_KOTA')->where('PROVINSI', $provinsi)->distinct()->get();
         return json_encode($res);
     }
 
     public function getKecamatan(Request $req)
     {
-        $req = json_decode($req);
-        $res = Kodewilayah::select('KECAMATAN')->where('KAB_KOTA', $req->kota)->distinct()->get();
+        // $req = json_decode($req);
+        $kota = $req->route('kota');
+        $res = Kodewilayah::select('KECAMATAN')->where('KAB_KOTA', $kota)->distinct()->get();
         return json_encode($res);
     }
 
     public function getKelurahan(Request $req)
     {
-        $req = json_decode($req);
-        $res = Kodewilayah::select('KELURAHAN_DESA', 'KODE_POS')->where('KECAMATAN', $req->kecamatan)->distinct()->get();
+        // $req = json_decode($req);
+        $kecamatan = $req->route('kecamatan');
+        $res = Kodewilayah::select('KELURAHAN_DESA', 'KODE_POS')->where('KECAMATAN', $kecamatan)->distinct()->get();
         return json_encode($res);
     }
 

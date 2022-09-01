@@ -23,7 +23,6 @@
 <div class="content-header">
     <div>
         <h2 class="content-title card-title">Daftar Biaya Ongkir</h2>
-        {{-- <p>Lorem ipsum dolor sit amet.</p> --}}
     </div>
     <div>
         <a href="/admin/add-shippingfee" class="btn btn-primary"><i class="material-icons md-plus"></i>Tambah Biaya Ongkir</a>

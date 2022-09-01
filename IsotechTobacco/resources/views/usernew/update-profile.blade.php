@@ -4,6 +4,10 @@
     Gondrong Tobacco | Semua Produk
 @endsection
 
+@section('extra-meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('main-content')
 <div>
     <div class="page-header breadcrumb-wrap">
@@ -22,7 +26,7 @@
                     <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
                         <div class="padding_eight_all bg-white">
                             <div class="heading_s1">
-                                <h3 class="mb-30">Edit Profile 1</h3>
+                                <h3 class="mb-30">Edit Profile</h3>
                             </div>
                             <p class="mb-50 font-sm">
                                 Edit profile melalui form dibawah ini.
@@ -47,10 +51,52 @@
                                 <div class="form-group">
                                     <input type="text" required="" id="alamat" name="alamat" value="{{ $items->alamat }}" placeholder="Alamat">
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" required="" id="kodepos" name="kodepos" value="{{ $items->kodepos }}" placeholder="Kode Pos">
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="provinsi" name="provinsi" class="form-select fs-6 fw-normal">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="kota" name="kota" class="form-select fs-6 fw-normal">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="kecamatan" name="kecamatan" class="form-select fs-6 fw-normal">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="kelurahan_desa" name="kelurahan_desa" class="form-select fs-6 fw-normal">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group ">
+                                        <div class="custom_select">
+                                            <select id="kodepos" name="kodepos" class="form-select fs-6 fw-normal">
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="form-row">
                                     <div class="form-group">
                                         <div class="custom_select">
                                             <select id="kota" name="kota" class="form-control select-active">
@@ -60,10 +106,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- <div class="form-group">
-                                    <input type="text" required="" id="kota" name="kota" value="{{ $items->kota }}" placeholder="Kota">
-                                </div> -->
+                                </div> --}}
                                 <div class="form-group">
                                     <button type="" class="btn btn-fill-out btn-block hover-up" name="login">Update &amp; Profil</button>
                                 </div>
@@ -75,4 +118,8 @@
         </div>
     </section>
 </div>
+@endsection
+
+@section('extra-script')
+    <script src="{{ asset('js-new/user/services/userServices.js') }}" type="module"></script>
 @endsection

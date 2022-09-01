@@ -23,7 +23,6 @@
 <div class="content-header">
     <div>
         <h2 class="content-title card-title">Daftar Pesanan</h2>
-        {{-- <p>Lorem ipsum dolor sit amet.</p> --}}
     </div>
     <div>
         <input type="text" placeholder="Cari ID pesanan" class="form-control bg-white">
